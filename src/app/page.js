@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <div className="bg-primary">
       <Navigation/>
+      {/* Introduction Start*/}
       <div className="flex flex-col text-center pt-[60px] items-center">
         <div className="text-tertiary text-[22px]">Hi there! &#128075; I am</div>
         <div className="text-secondary text-[90px]">Fonzy Lima</div>
@@ -16,6 +17,7 @@ export default function Home() {
         <div className="text-tertiary text-[22px]">A Software Developer based in Manila, Philippines</div>
         <div className="p-3 mt-[30px] text-[22px] bg-[#7DF39D] w-[190px] h-[53px] text-center align-text-middle rounded-[10px] items-center">Get in touch</div>
       </div>
+      {/* Introduction End */}
       
     </div>
   )
