@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
 import Navigation from '../../components/Navigation'
+import Footer from '../../components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,11 +40,12 @@ export default function Home() {
 
       </div>
       <div className="flex flex-col text-left items-center ">
-        <div className="text-secondary text-left text-[70px] ">Who I am</div>
+        <div className="text-secondary text-left text-[70px] font-semibold mt-20">Who I am</div>
         <div className="text-tertiary text-left text-[40px] w-[775px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </div>
         <div className="text-tertiary text-left text-[40px] w-[775px]">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
       </div>
+      <Footer/>
     </div>
   )
 }
