@@ -44,6 +44,7 @@ export default function Home() {
         <div className="text-tertiary text-left text-[40px] w-[775px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </div>
         <div className="text-tertiary text-left text-[40px] w-[775px]">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        
       </div>
       <Footer/>
     </div>
