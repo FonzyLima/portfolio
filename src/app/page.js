@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import styles from './page.module.css'
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
-
+import Project from '../../components/Project'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -20,8 +20,8 @@ export default function Home() {
       </div>
       {/* Introduction End */}
       {/* Green Orb */}
-      <div className="mt-[-200px] absolute">
-      <svg width="1440" height="1039" viewBox="0 0 1440 1039" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* <div className="min-h-screen  flex items-center absolute">
+      <svg className="w-full h-full" viewBox="0 0 1440 1039" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_f_112_5118)">
 <ellipse cx="720" cy="519.974" rx="673" ry="462" fill="url(#paint0_radial_112_5118)" fill-opacity="0.4"/>
 </g>
@@ -38,14 +38,25 @@ export default function Home() {
 </defs>
 </svg>
 
-      </div>
+      </div> */}
       <div className="flex flex-col text-left items-center ">
         <div className="text-secondary text-left text-[70px] font-semibold mt-20">Who I am</div>
-        <div className="text-tertiary text-left text-[40px] w-[775px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <div className="text-tertiary text-left text-[40px] w-[775px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/><br/>
         </div>
-        <div className="text-tertiary text-left text-[40px] w-[775px]">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-        
+        <div className="text-tertiary text-left text-[40px] w-[775px]">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div> 
       </div>
+      <div className="flex flex-col text-left items-center">
+        <div className='text-secondary text-left text-[70px] font-semibold mt-20'>Portfolio</div>
+        <div className="flex flex-row space-x-6 mt-12">
+          <Project name="Bok Fried Chicken" date="December 2021"/>
+          <Project name="Bok Fried Chicken" date="December 2022"/>
+        </div>
+        <div className="flex flex-row space-x-6 mt-12">
+          <Project name="Bok Fried Chicken" date="December 2021"/>
+          <Project name="Bok Fried Chicken" date="December 2022"/>
+        </div>
+      </div>
+      
       <Footer/>
     </div>
   )
