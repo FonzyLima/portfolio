@@ -4,6 +4,7 @@ import styles from './page.module.css'
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
 import Project from '../../components/Project'
+import Button from '../../components/Button'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
         <div className="text-secondary text-[90px]">Fonzy Lima</div>
         <div className="text-secondary text-[90px]">Software Developer</div>
         <div className="text-tertiary text-[22px]">A Software Developer based in Manila, Philippines</div>
-        <div className="p-3 mt-[30px] text-[22px] bg-[#7DF39D] w-[190px] h-[53px] text-center align-text-middle rounded-[10px] items-center">Get in touch</div>
+        <Button title="Get in touch"/>
       </div>
       {/* Introduction End */}
       {/* Green Orb */}
@@ -55,6 +56,7 @@ export default function Home() {
           <Project name="Bok Fried Chicken" date="December 2021"/>
           <Project name="Bok Fried Chicken" date="December 2022"/>
         </div>
+        <Button title="More Projects"/>
       </div>
       
       <Footer/>
