@@ -5,6 +5,7 @@ import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
 import Project from '../../components/Project'
 import Button from '../../components/Button'
+import SlidingText from '../../components/SlidingText'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -58,7 +59,7 @@ export default function Home() {
         </div>
         <Button title="More Projects"/>
       </div>
-      
+      <SlidingText/>
       <Footer/>
     </div>
   )
