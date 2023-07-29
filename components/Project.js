@@ -3,12 +3,12 @@ import Image from 'next/image'
 
 export default function Project({name,date}) {
   return (
-    <div className='w-1/2 rounded-t-lg'>
+    <div className='w-1/2 rounded-t-lg '>
         <Image alt="sample" src="/bok.png" width={500} height={500}>
 
         </Image>
         <div className="bg-[#171717] rounded-bl-lg rounded-br-lg">
-            <div className="text-secondary text-[30px] ml-14">
+            <div className="text-secondary text-[30px] ml-14 ">
                 {name}
             </div>
             <div className="flex flex-row justify-between ">

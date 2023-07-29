@@ -14,7 +14,13 @@ module.exports = {
       'tertiary': '#A9A9A9'
     }),
 
-    extend: {},
+    extend: {
+      fontFamily:{
+        custom:['WixMadeForDisplay', 'sans']
+      },
+    
+    },
   },
   plugins: [],
+  
 }
