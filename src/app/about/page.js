@@ -6,15 +6,15 @@ export default function about() {
   return (
     <div className="bg-primary">
         <Navigation/>
-        <div className='flex flex-col text-left'>
-          <div>
-
+        <div className='flex flex-col text-left ml-[100px] font-custom'>
+          <div className='text-secondary text-left text-[70px] font-semibold mt-20'>
+            Lorem Ipsum dolor sit
           </div>
-          <div>
-
+          <div className='text-tertiary text-left text-[40px] w-[1575px] mt-10'>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </div>
-          <div>
-
+          <div className='text-tertiary text-left text-[40px] w-[1575px] mt-10'>
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
           </div>
 
         </div>
