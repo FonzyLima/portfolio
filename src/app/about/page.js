@@ -10,10 +10,10 @@ export default function about() {
           <div className='text-secondary text-left text-[70px] font-semibold mt-20'>
             Lorem Ipsum dolor sit
           </div>
-          <div className='text-tertiary text-left text-[40px] w-[1575px] mt-10'>
+          <div className='text-tertiary text-left text-[40px] w-[575px] mt-10'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </div>
-          <div className='text-tertiary text-left text-[40px] w-[1575px] mt-10'>
+          <div className='text-tertiary text-left text-[40px] w-[575px] mt-10'>
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
           </div>
 

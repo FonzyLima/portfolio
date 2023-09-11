@@ -16,7 +16,7 @@ module.exports = {
 
     extend: {
       fontFamily:{
-        custom:['WixMadeForDisplay', 'sans']
+        custom:['WixMadeForDisplay', 'sans-serif']
       },
     
     },
