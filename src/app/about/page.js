@@ -22,6 +22,27 @@ export default function about() {
           <SlidingText text="Backend Frontend Mobile Web Game Web3 Artificial Intelligence&nbsp;" direction={-1}/>
           <SlidingText text="ReactJS NextJS NodeJS Python Java C# C++ Solidity SQL&nbsp;" direction={1}/>
         </div>
+        {/* Resume Start */}
+        <div className='flex flex-col'>
+          <div className='flex flex-row'>
+            <div className='flex flex-col'>
+              <div className='text-secondary'>
+                WTW
+              </div>
+              <div className='text-tertiary'>
+                Dec 2022 - Jan 2023
+              </div>
+            </div>
+            <div className='flex flex-col'>
+              <div className='text-fourtary'>
+              DevOps Intern
+              </div>
+              <div className='text-tertiary'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
+            </div>
+          </div>
+        </div>
         <Footer/>
     </div>
   )

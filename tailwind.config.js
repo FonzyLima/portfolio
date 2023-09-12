@@ -11,7 +11,8 @@ module.exports = {
       ...theme('colors'),
       'primary': '#1E1E1E',
       'secondary': '#EBEBEB',
-      'tertiary': '#A9A9A9'
+      'tertiary': '#A9A9A9',
+      'fourtary': "#7DF39D"
     }),
 
     extend: {
