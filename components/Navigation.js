@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link'
 export default function Navigation() {
   return (
     <div className="bg-primary backdrop-filter backdrop-blur-md flex flex-row justify-between text-secondary border-b-2 border-[#EBEBEB66]">
@@ -8,9 +8,9 @@ export default function Navigation() {
 
         </div>
         <div className="flex flex-row pl-[400px]">
-            <div className="p-4 pt-[20px] text-[18px]">Home</div>
-            <div className="p-4 pt-[20px] text-[18px]">About</div>
-            <div className="p-4 pt-[20px] text-[18px]">Portfolio</div>
+            <Link href="/"><div className="p-4 pt-[20px] text-[18px]">Home</div></Link>
+            <Link href="/about"><div className="p-4 pt-[20px] text-[18px]">About</div></Link>
+            <Link href="/portfolio"><div className="p-4 pt-[20px] text-[18px]">Portfolio</div></Link>
             <div className="p-4 pt-[20px] text-[18px]">Contact</div>
         </div>
         <div className="p-4 pt-[20px] pr-[100px]"> 

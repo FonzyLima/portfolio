@@ -61,7 +61,7 @@ export default function Home() {
       </div>
       <div className="mt-40 space-y-0">
         <SlidingText text="Backend Frontend Mobile Web Game Web3 Artificial Intelligence&nbsp;" direction={-1}/>
-        <SlidingText text="ReactJS NextJS NodeJS Python Java C# C++ Solidity SQL&nbsp;" direction={1}/>
+        <SlidingText text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;" direction={1}/>
       </div>
 
       <Footer/>

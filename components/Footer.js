@@ -13,7 +13,7 @@ export default function Footer() {
             <li className="text-secondary text-[18px] font-normal ">DISCORD</li>
             <li className="text-secondary text-[18px] font-normal ">INSTAGRAM</li>
           </ul>
-
+      <div className='text-tertiary text-[18px]'>Copyright &copy; Alfonso Gabriel V. Lima - 2023</div>
     </div>  
   )
 }

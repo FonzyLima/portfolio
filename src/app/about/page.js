@@ -19,11 +19,47 @@ export default function about() {
 
         </div>
         <div className="mt-40 space-y-0">
-          <SlidingText text="Backend Frontend Mobile Web Game Web3 Artificial Intelligence&nbsp;" direction={-1}/>
-          <SlidingText text="ReactJS NextJS NodeJS Python Java C# C++ Solidity SQL&nbsp;" direction={1}/>
+          <SlidingText text="Backend Frontend Mobile Web Game Artificial Intelligence&nbsp;" direction={-1}/>
+          <SlidingText text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;" direction={1}/>
         </div>
         {/* Resume Start */}
-        <div className='flex flex-col px-24 mt-40'>
+        <div className='flex flex-col px-24 mt-40 gap-y-[90px]'>
+          <div className='flex flex-row justify-between'>
+            <div className='flex flex-col gap-y-[10px] '>
+              <div className='text-secondary text-[50px] font-custom font-semibold'>
+                WTW
+              </div>
+              <div className='text-tertiary text-[22px] font-custom font-normal'>
+                Dec 2022 - Jan 2023
+              </div>
+            </div>
+            <div className='flex flex-col gap-y-[10px]'>
+              <div className='text-fourtary text-[30px] font-custom font-normal'>
+              DevOps Intern
+              </div>
+              <div className='text-tertiary text-[22px] w-[730px] font-custom font-normal'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
+            </div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div className='flex flex-col gap-y-[10px] '>
+              <div className='text-secondary text-[50px] font-custom font-semibold'>
+                WTW
+              </div>
+              <div className='text-tertiary text-[22px] font-custom font-normal'>
+                Dec 2022 - Jan 2023
+              </div>
+            </div>
+            <div className='flex flex-col gap-y-[10px]'>
+              <div className='text-fourtary text-[30px] font-custom font-normal'>
+              DevOps Intern
+              </div>
+              <div className='text-tertiary text-[22px] w-[730px] font-custom font-normal'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
+            </div>
+          </div>
           <div className='flex flex-row justify-between'>
             <div className='flex flex-col gap-y-[10px] '>
               <div className='text-secondary text-[50px] font-custom font-semibold'>
