@@ -45,15 +45,15 @@ export default function about() {
           <div className='flex flex-row justify-between'>
             <div className='flex flex-col gap-y-[10px] '>
               <div className='text-secondary text-[50px] font-custom font-semibold'>
-                WTW
+                WRSHealth
               </div>
               <div className='text-tertiary text-[22px] font-custom font-normal'>
-                Dec 2022 - Jan 2023
+                June 2023 - September 2023
               </div>
             </div>
             <div className='flex flex-col gap-y-[10px]'>
               <div className='text-fourtary text-[30px] font-custom font-normal'>
-              DevOps Intern
+              Software Engineering Intern
               </div>
               <div className='text-tertiary text-[22px] w-[730px] font-custom font-normal'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
