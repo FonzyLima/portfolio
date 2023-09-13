@@ -6,14 +6,14 @@ export default function about() {
   return (
     <div className="bg-primary">
         <Navigation/>
-        <div className='flex flex-col text-left ml-[100px] font-custom'>
+        <div className='flex flex-col text-left px-24 font-custom'>
           <div className='text-secondary text-left text-[70px] font-semibold mt-20'>
             Lorem Ipsum dolor sit
           </div>
-          <div className='text-tertiary text-left text-[40px] w-[575px] mt-10'>
+          <div className='text-tertiary text-left text-[40px] w-[1028px] mt-10'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </div>
-          <div className='text-tertiary text-left text-[40px] w-[575px] mt-10'>
+          <div className='text-tertiary text-left text-[40px] w-[1028] mt-10'>
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
           </div>
 
@@ -23,21 +23,21 @@ export default function about() {
           <SlidingText text="ReactJS NextJS NodeJS Python Java C# C++ Solidity SQL&nbsp;" direction={1}/>
         </div>
         {/* Resume Start */}
-        <div className='flex flex-col'>
-          <div className='flex flex-row'>
-            <div className='flex flex-col'>
-              <div className='text-secondary'>
+        <div className='flex flex-col px-24 mt-40'>
+          <div className='flex flex-row justify-between'>
+            <div className='flex flex-col gap-y-[10px] '>
+              <div className='text-secondary text-[50px] font-custom font-semibold'>
                 WTW
               </div>
-              <div className='text-tertiary'>
+              <div className='text-tertiary text-[22px] font-custom font-normal'>
                 Dec 2022 - Jan 2023
               </div>
             </div>
-            <div className='flex flex-col'>
-              <div className='text-fourtary'>
+            <div className='flex flex-col gap-y-[10px]'>
+              <div className='text-fourtary text-[30px] font-custom font-normal'>
               DevOps Intern
               </div>
-              <div className='text-tertiary'>
+              <div className='text-tertiary text-[22px] w-[730px] font-custom font-normal'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </div>
             </div>
