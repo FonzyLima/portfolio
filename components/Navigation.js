@@ -7,7 +7,7 @@ export default function Navigation({page}) {
     
     <div className="bg-primary backdrop-filter backdrop-blur-md flex flex-row justify-between text-secondary border-b-2 border-[#EBEBEB66]">
         <div>
-            <div className="pl-[80px] pt-[15px] text-[25px]">FonzyLima</div>
+            <div className="pl-[30px] lg:pl-[80px] pt-[15px] text-[25px]">FonzyLima</div>
 
         </div>
         <div className="flex flex-row pl-[400px]">
