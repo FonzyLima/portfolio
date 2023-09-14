@@ -12,7 +12,10 @@ module.exports = {
       'primary': '#1E1E1E',
       'secondary': '#EBEBEB',
       'tertiary': '#A9A9A9',
-      'fourtary': "#7DF39D"
+      'fourtary': "#7DF39D",
+      'primary-light':"#EBEBEB",
+      'secondary-light':"#171717",
+      'teriary-light':"#606060"
     }),
 
     extend: {

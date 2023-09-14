@@ -10,24 +10,35 @@ import SlidingText from '../../components/SlidingText'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+
   return (
     <div className="bg-primary">
       <Navigation page="home"/>
       {/* Introduction Start*/}
-      <div className="flex flex-col text-center pt-[60px] items-center">
-        <div className="text-tertiary text-[22px]">Hi there! &#128075; I am</div>
-        <div className="text-secondary text-[90px]">Fonzy Lima</div>
-        <div className="text-secondary text-[90px]">Software Developer</div>
-        <div className="text-tertiary text-[22px]">A Software Developer based in Manila, Philippines</div>
+      <div className="flex flex-col ml-[30px] text-left pt-[60px] items-left md:text-center md:items-center">
+        <div className="text-tertiary text-[18px] md:text-[22px]">Hi there! &#128075; I am</div>
+        <div className="text-secondary text-[40px] md:text-[90px]">Fonzy Lima</div>
+        <div className="text-secondary text-[40px] md:text-[90px]">Software Developer</div>
+        <div className="text-tertiary text-[18px] md:text-[22px]">A Software Developer based in Manila, Philippines</div>
         <Button title="Get in touch"/>
       </div>
-      <div className='flex flex-row justify-center mt-20'>
+      <div className='hidden md:flex flex-row justify-center mt-20'>
       <Image
         src="/gameboy.svg"
         alt="Gameboy"
         
         width={960}
         height={510}
+        />
+      </div>
+      <div className='md:hidden flex flex-row justify-center mt-10'>
+      <Image
+        src="/gameboy.svg"
+        alt="Gameboy"
+        
+        width={360}
+        height={210}
         />
       </div>
       
