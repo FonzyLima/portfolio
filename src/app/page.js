@@ -6,6 +6,7 @@ import Footer from '../../components/Footer'
 import Project from '../../components/Project'
 import Button from '../../components/Button'
 import SlidingText from '../../components/SlidingText'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -20,6 +21,16 @@ export default function Home() {
         <div className="text-tertiary text-[22px]">A Software Developer based in Manila, Philippines</div>
         <Button title="Get in touch"/>
       </div>
+      <div className='flex flex-row justify-center mt-20'>
+      <Image
+        src="/gameboy.svg"
+        alt="Gameboy"
+        
+        width={960}
+        height={510}
+        />
+      </div>
+      
       {/* Introduction End */}
       {/* Green Orb */}
       {/* <div className="min-h-screen  flex items-center absolute">
@@ -43,11 +54,11 @@ export default function Home() {
       </div> */}
       <div className="flex flex-col text-left items-center font-custom">
         <div className="text-secondary text-left text-[70px] font-semibold mt-20">Who I am</div>
-        <div className="text-tertiary text-left text-[40px] w-[775px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/><br/>
+        <div className="text-tertiary text-left text-[40px] max-w-[775px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/><br/>
         </div>
-        <div className="text-tertiary text-left text-[40px] w-[775px]">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div> 
+        <div className="text-tertiary text-left text-[40px] max-w-[775px]">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div> 
       </div>
-      <div className="flex flex-col text-left items-center font-custom">
+      <div className="flex flex-col text-left items-center font-custom ">
         <div className='text-secondary text-left text-[70px] font-semibold mt-20'>Portfolio</div>
         <div className="flex flex-row space-x-6 mt-12">
           <Project name="Bok Fried Chicken" date="December 2021"/>
