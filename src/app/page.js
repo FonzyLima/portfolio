@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <div className="bg-primary">
+    <div className="bg-primary font-custom">
       <Navigation page="home" />
       {/* Introduction Start*/}
       <div className="flex flex-col ml-[30px] text-left pt-[60px] items-left lg:text-center lg:items-center">
