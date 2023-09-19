@@ -2,9 +2,12 @@ import React from "react";
 import Project from "../../../components/Project";
 import Navigation from "../../../components/Navigation";
 import Footer from "../../../components/Footer";
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
+
 export default function projects() {
   return (
-    <div className="bg-primary">
+    <div className="bg-primary font-custom">
       <Navigation page="portfolio" />
       <div className="flex flex-col text-left items-center font-custom">
         <div className="text-secondary text-left text-[70px] font-semibold mt-20">

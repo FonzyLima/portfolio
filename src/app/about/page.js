@@ -2,9 +2,12 @@ import React from "react";
 import Navigation from "../../../components/Navigation";
 import SlidingText from "../../../components/SlidingText";
 import Footer from "../../../components/Footer";
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
+
 export default function about() {
   return (
-    <div className="bg-primary">
+    <div className="bg-primary font-custom">
       <Navigation page="abouts" />
       <div className="flex flex-col text-left px-24 font-custom">
         <div className="text-secondary text-left text-[70px] font-semibold mt-20">
