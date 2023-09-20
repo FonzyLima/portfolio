@@ -7,22 +7,18 @@ import Project from "../../components/Project";
 import Button from "../../components/Button";
 import SlidingText from "../../components/SlidingText";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
   return (
     <div className="bg-primary font-custom">
       <Navigation page="home" />
       {/* Introduction Start*/}
-      <div className="flex flex-col ml-[30px] text-left pt-[60px] items-left lg:text-center lg:items-center">
+      <div className="flex flex-col gap-[15px] lg:gap-[30px] ml-[30px] text-left pt-[60px] items-left lg:text-center lg:items-center">
         <div className="text-tertiary text-[18px] lg:text-[22px]">
           Hi there! &#128075; I am
         </div>
-        <div className="text-secondary text-[40px] lg:text-[90px]">
-          Fonzy Lima
-        </div>
-        <div className="text-secondary text-[40px] lg:text-[90px]">
-          Software Developer
+        <div className="font-semibold text-secondary text-[30px] lg:text-[90px] flex flex-col">
+          <div className="lg:h-[95px] lg:mt-[-45px]">Fonzy Lima</div>
+          <div className="lg:h-[95px]">Software Developer</div>
         </div>
         <div className="text-tertiary text-[18px] lg:text-[22px]">
           A Software Developer based in Manila, Philippines

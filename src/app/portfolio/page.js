@@ -2,8 +2,6 @@ import React from "react";
 import Project from "../../../components/Project";
 import Navigation from "../../../components/Navigation";
 import Footer from "../../../components/Footer";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
 
 export default function projects() {
   return (
