@@ -9,90 +9,74 @@ import SlidingText from "../../components/SlidingText";
 
 export default function Home() {
   return (
-    <div className="bg-primary font-custom">
+    <>
       <Navigation page="home" />
-      {/* Introduction Start*/}
-      <div className="flex flex-col gap-[15px] lg:gap-[30px] ml-[30px] text-left pt-[60px] items-left lg:text-center lg:items-center">
-        <div className="text-tertiary text-[18px] lg:text-[22px]">
-          Hi there! &#128075; I am
+      <div className="gradient-green w-full absolute h-[260px] lg:h-[800px] top-[390px] lg:top-[430px] z-10"></div>
+      <div className="z-20 relative">
+        {/* Introduction Start*/}
+        <div className="flex flex-col gap-[15px] lg:gap-[30px] text-left pt-[60px] items-left lg:text-center lg:items-center">
+          <div className="text-tertiary text-[18px] lg:text-[22px]">
+            Hi there! &#128075; I am
+          </div>
+          <div className="font-semibold text-secondary text-[30px] lg:text-[90px] flex flex-col">
+            <div className="lg:h-[95px] lg:mt-[-45px]">Fonzy Lima</div>
+            <div className="lg:h-[95px]">Software Developer</div>
+          </div>
+          <div className="text-tertiary text-[18px] lg:text-[22px]">
+            A Software Developer based in Manila, Philippines
+          </div>
+          <div className="w-[150px] lg:w-[190px]">
+            <Button title="Get in touch" />
+          </div>
         </div>
-        <div className="font-semibold text-secondary text-[30px] lg:text-[90px] flex flex-col">
-          <div className="lg:h-[95px] lg:mt-[-45px]">Fonzy Lima</div>
-          <div className="lg:h-[95px]">Software Developer</div>
+        <div className="hidden lg:flex flex-row justify-center mt-[80px]">
+          <Image src="/gameboy.svg" alt="Gameboy" width={960} height={510} />
         </div>
-        <div className="text-tertiary text-[18px] lg:text-[22px]">
-          A Software Developer based in Manila, Philippines
+        <div className="lg:hidden flex flex-row justify-center mt-10">
+          <Image src="/gameboy.svg" alt="Gameboy" width={360} height={210} />
         </div>
-        <Button title="Get in touch" />
-      </div>
-      <div className="hidden lg:flex flex-row justify-center mt-20">
-        <Image src="/gameboy.svg" alt="Gameboy" width={960} height={510} />
-      </div>
-      <div className="lg:hidden flex flex-row justify-center mt-10">
-        <Image src="/gameboy.svg" alt="Gameboy" width={360} height={210} />
-      </div>
 
-      {/* Introduction End */}
-      {/* Green Orb */}
-      {/* <div className="min-h-screen  flex items-center absolute">
-      <svg className="w-full h-full" viewBox="0 0 1440 1039" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_f_112_5118)">
-<ellipse cx="720" cy="519.974" rx="673" ry="462" fill="url(#paint0_radial_112_5118)" fill-opacity="0.4"/>
-</g>
-<defs>
-<filter id="filter0_f_112_5118" x="-10" y="0.973633" width="1460" height="1038" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="28.5" result="effect1_foregroundBlur_112_5118"/>
-</filter>
-<radialGradient id="paint0_radial_112_5118" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(720 519.974) rotate(90) scale(462 673)">
-<stop stop-color="#00FC83"/>
-<stop offset="1" stop-color="#00FC83" stop-opacity="0"/>
-</radialGradient>
-</defs>
-</svg>
+        <div className="flex flex-col text-left items-left lg:items-center mt-[200px] w-full">
+          <div className="w-[775px] flex flex-col gap-[40px] ml-[-90px]">
+            <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
+              Who I am
+            </div>
+            <div className="text-tertiary leading-[147.5%] text-left text-[22px] lg:text-[40px] max-w-[475px] lg:max-w-[775px]">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. <br />
+              <br />
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </div>
+        </div>
 
-      </div> */}
-      <div className="flex flex-col text-left items-left ml-[30px] lg:items-center font-custom">
-        <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
-          Who I am
+        <div className="flex flex-col text-left items-center mt-[200px]">
+          <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
+            Portfolio
+          </div>
+          <div className="flex flex-col lg:flex-row space-x-6 mt-12">
+            <Project name="Bok Fried Chicken" date="December 2021" />
+            <Project name="Bok Fried Chicken" date="December 2022" />
+          </div>
+          <div className="flex flex-col lg:flex-row space-x-6 mt-12">
+            <Project name="Bok Fried Chicken" date="December 2021" />
+            <Project name="Bok Fried Chicken" date="December 2022" />
+          </div>
+          <Button title="More Projects" />
         </div>
-        <div className="text-tertiary text-left text-[22px] lg:text-[40px] max-w-[475px] lg:max-w-[775px]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. <br />
-          <br />
-        </div>
-        <div className="text-tertiary text-left text-[22px] lg:text-[40px] max-w-[475px] lg:max-w-[775px]">
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat.
+        <div className="mt-40 space-y-0">
+          <SlidingText
+            text="Backend Frontend Mobile Web Game Web3 Artificial Intelligence&nbsp;"
+            direction={-1}
+          />
+          <SlidingText
+            text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
+            direction={1}
+          />
         </div>
       </div>
-      <div className="flex flex-col text-left items-center font-custom ">
-        <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
-          Portfolio
-        </div>
-        <div className="flex flex-col lg:flex-row space-x-6 mt-12">
-          <Project name="Bok Fried Chicken" date="December 2021" />
-          <Project name="Bok Fried Chicken" date="December 2022" />
-        </div>
-        <div className="flex flex-col lg:flex-row space-x-6 mt-12">
-          <Project name="Bok Fried Chicken" date="December 2021" />
-          <Project name="Bok Fried Chicken" date="December 2022" />
-        </div>
-        <Button title="More Projects" />
-      </div>
-      <div className="mt-40 space-y-0">
-        <SlidingText
-          text="Backend Frontend Mobile Web Game Web3 Artificial Intelligence&nbsp;"
-          direction={-1}
-        />
-        <SlidingText
-          text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
-          direction={1}
-        />
-      </div>
-
       <Footer />
-    </div>
+    </>
   );
 }

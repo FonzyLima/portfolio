@@ -5,7 +5,7 @@ import Footer from "../../../components/Footer";
 
 export default function about() {
   return (
-    <div className="bg-primary font-custom">
+    <div className="">
       <Navigation page="abouts" />
       <div className="flex flex-col text-left px-24 font-custom">
         <div className="text-secondary text-left text-[70px] font-semibold mt-20">

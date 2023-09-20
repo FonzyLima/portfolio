@@ -5,7 +5,7 @@ import Footer from "../../../components/Footer";
 
 export default function projects() {
   return (
-    <div className="bg-primary font-custom">
+    <div className="">
       <Navigation page="portfolio" />
       <div className="flex flex-col text-left items-center font-custom">
         <div className="text-secondary text-left text-[70px] font-semibold mt-20">

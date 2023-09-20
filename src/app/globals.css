@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.gradient-green {
+  border-radius: 1346px;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(0, 252, 131, 0.4) 0%,
+    rgba(0, 252, 131, 0) 100%
+  );
+  filter: blur(28.5px);
+}
