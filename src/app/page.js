@@ -55,25 +55,27 @@ export default function Home() {
           <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
             Portfolio
           </div>
-          <div className="flex flex-col lg:flex-row space-x-6 mt-12">
+          <div className="flex flex-col lg:flex-row gap-6 mt-12">
             <Project name="Bok Fried Chicken" date="December 2021" />
             <Project name="Bok Fried Chicken" date="December 2022" />
           </div>
-          <div className="flex flex-col lg:flex-row space-x-6 mt-12">
+          <div className="flex flex-col lg:flex-row gap-6 mt-12">
             <Project name="Bok Fried Chicken" date="December 2021" />
             <Project name="Bok Fried Chicken" date="December 2022" />
           </div>
           <Button title="More Projects" />
         </div>
-        <div className="mt-40 space-y-0">
+        <div className="mt-40">
           <SlidingText
             text="Backend Frontend Mobile Web Game Web3 Artificial Intelligence&nbsp;"
             direction={-1}
           />
-          <SlidingText
-            text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
-            direction={1}
-          />
+          <div className="mt-[-45px]">
+            <SlidingText
+              text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
+              direction={1}
+            />
+          </div>
         </div>
       </div>
       <Footer />

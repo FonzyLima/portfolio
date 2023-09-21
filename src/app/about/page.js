@@ -20,15 +20,17 @@ export default function about() {
           nisi ut aliquip ex ea commodo consequat.
         </div>
       </div>
-      <div className="mt-40 space-y-0">
+      <div className="mt-40">
         <SlidingText
           text="Backend Frontend Mobile Web Game Artificial Intelligence&nbsp;"
           direction={-1}
         />
-        <SlidingText
-          text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
-          direction={1}
-        />
+        <div className="mt-[-45px]">
+          <SlidingText
+            text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
+            direction={1}
+          />
+        </div>
       </div>
       {/* Resume Start */}
       <div className="flex flex-col px-24 mt-40 gap-y-[90px]">
