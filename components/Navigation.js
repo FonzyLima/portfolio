@@ -7,7 +7,7 @@ export default function Navigation({ page }) {
   return (
     <div className="w-full bg-primary backdrop-filter backdrop-blur-md flex flex-row justify-between text-secondary border-b-2 border-[#EBEBEB66] font-custom">
       <div>
-        <div className="pl-[30px] lg:pl-[96px] pt-[15px] text-[25px]">
+        <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px]">
           FonzyLima
         </div>
       </div>
