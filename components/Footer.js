@@ -3,9 +3,9 @@ import Button from './Button'
 import Link from 'next/link'
 export default function Footer() {
   return (
-    <div className='flex flex-col items-center text-center font-custom mt-40 border-t-[0.5px] border-solid border-gray-600'>
-        <div className='bg-primary text-secondary text-[40px] lg:text-[90px] text-center mt-20 font-semibold'>Get in Touch</div>
-        <div className='text-tertiary text-[18px] lg:text-[30px] w-4/5 mt-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt <br/>ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</div>
+    <div className='flex flex-col items-center text-center font-custom mt-40 border-t-[0.5px] border-solid border-gray-600 gap-[15px] lg:gap-[30px] pt-16'>
+        <div className='bg-primary text-secondary text-[40px] lg:text-[90px] text-center font-semibold'>Get in Touch</div>
+        <div className='text-tertiary text-[18px] lg:text-[30px] w-4/5'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt <br/>ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</div>
         <Button title="Say Hello"/>
 
           <ul className="flex flex-row mt-20 space-x-8 lg:space-x-12 mb-14">
