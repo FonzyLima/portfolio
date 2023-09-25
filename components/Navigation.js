@@ -5,13 +5,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Navigation({ page }) {
   return (
-    <div className="bg-primary backdrop-filter backdrop-blur-md flex flex-row justify-between text-secondary border-b-2 border-[#EBEBEB66] font-custom">
+    <div className="w-full bg-primary backdrop-filter backdrop-blur-md flex flex-row justify-between text-secondary border-b-2 border-[#EBEBEB66] font-custom">
       <div>
         <div className="pl-[30px] lg:pl-[96px] pt-[15px] text-[25px]">
           FonzyLima
         </div>
       </div>
-      <div className="flex flex-row pl-[400px]">
+      <div className="flex-row pl-[400px] hidden lg:flex">
         <Link href="/">
           <div
             className={`p-4 pt-[20px] text-[18px] hover:text-tertiary ${
@@ -41,7 +41,7 @@ export default function Navigation({ page }) {
         </Link>
         <div className="p-4 pt-[20px] text-[18px]">Contact</div>
       </div>
-      <div className="p-4 pt-[20px] pr-[100px]">
+      <div className="hidden lg:flex p-4 pt-[20px] pr-[100px]">
         <svg
           width="22"
           height="23"
