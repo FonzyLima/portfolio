@@ -37,15 +37,34 @@ export default function about() {
         <div className="flex flex-col lg:flex-row justify-between">
           <div className="flex flex-col gap-y-[10px] py-[10px]">
             <div className="text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
-              WTW
+              WRSHealth
             </div>
             <div className="text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
-              Dec 2022 - Jan 2023
+              June 2023 - Sept 2023
             </div>
           </div>
           <div className="flex flex-col gap-y-[10px] ">
             <div className="text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
-              DevOps Intern
+              Software Engineering Intern
+            </div>
+            <div className="text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col lg:flex-row justify-between">
+          <div className="flex flex-col gap-y-[10px] py-[10px]">
+            <div className="text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
+              xDNA Digital Agency
+            </div>
+            <div className="text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
+              April 2023 - June 2023
+            </div>
+          </div>
+          <div className="flex flex-col gap-y-[10px] ">
+            <div className="text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
+              Web Development Intern
             </div>
             <div className="text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -59,26 +78,7 @@ export default function about() {
               WTW
             </div>
             <div className="text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
-              Dec 2022 - Jan 2023
-            </div>
-          </div>
-          <div className="flex flex-col gap-y-[10px] ">
-            <div className="text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
-              DevOps Intern
-            </div>
-            <div className="text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col lg:flex-row justify-between">
-          <div className="flex flex-col gap-y-[10px] py-[10px]">
-            <div className="text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
-              WTW
-            </div>
-            <div className="text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
-              Dec 2022 - Jan 2023
+              April 2022 - October 2023
             </div>
           </div>
           <div className="flex flex-col gap-y-[10px] ">
