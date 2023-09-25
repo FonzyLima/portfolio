@@ -14,7 +14,7 @@ export default function Home() {
       <div className="gradient-green w-full absolute h-[260px] lg:h-[800px] top-[390px] lg:top-[430px] z-10"></div>
       <div className="z-20 relative">
         {/* Introduction Start*/}
-        <div className="flex flex-col gap-[15px] lg:gap-[30px] text-left pt-[60px] items-left lg:text-center lg:items-center">
+        <div className="flex flex-col gap-[15px] lg:gap-[30px] text-left pt-[60px] px-6 items-left lg:text-center lg:items-center">
           <div className="text-tertiary text-[18px] lg:text-[22px]">
             Hi there! &#128075; I am
           </div>
@@ -33,11 +33,11 @@ export default function Home() {
           <Image src="/gameboy.svg" alt="Gameboy" width={960} height={510} />
         </div>
         <div className="lg:hidden flex flex-row justify-center mt-10">
-          <Image src="/gameboy.svg" alt="Gameboy" width={360} height={210} />
+          <Image src="/gameboy.svg" alt="Gameboy" width={330} height={210} />
         </div>
 
-        <div className="flex flex-col text-left items-left lg:items-center mt-[200px] w-full">
-          <div className="w-[775px] flex flex-col gap-[40px] ml-[-90px]">
+        <div className="flex flex-col px-6 text-left items-left lg:items-center mt-[100px] lg:mt-[200px]">
+          <div className="lg:w-[775px] flex flex-col gap-[40px] lg:ml-[-90px]">
             <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
               Who I am
             </div>
