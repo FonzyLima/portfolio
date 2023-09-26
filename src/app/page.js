@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "./page.module.css";
@@ -6,17 +7,18 @@ import Footer from "../../components/Footer";
 import Project from "../../components/Project";
 import Button from "../../components/Button";
 import SlidingText from "../../components/SlidingText";
-
+import { useButton } from "../../components/LightButtonContext";
 export default function Home() {
+  const { buttonState, toggleButton } = useButton();
   return (
-    <>
+    <div>
       <Navigation page="home" />
       <div className="gradient-green w-full absolute h-[260px] lg:h-[800px] top-[390px] lg:top-[430px] z-10"></div>
       <div className="z-20 relative">
         {/* Introduction Start*/}
         <div className="flex flex-col gap-[15px] lg:gap-[30px] text-left pt-[60px] px-6 items-left lg:text-center lg:items-center">
           <div className="text-tertiary text-[18px] lg:text-[22px]">
-            Hi there! &#128075; I am
+            Hi there! &#128075; I 
           </div>
           <div className="font-semibold text-secondary text-[30px] lg:text-[90px] flex flex-col">
             <div className="lg:h-[95px] lg:mt-[-45px]">Fonzy Lima</div>
@@ -63,7 +65,7 @@ export default function Home() {
             <Project name="Bok Fried Chicken" date="December 2021" />
             <Project name="Bok Fried Chicken" date="December 2022" />
           </div>
-          
+
           <Button title="More Projects" />
         </div>
         <div className="mt-40">
@@ -79,7 +81,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-    </>
+    </div>
   );
 }

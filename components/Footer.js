@@ -11,7 +11,7 @@ export default function Footer() {
           <ul className="flex flex-row mt-20 space-x-8 lg:space-x-12 mb-14">
             <Link href="https://www.linkedin.com/in/alfonso-lima/" target="_blank"><li className="hover:text-tertiary text-secondary text-[12px] lg:text-[18px] font-normal ">LINKEDIN</li> </Link>
             <Link href="https://github.com/FonzyLima" target="_blank"><li className="hover:text-tertiary text-secondary text-[12px] lg:text-[18px] font-normal ">GITHUB</li></Link>
-            <Link href="/"><li className="hover:text-tertiary text-secondary text-[12px] lg:text-[18px] font-normal ">DISCORD</li></Link>
+            <Link href="https://discord.com/users/702050752490897479" target="_blank"><li className="hover:text-tertiary text-secondary text-[12px] lg:text-[18px] font-normal ">DISCORD</li></Link>
             <Link href="https://www.instagram.com/fonzylima/" target="_blank"><li className="hover:text-tertiary text-secondary text-[12px] lg:text-[18px] font-normal ">INSTAGRAM</li></Link>
           </ul>
       <div className='text-tertiary text-[12px] lg:text-[18px] pb-8'>Copyright &copy; Alfonso Gabriel V. Lima - 2023</div>

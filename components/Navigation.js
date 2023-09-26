@@ -1,11 +1,18 @@
+'use client'
 import React from "react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
+import { useState,useEffect } from "react";
+import { useButton } from "./LightButtonContext";
 
 export default function Navigation({ page }) {
+  const [isLight,setIsLight] = useState(false);
+  const { buttonState, toggleButton } = useButton();
+
+
   return (
-    <div className="w-full bg-primary backdrop-filter backdrop-blur-md flex flex-row justify-between text-secondary border-b-2 border-[#EBEBEB66] font-custom">
+    <div className={`w-full ${buttonState ? 'bg-secondary text-primary':'bg-primary text-secondary'} backdrop-filter backdrop-blur-md flex flex-row justify-between  border-b-2 border-[#EBEBEB66] font-custom`}>
       <div>
         <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px]">
           FonzyLima
@@ -41,7 +48,7 @@ export default function Navigation({ page }) {
         </Link>
         <div className="p-4 pt-[20px] text-[18px]">Contact</div>
       </div>
-      <div className="hidden lg:flex p-4 pt-[20px] pr-[100px]">
+      <div className="hidden lg:flex p-4 pt-[20px] pr-[100px] cursor-pointer" onClick={toggleButton}>
         <svg
           width="22"
           height="23"
