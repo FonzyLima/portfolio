@@ -93,7 +93,7 @@ export default function about() {
         </div>
         
       </div>
-      <Footer />
+   
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function projects() {
           <Project name="Bok Fried Chicken" date="December 2022" />
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 }
