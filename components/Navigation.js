@@ -1,18 +1,55 @@
-'use client'
+"use client";
 import React from "react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useButton } from "./LightButtonContext";
 
 export default function Navigation({ page }) {
-  const [isLight,setIsLight] = useState(false);
+  const [isLight, setIsLight] = useState(false);
   const { buttonState, toggleButton } = useButton();
 
+// Nav hide effect vvv
+
+  // const nav = document.querySelector("nav");
+  // const navHeight = 70;
+  // let lastScrollY = 0;
+  // const delta = 10;
+
+  // function scrolled() {
+  //   let sy = window.scrollY;
+  //   if (Math.abs(lastScrollY - sy) > delta) {
+  //     if (sy > lastScrollY && sy > navHeight) {
+  //       nav.classList.add("nav-up");
+  //     }
+  //     else if (sy < lastScrollY) {
+  //       nav.classList.remove("nav-up");
+  //     }
+  //     lastScrollY = sy;
+  //   }
+  // }
+
+  // let didScroll = false;
+  // window.addEventListener("scroll", function (e) {
+  //   didScroll = true;
+  // });
+
+  // setInterval(function () {
+  //   if (didScroll) {
+  //     scrolled();
+  //     didScroll = false;
+  //   }
+  // }, 250);
 
   return (
-    <div className={`w-full ${buttonState ? 'bg-secondary text-primary':'bg-primary text-secondary'} backdrop-filter backdrop-blur-md flex flex-row justify-between  border-b-2 border-[#EBEBEB66] font-custom`}>
+    <nav
+      className={`w-full ${
+        buttonState
+          ? "bg-navsecondary text-primary"
+          : "bg-navprimary text-secondary"
+      } backdrop-filter backdrop-blur-md flex flex-row justify-between border-b-[0.5px] border-[#EBEBEB66] font-custom fixed z-40 top-0 transition-all duration-300`}
+    >
       <div>
         <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px]">
           FonzyLima
@@ -48,7 +85,10 @@ export default function Navigation({ page }) {
         </Link>
         <div className="p-4 pt-[20px] text-[18px]">Contact</div>
       </div>
-      <div className="hidden lg:flex p-4 pt-[20px] pr-[100px] cursor-pointer" onClick={toggleButton}>
+      <div
+        className="hidden lg:flex p-4 pt-[20px] pr-[100px] cursor-pointer"
+        onClick={toggleButton}
+      >
         <svg
           width="22"
           height="23"
@@ -62,6 +102,6 @@ export default function Navigation({ page }) {
           />
         </svg>
       </div>
-    </div>
+    </nav>
   );
 }
