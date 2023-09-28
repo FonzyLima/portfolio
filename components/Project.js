@@ -3,13 +3,21 @@ import Image from "next/image";
 
 export default function Project({ name, date }) {
   return (
-    <div className="w-1/2 rounded-t-lg ">
+    <div className="w-1/2 rounded-t-lg shadow-proj relative flex flex-col items-center">
       <Image alt="sample" src="/bok.png" width={500} height={500}></Image>
-      <div className="bg-[#171717] rounded-bl-lg rounded-br-lg">
-        <div className="text-secondary text-[30px] ml-14 ">{name}</div>
-        <div className="flex flex-row justify-between ">
-          <div className="text-tertiary text-[22px] ml-14 mr-14">{date}</div>
-          <div className="flex flex-row space-x-2 mr-12 pb-6">
+      <div className="absolute top-[330px] bg-secondary flex-row justify-between w-inherit inline-block pr-4 rounded-full">
+        <ul className="flex flex-row gap-4 items-center">
+          <li className="px-4 bg-fourtary h-full py-2 rounded-full">Website</li>
+          <li className="ml-[-5px]">Next.js</li>
+          <li>Python</li>
+          <li>Java</li>
+        </ul>
+      </div>
+      <div className="bg-[#171717] rounded-bl-[30px] rounded-br-[30px] px-[28px] py-[45px] w-full">
+        <div className="text-secondary text-[30px] font-semibold">{name}</div>
+        <div className="flex flex-row justify-between items-center">
+          <div className="text-tertiary text-[22px] borde">{date}</div>
+          <div className="flex flex-row gap-[12px] items-center justify-center">
             <svg
               width="33"
               height="32"
