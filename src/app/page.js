@@ -7,9 +7,8 @@ import Footer from "../../components/Footer";
 import Project from "../../components/Project";
 import Button from "../../components/Button";
 import SlidingText from "../../components/SlidingText";
-import { useButton } from "../../components/LightButtonContext";
 export default function Home() {
-  const { buttonState, toggleButton } = useButton();
+
   return (
     <div>
       <Navigation page="home" />

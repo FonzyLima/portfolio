@@ -4,11 +4,10 @@ import Link from "next/link";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import { useState, useEffect } from "react";
-import { useButton } from "./LightButtonContext";
+
 
 export default function Navigation({ page }) {
-  const [isLight, setIsLight] = useState(false);
-  const { buttonState, toggleButton } = useButton();
+
 
 // Nav hide effect vvv
 
@@ -44,11 +43,7 @@ export default function Navigation({ page }) {
 
   return (
     <nav
-      className={`w-full ${
-        buttonState
-          ? "bg-navsecondary text-primary"
-          : "bg-navprimary text-secondary"
-      } backdrop-filter backdrop-blur-md flex flex-row justify-between border-b-[0.5px] border-[#EBEBEB66] font-custom fixed z-40 top-0 transition-all duration-300`}
+      className="w-full bg-navprimary text-secondary backdrop-filter backdrop-blur-md flex flex-row justify-between border-b-[0.5px] border-[#EBEBEB66] font-custom fixed z-40 top-0 transition-all duration-300"
     >
       <div>
         <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px]">
@@ -87,7 +82,7 @@ export default function Navigation({ page }) {
       </div>
       <div
         className="hidden lg:flex p-4 pt-[20px] pr-[100px] cursor-pointer"
-        onClick={toggleButton}
+
       >
         <svg
           width="22"
