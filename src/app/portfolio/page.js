@@ -11,11 +11,11 @@ export default function projects() {
         <div className="text-secondary text-left text-[70px] font-semibold mt-20">
           Portfolio
         </div>
-        <div className="flex flex-row space-x-6 mt-12">
+        <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 mt-12">
           <Project name="Bok Fried Chicken" date="December 2021" />
           <Project name="Bok Fried Chicken" date="December 2022" />
         </div>
-        <div className="flex flex-row space-x-6 mt-12">
+        <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 mt-12">
           <Project name="Bok Fried Chicken" date="December 2021" />
           <Project name="Bok Fried Chicken" date="December 2022" />
         </div>

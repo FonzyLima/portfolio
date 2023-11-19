@@ -56,11 +56,11 @@ export default function Home() {
           <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
             Portfolio
           </div>
-          <div className="flex flex-col lg:flex-row gap-6 mt-12">
+          <div className="flex flex-col justify-center items-center lg:flex-row gap-6 mt-12">
             <Project name="Bok Fried Chicken" date="December 2021" />
             <Project name="Bok Fried Chicken" date="December 2022" />
           </div>
-          <div className="flex flex-col lg:flex-row gap-6 mt-12">
+          <div className="flex flex-col justify-center items-center  lg:flex-row gap-6 mt-12">
             <Project name="Bok Fried Chicken" date="December 2021" />
             <Project name="Bok Fried Chicken" date="December 2022" />
           </div>
