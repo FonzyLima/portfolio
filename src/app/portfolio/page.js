@@ -8,7 +8,7 @@ export default function projects() {
     <div className="">
       <Navigation page="portfolio" />
       <div className="flex flex-col text-left items-center font-custom">
-        <div className="text-secondary text-left text-[70px] font-semibold mt-20">
+        <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
           Portfolio
         </div>
         <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 mt-12">
