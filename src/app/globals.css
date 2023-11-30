@@ -19,3 +19,6 @@
 .nav-up {
   top: -70px;
 }
+.hidden-nav {
+  transform: translateY(-100%);
+}

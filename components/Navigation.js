@@ -8,42 +8,38 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Navigation({ page }) {
 
+  const [scrollY, setScrollY] = useState(0);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState("down");
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
 
-
-  const nav = document.querySelector("nav");
-  const navHeight = 70;
-  let lastScrollY = 0;
-  const delta = 10;
-
-  function scrolled() {
-    let sy = window.scrollY;
-    if (Math.abs(lastScrollY - sy) > delta) {
-      if (sy > lastScrollY && sy > navHeight) {
-        nav.classList.add("nav-up");
+      if (currentScrollY > lastScrollY) {
+        setScrollDirection("down");
+      } else {
+        setScrollDirection("up");
       }
-      else if (sy < lastScrollY) {
-        nav.classList.remove("nav-up");
-      }
-      lastScrollY = sy;
-    }
-  }
 
-  let didScroll = false;
-  window.addEventListener("scroll", function (e) {
-    didScroll = true;
-  });
+      setLastScrollY(currentScrollY);
+    };
 
-  setInterval(function () {
-    if (didScroll) {
-      scrolled();
-      didScroll = false;
-    }
-  }, 250);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
+  const hideNavbar = scrollY > 100 && scrollDirection === "down";
 
   return (
     <nav
-      className="w-full bg-navprimary text-secondary backdrop-filter backdrop-blur-md flex flex-row justify-between border-b-[0.5px] border-[#EBEBEB66] font-custom fixed z-40 top-0 transition-all duration-300"
+      className={`w-full bg-navprimary text-secondary backdrop-filter backdrop-blur-md flex flex-row justify-between border-b-[0.5px] border-[#EBEBEB66] font-custom fixed z-40 top-0 transition-transform duration-300 ease-in-out ${
+        hideNavbar ? "hidden-nav" : ""
+      }`}
     >
       <div>
         <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px]">
