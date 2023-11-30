@@ -17,7 +17,7 @@ export default function Home() {
         {/* Introduction Start*/}
         <div className="flex flex-col gap-[15px] lg:gap-[30px] text-left pt-[60px] px-6 items-left lg:text-center lg:items-center">
           <div className="text-tertiary text-[18px] lg:text-[22px]">
-            Hi there! &#128075; I
+            Hi there! &#128075; I am
           </div>
           <div className="font-semibold text-secondary text-[30px] lg:text-[90px] flex flex-col">
             <div className="lg:h-[95px] lg:mt-[-45px]">Fonzy Lima</div>

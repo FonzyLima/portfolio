@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import { useState, useEffect } from "react";
-
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Navigation({ page }) {
 
@@ -48,12 +48,18 @@ export default function Navigation({ page }) {
       <div>
         <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px]">
           FonzyLima
+          
         </div>
+        
       </div>
-      <div className="flex-row pl-[400px] hidden lg:flex">
+      <div className="flex-row flex">
+        <div className="flex md:hidden p-4 pt-[25px] text-[18px] hover:text-tertiary">
+        <GiHamburgerMenu/>
+        </div>
+      
         <Link href="/">
           <div
-            className={`p-4 pt-[20px] text-[18px] hover:text-tertiary ${
+            className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
               page == "home" ? "text-fourtary" : ""
             }`}
           >
@@ -62,7 +68,7 @@ export default function Navigation({ page }) {
         </Link>
         <Link href="/about">
           <div
-            className={`p-4 pt-[20px] text-[18px] hover:text-tertiary ${
+            className={`lg:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
               page == "abouts" ? "text-fourtary" : ""
             }`}
           >
@@ -71,16 +77,15 @@ export default function Navigation({ page }) {
         </Link>
         <Link href="/portfolio">
           <div
-            className={`p-4 pt-[20px] text-[18px] hover:text-tertiary ${
+            className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
               page == "portfolio" ? "text-fourtary" : ""
             }`}
           >
             Portfolio
           </div>
         </Link>
-        <div className="p-4 pt-[20px] text-[18px]">Contact</div>
-      </div>
-      <div
+        <div className="md:flex hidden p-4 pt-[20px] text-[18px]">Contact</div>
+        <div
         className="hidden lg:flex p-4 pt-[20px] pr-[100px] cursor-pointer"
 
       >
@@ -97,6 +102,8 @@ export default function Navigation({ page }) {
           />
         </svg>
       </div>
+      </div>
+      
     </nav>
   );
 }

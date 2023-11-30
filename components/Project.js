@@ -5,12 +5,12 @@ export default function Project({ name, date }) {
   return (
     <div className="w-[344px] lg:w-1/2 rounded-t-lg shadow-proj relative flex flex-col items-center">
       <Image alt="sample" src="/bok.png" width={500} height={500}></Image>
-      <div className="absolute top-[230px] lg:top-[330px] bg-secondary flex-row justify-between w-[205px] lg:w-inherit inline-block pr-4 rounded-full">
+      <div className="absolute top-[230px] lg:top-[330px] bg-secondary flex-row justify-between w-[205px] lg:w-auto inline-block pr-4 rounded-full">
         <ul className="flex flex-row gap-2 items-center">
-          <li className="px-4 bg-fourtary h-full py-2 rounded-full">Website</li>
-          <li className="ml-[-5px]">Next.js</li>
-          <li>Python</li>
-          <li>Java</li>
+          <li className="text-[11px] lg:text-[18px] px-4 bg-fourtary h-full py-2 rounded-full">Website</li>
+          <li className="text-[11px] lg:text-[18px] ml-[-5px]">Next.js</li>
+          <li className="text-[11px] lg:text-[18px]">Python</li>
+          <li className="text-[11px] lg:text-[18px]">Java</li>
         </ul>
       </div>
       <div className="bg-[#171717] rounded-bl-[30px] rounded-br-[30px] px-[28px] py-[45px] w-full">
