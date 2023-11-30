@@ -52,7 +52,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-col text-left items-center mt-[200px] gap-[15px] lg:gap-[30px]">
+        <div className="flex flex-col text-left items-center mt-[100px] lg:mt-[200px] gap-[15px] lg:gap-[30px]">
           <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
             Portfolio
           </div>
