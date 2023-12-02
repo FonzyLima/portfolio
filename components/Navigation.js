@@ -82,9 +82,12 @@ export default function Navigation({ page }) {
     >
       <div className="w-full flex flex-row justify-between">
         <div>
+          <Link href="/">
           <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px]">
             FonzyLima
           </div>
+          </Link>
+          
         </div>
         <div className="flex-row flex">
           <div
