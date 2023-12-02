@@ -157,7 +157,7 @@ export default function Navigation({ page }) {
               <motion.div
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
-                className="w-full flex justify-center text-[18px] p-1"
+                className={`w-full flex justify-center text-[18px] p-1 ${page == "home" ? "text-fourtary" : ""}`}
               >
                 Home
               </motion.div>
@@ -166,7 +166,7 @@ export default function Navigation({ page }) {
               <motion.div
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
-                className="w-full flex justify-center text-[18px] p-1"
+                className={`w-full flex justify-center text-[18px] p-1 ${page == "abouts" ? "text-fourtary" : ""}`}
               >
                 About
               </motion.div>
@@ -176,7 +176,7 @@ export default function Navigation({ page }) {
               <motion.div
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
-                className="w-full flex justify-center text-[18px] p-1"
+                className={`w-full flex justify-center text-[18px] p-1 ${page == "portfolio" ? "text-fourtary" : ""}`}
               >
                 Portfolio
               </motion.div>
