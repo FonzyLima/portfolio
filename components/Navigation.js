@@ -5,40 +5,48 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import { useState, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { motion,AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 export default function Navigation({ page }) {
   const [scrollY, setScrollY] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [scrollDirection, setScrollDirection] = useState("down");
   const variants = {
-    open: { staggerChildren: 0.07, delayChildren: 0.2,transition: {
-      type: "spring",
-      stiffness: 20,
-      restDelta: 2
-    } },
-    closed: {  staggerChildren: 0.05, staggerDirection: -1,transition: {
-      delay: 0.5,
-      type: "spring",
-      stiffness: 400,
-      damping: 40
-    } },
-  }
+    open: {
+      staggerChildren: 0.07,
+      delayChildren: 0.2,
+      transition: {
+        type: "spring",
+        stiffness: 20,
+        restDelta: 2,
+      },
+    },
+    closed: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+      transition: {
+        delay: 0.5,
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+      },
+    },
+  };
   const mobileNavContainerVariant = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 },
+      transition: { staggerChildren: 0.2 },
     },
   };
   const mobileNavListVariant = {
-    hidden: { y: -20,  opacity: 0 },
+    hidden: { y: -20, opacity: 0 },
     show: { opacity: 1, y: 0 },
   };
-  
+
   const mobileNavExitProps = {
     exit: {
       opacity: 0,
-      height: 0,
+      height:0,
       transition: { duration: 0.2, ease: "easeIn" },
     },
   };
@@ -137,22 +145,38 @@ export default function Navigation({ page }) {
         <div className="w-full flex justify-center text-[18px] p-1">About</div>
         <div className="w-full flex justify-center text-[18px] p-1">Portfolio</div>
       </div>:null} */}
-    <AnimatePresence mode="wait">
-    {showMenu && (<motion.div
-        variants={mobileNavContainerVariant}
-        initial="hidden"
-        animate="show"
-        className={`flex flex-col transition duration-500 ease-out`}
-      >
-        <motion.div  variants={mobileNavListVariant} {...mobileNavExitProps} className="w-full flex justify-center text-[18px] p-1">Home</motion.div>
-        <motion.div  variants={mobileNavListVariant} {...mobileNavExitProps} className="w-full flex justify-center text-[18px] p-1">About</motion.div>
-        <motion.div  variants={mobileNavListVariant} {...mobileNavExitProps} className="w-full flex justify-center text-[18px] p-1">
-          Portfolio
-        </motion.div>
-      </motion.div>)}
-    </AnimatePresence>
-      
-     
+      <AnimatePresence>
+        {showMenu && (
+          <motion.div
+            variants={mobileNavContainerVariant}
+            initial="hidden"
+            animate="show"
+            className={`flex flex-col transition duration-500 ease-out`}
+          >
+            <motion.div
+              variants={mobileNavListVariant}
+              {...mobileNavExitProps}
+              className="w-full flex justify-center text-[18px] p-1"
+            >
+              Home
+            </motion.div>
+            <motion.div
+              variants={mobileNavListVariant}
+              {...mobileNavExitProps}
+              className="w-full flex justify-center text-[18px] p-1"
+            >
+              About
+            </motion.div>
+            <motion.div
+              variants={mobileNavListVariant}
+              {...mobileNavExitProps}
+              className="w-full flex justify-center text-[18px] p-1"
+            >
+              Portfolio
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
