@@ -46,7 +46,7 @@ export default function Navigation({ page }) {
   const mobileNavExitProps = {
     exit: {
       opacity: 0,
-      height:0,
+      height: 0,
       transition: { duration: 0.2, ease: "easeIn" },
     },
   };
@@ -153,27 +153,34 @@ export default function Navigation({ page }) {
             animate="show"
             className={`flex flex-col transition duration-500 ease-out`}
           >
-            <motion.div
-              variants={mobileNavListVariant}
-              {...mobileNavExitProps}
-              className="w-full flex justify-center text-[18px] p-1"
-            >
-              Home
-            </motion.div>
-            <motion.div
-              variants={mobileNavListVariant}
-              {...mobileNavExitProps}
-              className="w-full flex justify-center text-[18px] p-1"
-            >
-              About
-            </motion.div>
-            <motion.div
-              variants={mobileNavListVariant}
-              {...mobileNavExitProps}
-              className="w-full flex justify-center text-[18px] p-1"
-            >
-              Portfolio
-            </motion.div>
+            <Link href="/">
+              <motion.div
+                variants={mobileNavListVariant}
+                {...mobileNavExitProps}
+                className="w-full flex justify-center text-[18px] p-1"
+              >
+                Home
+              </motion.div>
+            </Link>
+            <Link href="/about">
+              <motion.div
+                variants={mobileNavListVariant}
+                {...mobileNavExitProps}
+                className="w-full flex justify-center text-[18px] p-1"
+              >
+                About
+              </motion.div>
+            </Link>
+
+            <Link href="/portfolio">
+              <motion.div
+                variants={mobileNavListVariant}
+                {...mobileNavExitProps}
+                className="w-full flex justify-center text-[18px] p-1"
+              >
+                Portfolio
+              </motion.div>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
