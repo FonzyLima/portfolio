@@ -20,11 +20,11 @@ export default function Home() {
             Hi there! &#128075; I am
           </div>
           <div className="font-semibold text-secondary text-[30px] lg:text-[90px] flex flex-col">
-            <div className="lg:h-[95px] lg:mt-[-45px]">Fonzy Lima</div>
+            <div className="lg:h-[95px] lg:mt-[-45px]">Alfonso Lima</div>
             <div className="lg:h-[95px]">Software Developer</div>
           </div>
           <div className="text-tertiary text-[18px] lg:text-[22px]">
-            A Software Developer based in Manila, Philippines
+            Currently based in Manila, Philippines
           </div>
           <div className="w-[150px] lg:w-[190px]">
             <Button title="Get in touch" />
@@ -65,11 +65,11 @@ export default function Home() {
             <Project name="Bok Fried Chicken" date="December 2022" />
           </div>
 
-          <Button title="More Projects" />
+          <Button title="More Projects" destination="/portfolio"/>
         </div>
         <div className="mt-40">
           <SlidingText
-            text="Backend Frontend Mobile Web Game Web3 Artificial Intelligence&nbsp;"
+            text="Backend Frontend Mobile Web Game AI Development&nbsp;"
             direction={-1}
           />
           <div className="mt-[-45px]">

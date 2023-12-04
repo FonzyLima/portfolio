@@ -82,9 +82,11 @@ export default function Navigation({ page }) {
     >
       <div className="w-full flex flex-row justify-between">
         <div>
-          <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px]">
-            FonzyLima
-          </div>
+          <Link href="/">
+            <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px] font-custom hover:cursor-pointer">
+              AlfonsoLima
+            </div>
+          </Link>
         </div>
         <div className="flex-row flex">
           <div
@@ -157,7 +159,9 @@ export default function Navigation({ page }) {
               <motion.div
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
-                className={`w-full flex justify-center text-[18px] p-1 ${page == "home" ? "text-fourtary" : ""}`}
+                className={`w-full flex justify-center text-[18px] font-custom p-1 ${
+                  page == "home" ? "text-fourtary" : ""
+                }`}
               >
                 Home
               </motion.div>
@@ -166,7 +170,9 @@ export default function Navigation({ page }) {
               <motion.div
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
-                className={`w-full flex justify-center text-[18px] p-1 ${page == "abouts" ? "text-fourtary" : ""}`}
+                className={`w-full flex justify-center text-[18px] font-custom p-1 ${
+                  page == "abouts" ? "text-fourtary" : ""
+                }`}
               >
                 About
               </motion.div>
@@ -176,7 +182,9 @@ export default function Navigation({ page }) {
               <motion.div
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
-                className={`w-full flex justify-center text-[18px] p-1 ${page == "portfolio" ? "text-fourtary" : ""}`}
+                className={`w-full flex justify-center text-[18px] font-custom p-1 pb-4 ${
+                  page == "portfolio" ? "text-fourtary" : ""
+                }`}
               >
                 Portfolio
               </motion.div>
