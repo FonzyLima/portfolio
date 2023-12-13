@@ -8,7 +8,6 @@ import Project from "../../components/Project";
 import Button from "../../components/Button";
 import SlidingText from "../../components/SlidingText";
 export default function Home() {
-
   return (
     <div>
       <Navigation page="home" />
@@ -57,15 +56,27 @@ export default function Home() {
             Portfolio
           </div>
           <div className="flex flex-col justify-center items-center lg:flex-row gap-6 mt-12">
-            <Project name="Bok Fried Chicken" date="December 2021" />
-            <Project name="Bok Fried Chicken" date="December 2022" />
+            <Project
+              name="Bok Fried Chicken"
+              date="December 2021"
+              image="/bok.png"
+            />
+            <Project name="925 Wear" date="October 2023" image="/925.png" />
           </div>
           <div className="flex flex-col justify-center items-center  lg:flex-row gap-6 mt-12">
-            <Project name="Bok Fried Chicken" date="December 2021" />
-            <Project name="Bok Fried Chicken" date="December 2022" />
+            <Project
+              name="Mutya (2D Game)"
+              date="December 2022"
+              image="/mutya.png"
+            />
+            <Project
+              name="Blitz (Wordle Discord Bot)"
+              date="March 2022"
+              image="/blitz.png"
+            />
           </div>
 
-          <Button title="More Projects" destination="/portfolio"/>
+          <Button title="More Projects" destination="/portfolio" />
         </div>
         <div className="mt-40">
           <SlidingText
