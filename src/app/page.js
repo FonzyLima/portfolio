@@ -55,7 +55,7 @@ export default function Home() {
           <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
             Portfolio
           </div>
-          <div className="flex flex-col justify-center items-center lg:flex-row gap-6 mt-12">
+          <div className="flex flex-col justify-center items-center lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12">
             <Project
               name="Bok Fried Chicken"
               date="December 2021"
@@ -63,7 +63,7 @@ export default function Home() {
             />
             <Project name="925 Wear" date="October 2023" image="/925.png" />
           </div>
-          <div className="flex flex-col justify-center items-center  lg:flex-row gap-6 mt-12">
+          <div className="flex flex-col justify-center items-center  lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12">
             <Project
               name="Mutya (2D Game)"
               date="December 2022"
