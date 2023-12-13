@@ -11,15 +11,15 @@ export default function projects() {
         <div className="text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
           Portfolio
         </div>
-        <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 space-y-6 mt-12">
+        <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 space-y-6 lg:space-y-0 mt-12">
           <Project name="Bok Fried Chicken" date="December 2021" image="/bok.png"/>
           <Project name="925 Wear" date="October 2023" image="/925.png"/>
         </div>
-        <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 mt-12">
+        <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 space-y-6 lg:space-y-0 mt-12">
           <Project name="Mutya (2D Game)" date="December 2022" image="/mutya.png"/>
           <Project name="Blitz (Wordle Discord Bot)" date="March 2022" image="/blitz.png"/>
         </div>
-        <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 mt-12 w-1/2">
+        <div className="flex flex-col lg:flex-row justify-center items-center space-x-6 space-y-6 lg:space-y-0 mt-12 w-1/2">
           <Project name="Mutya (2D Game)" date="December 2022" image="/serbiz.png"/>
 
         </div>
