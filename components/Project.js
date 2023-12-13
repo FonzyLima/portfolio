@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Project({ name, date }) {
+export default function Project({ name, date,image}) {
   return (
     <div className="w-[344px] lg:w-1/2 rounded-t-lg shadow-proj relative flex flex-col items-center">
-      <Image alt="sample" src="/bok.png" width={500} height={500}></Image>
+      <Image alt="sample" src={image} width={500} height={500}></Image>
       <div className="absolute top-[230px] lg:top-[330px] bg-secondary flex-row justify-between w-[205px] lg:w-auto inline-block pr-4 rounded-full">
         <ul className="flex flex-row gap-2 items-center">
           <li className="text-[11px] lg:text-[18px] px-4 bg-fourtary h-full py-2 rounded-full">Website</li>
