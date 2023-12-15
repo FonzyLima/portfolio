@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-
-export default function Project({ name, date,image}) {
+import Link from "next/link";
+export default function Project({ name, date,image,link="/"}) {
   return (
     <div className="w-[344px] lg:w-1/2 rounded-t-lg shadow-proj relative flex flex-col items-center">
       <Image alt="Project Thumbnail" src={image} width={500} height={500}></Image>
@@ -34,6 +34,7 @@ export default function Project({ name, date,image}) {
                 strokeLinejoin="round"
               />
             </svg>
+            <Link href={link} target="_blank">
             <svg
               width="28"
               height="28"
@@ -49,6 +50,8 @@ export default function Project({ name, date,image}) {
                 strokeLinejoin="round"
               />
             </svg>
+            </Link>
+            
           </div>
         </div>
       </div>
