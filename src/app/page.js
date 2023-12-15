@@ -60,14 +60,21 @@ export default function Home() {
               name="Bok Fried Chicken"
               date="December 2021"
               image="/bok.png"
+              link="https://bokfriedchicken.com"
             />
-            <Project name="925 Wear" date="October 2023" image="/925.png" />
+            <Project
+              name="925 Wear"
+              date="October 2023"
+              image="/925.png"
+              link="https://925studio.online"
+            />
           </div>
           <div className="flex flex-col justify-center items-center  lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12">
             <Project
               name="Mutya (2D Game)"
               date="December 2022"
               image="/mutya.png"
+              link="https://alfygl.itch.io/mutya"
             />
             <Project
               name="Blitz (Wordle Discord Bot)"
