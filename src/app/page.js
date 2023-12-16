@@ -75,11 +75,13 @@ export default function Home() {
               date="December 2022"
               image="/mutya.png"
               link="https://alfygl.itch.io/mutya"
+              git="https://github.com/FonzyLima/mutya"
             />
             <Project
               name="Blitz (Wordle Discord Bot)"
               date="March 2022"
               image="/blitz.png"
+              git="https://github.com/FonzyLima/blitz-bot"
             />
           </div>
 
