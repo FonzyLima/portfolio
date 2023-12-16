@@ -69,7 +69,7 @@ export default function Home() {
               link="https://925studio.online"
             />
           </div>
-          <div className="flex flex-col justify-center items-center  lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12">
+          <div className="flex flex-col justify-center items-center  lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12 mb-6">
             <Project
               name="Mutya (2D Game)"
               date="December 2022"
