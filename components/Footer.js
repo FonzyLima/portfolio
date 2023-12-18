@@ -40,7 +40,7 @@ export default function Footer() {
           </li>
         </Link>
       </ul>
-      <div className="text-tertiary text-[12px] lg:text-[18px] pb-8">
+      <div className="text-fiftary dark:text-tertiary text-[12px] lg:text-[18px] pb-8">
         Copyright &copy; Alfonso Gabriel V. Lima - 2023
       </div>
     </div>
