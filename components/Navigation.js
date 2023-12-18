@@ -116,16 +116,15 @@ export default function Navigation({ page }) {
           </Link>
           <Link href="/portfolio">
             <div
-              className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
+              className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary pr-[100px] ${
                 page == "portfolio" ? "text-[#61BC7A] dark:text-fourtary" : ""
               }`}
             >
               Portfolio
             </div>
           </Link>
-          <div className="md:flex hidden p-4 pt-[20px] text-[18px]">
-            Contact
-          </div>
+
+  
         </div>
       </div>
       {/* {showMenu ? <div className="transition-transform duration-500 ease-in-out">
