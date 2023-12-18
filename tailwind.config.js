@@ -17,6 +17,7 @@ module.exports = {
       tertiary: "#A9A9A9",
       fourtary: "#7DF39D",
       fiftary: "#606060",
+      sixtary: "#61BC7A",
       "primary-light": "#EBEBEB",
       "secondary-light": "#171717",
       "teriary-light": "#606060",
