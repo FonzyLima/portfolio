@@ -99,7 +99,7 @@ export default function Navigation({ page }) {
           <Link href="/">
             <div
               className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
-                page == "home" ? "text-tertiary dark:text-fourtary" : ""
+                page == "home" ? "text-[#61BC7A] dark:text-fourtary" : ""
               }`}
             >
               Home
@@ -108,7 +108,7 @@ export default function Navigation({ page }) {
           <Link href="/about">
             <div
               className={`lg:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
-                page == "abouts" ? "text-tertiary dark:text-fourtary" : ""
+                page == "abouts" ? "text-[#61BC7A] dark:text-fourtary" : ""
               }`}
             >
               About
@@ -117,7 +117,7 @@ export default function Navigation({ page }) {
           <Link href="/portfolio">
             <div
               className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
-                page == "portfolio" ? "text-tertiary dark:text-fourtary" : ""
+                page == "portfolio" ? "text-[#61BC7A] dark:text-fourtary" : ""
               }`}
             >
               Portfolio
