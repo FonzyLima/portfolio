@@ -76,7 +76,7 @@ export default function Navigation({ page }) {
 
   return (
     <nav
-      className={`w-full bg-navprimary text-secondary backdrop-filter backdrop-blur-md border-b-[0.5px] border-[#EBEBEB66] font-custom fixed z-40 top-0 transition-transform duration-300 ease-in-out ${
+      className={`w-full bg-[#EBEBEB] dark:bg-navprimary text-primary dark:text-secondary backdrop-filter backdrop-blur-md border-b-[0.5px] border-[#171717] dark:border-[#EBEBEB] font-custom fixed z-40 top-0 transition-transform duration-300 ease-in-out ${
         hideNavbar ? "hidden-nav" : ""
       }`}
     >
@@ -99,7 +99,7 @@ export default function Navigation({ page }) {
           <Link href="/">
             <div
               className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
-                page == "home" ? "text-fourtary" : ""
+                page == "home" ? "text-tertiary dark:text-fourtary" : ""
               }`}
             >
               Home
@@ -108,7 +108,7 @@ export default function Navigation({ page }) {
           <Link href="/about">
             <div
               className={`lg:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
-                page == "abouts" ? "text-fourtary" : ""
+                page == "abouts" ? "text-tertiary dark:text-fourtary" : ""
               }`}
             >
               About
@@ -117,7 +117,7 @@ export default function Navigation({ page }) {
           <Link href="/portfolio">
             <div
               className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
-                page == "portfolio" ? "text-fourtary" : ""
+                page == "portfolio" ? "text-tertiary dark:text-fourtary" : ""
               }`}
             >
               Portfolio

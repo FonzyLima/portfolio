@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className="bg-primary font-custom">
+      <body className="bg-[#EBEBEB] dark:bg-primary font-custom">
         {children}
         <Footer />
       </body>

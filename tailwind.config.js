@@ -6,8 +6,8 @@ module.exports = {
       ...theme("colors"),
       primary: "#171717",
       secondary: "#EBEBEB",
-      navprimary: "#17171799",
-      navsecondary: "#EBEBEB99",
+      navprimary: "#171717",
+      navsecondary: "#EBEBEB",
       fourtary: "#7DF39D",
     }),
     textColor: (theme) => ({
@@ -16,6 +16,7 @@ module.exports = {
       secondary: "#EBEBEB",
       tertiary: "#A9A9A9",
       fourtary: "#7DF39D",
+      fiftary: "#606060",
       "primary-light": "#EBEBEB",
       "secondary-light": "#171717",
       "teriary-light": "#606060",
