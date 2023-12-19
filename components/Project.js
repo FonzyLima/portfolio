@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-export default function Project({ name, date, image, link = "/", git = "/" }) {
+export default function Project({ name, date, image, link = "/", git = "/" ,words=["hello","yellow","yelp","dddd"]}) {
   return (
     <div className="w-[344px] lg:w-1/2 rounded-t-lg shadow-proj relative flex flex-col items-center">
       <Image
@@ -10,14 +10,14 @@ export default function Project({ name, date, image, link = "/", git = "/" }) {
         width={500}
         height={500}
       ></Image>
-      <div className="absolute top-[230px] lg:top-[330px] bg-[#2a2a2a] dark:bg-secondary flex-row justify-between w-[205px] lg:w-auto inline-block pr-4 rounded-full">
+      <div className="absolute top-[230px] lg:top-[330px] bg-[#2a2a2a] dark:bg-secondary flex-row justify-between w-auto lg:w-auto inline-block pr-4 rounded-full">
         <ul className="text-secondary dark:text-primary flex flex-row gap-2 items-center">
           <li className="text-[11px] lg:text-[18px] px-4 bg-[#61BC7A] dark:bg-fourtary h-full py-2 rounded-full">
-            Website
+            {words[0]}
           </li>
-          <li className="text-[11px] lg:text-[18px] ml-[-5px]">Next.js</li>
-          <li className="text-[11px] lg:text-[18px]">Python</li>
-          <li className="text-[11px] lg:text-[18px]">Java</li>
+          <li className="text-[11px] lg:text-[18px] ml-[-5px]">{words[1]}</li>
+          <li className="text-[11px] lg:text-[18px]">{words[2]}</li>
+          <li className="text-[11px] lg:text-[18px]">{words[3]}</li>
         </ul>
       </div>
       <div className="bg-secondary dark:bg-[#171717] rounded-bl-[30px] rounded-br-[30px] px-[28px] py-[45px] w-full">
