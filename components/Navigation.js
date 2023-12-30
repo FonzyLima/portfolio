@@ -92,12 +92,7 @@ export default function Navigation({ page }) {
           </Link>
         </div>
         <div className="flex-row flex">
-          <div
-            className="flex md:hidden p-4 pt-[25px] text-[18px] hover:text-tertiary"
-            onClick={() => setshowMenu(!showMenu)}
-          >
-            <GiHamburgerMenu />
-          </div>
+          
 
           <Link href="/">
             <div
@@ -119,14 +114,14 @@ export default function Navigation({ page }) {
           </Link>
           <Link href="/portfolio">
             <div
-              className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary pr-[100px] ${
+              className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary pr-[20px] ${
                 page == "portfolio" ? "text-[#61BC7A] dark:text-fourtary" : ""
               }`}
             >
               Portfolio
             </div>
           </Link>
-          <div className="hidden lg:flex pt-[20px] pr-[100px] cursor-pointer" onClick={()=>setisDark(!isDark)}>
+          <div className="flex pt-[20px] lg:pr-[100px] cursor-pointer" onClick={()=>setisDark(!isDark)}>
             <svg
               width="22"
               height="23"
@@ -140,7 +135,12 @@ export default function Navigation({ page }) {
               />
             </svg>
           </div>
-
+          <div
+            className="flex md:hidden p-4 pt-[25px] text-[18px] hover:text-tertiary"
+            onClick={() => setshowMenu(!showMenu)}
+          >
+            <GiHamburgerMenu />
+          </div>
   
         </div>
       </div>
@@ -194,6 +194,7 @@ export default function Navigation({ page }) {
           </motion.div>
         )}
       </AnimatePresence>
+      
     </nav>
   );
 }
