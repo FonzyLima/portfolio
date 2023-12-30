@@ -3,6 +3,7 @@ import Project from "../../../components/Project";
 import Navigation from "../../../components/Navigation";
 import Footer from "../../../components/Footer";
 
+
 export default function projects() {
   return (
     <div className="">

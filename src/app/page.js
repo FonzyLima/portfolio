@@ -7,9 +7,12 @@ import Footer from "../../components/Footer";
 import Project from "../../components/Project";
 import Button from "../../components/Button";
 import SlidingText from "../../components/SlidingText";
+import DarkContext from "@/app/context/darkContext";
+import { useContext } from "react";
 export default function Home() {
+  const [isDark, setisDark] = useContext(DarkContext)
   return (
-    <div>
+    <div className={`${isDark ? "dark":""}`}>
       <Navigation page="home" />
       <div className="gradient-green w-full absolute h-[260px] lg:h-[800px] top-[390px] lg:top-[430px] z-10"></div>
       <div className="z-20 relative mt-[60px]">
