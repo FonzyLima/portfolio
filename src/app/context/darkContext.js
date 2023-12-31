@@ -5,7 +5,7 @@ import { createContext, useState ,useContext} from "react"
 const DarkContext = createContext();
 
 export const DarkContextProvider = ({children}) => {
-    const [isDark, setisDark] = useState(false);
+    const [isDark, setisDark] = useState(true);
     
     return(
         <DarkContext.Provider value={[isDark,setisDark]}>
