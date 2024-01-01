@@ -23,12 +23,12 @@ export default function about() {
       </div>
       </Reveal>
       <Reveal>
-      <div className="mt-40">
+      <div className="mt-30">
         <SlidingText
           text="Backend Frontend Mobile Web Game AI Development&nbsp;"
           direction={-1}
         />
-        <div className="mt-[-45px]">
+        <div className="mt-[-35px]">
           <SlidingText
             text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
             direction={1}
