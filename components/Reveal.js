@@ -13,7 +13,7 @@ export default function Reveal({children}) {
     },[isInView])
   return (
     <div ref={ref} className='relative w-full overflow-hidden'>
-<motion.div variants={{hidden:{opacity:0, y: 75}, visible:{opacity:1, y:0}}} initial="hidden" animate={controls} transition={{duration:0.5,delay:0.25}}>
+<motion.div variants={{hidden:{opacity:0, y: 75}, visible:{opacity:1, y:0}}} initial="hidden" animate={controls} transition={{duration:0.8,delay:0.5}}>
         {children}
     </motion.div>
     </div>
