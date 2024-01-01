@@ -121,6 +121,7 @@ export default function Navigation({ page }) {
               Portfolio
             </div>
           </Link>
+          
           <div className="flex pt-[20px] lg:pr-[100px] cursor-pointer" onClick={()=>setisDark(!isDark)}>
             <svg
               width="22"

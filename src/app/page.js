@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 import Project from "../../components/Project";
 import Button from "../../components/Button";
 import SlidingText from "../../components/SlidingText";
+import Reveal from "../../components/Reveal";
 import DarkContext from "@/app/context/darkContext";
 import { useContext } from "react";
 export default function Home() {
@@ -15,9 +16,12 @@ export default function Home() {
     <div className={`${isDark ? "dark":""}`}>
       <Navigation page="home" />
       <div className="gradient-green w-full absolute h-[260px] lg:h-[800px] top-[390px] lg:top-[430px] z-10"></div>
+      
       <div className="z-20 relative mt-[60px]">
         {/* Introduction Start*/}
-        <div className="flex flex-col gap-[15px] lg:gap-[30px] text-left pt-[60px] px-6 items-left lg:text-center lg:items-center">
+        <Reveal>
+      <div className="flex flex-col gap-[15px] lg:gap-[30px] text-left pt-[60px] px-6 items-left lg:text-center lg:items-center">
+          
           <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px]">
             Hi there! &#128075; I am
           </div>
@@ -38,8 +42,9 @@ export default function Home() {
         <div className="lg:hidden flex flex-row justify-center mt-10">
           <Image src="/gameboy.svg" alt="Gameboy" width={330} height={210} />
         </div>
-
-        <div className="flex flex-col px-6 text-left items-left lg:items-center mt-[100px] lg:mt-[200px]">
+      </Reveal>
+<Reveal>
+<div className="flex flex-col px-6 text-left items-left lg:items-center mt-[100px] lg:mt-[200px]">
           <div className="lg:w-[775px] flex flex-col gap-[40px] lg:ml-[-90px]">
             <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
               Who I am
@@ -54,7 +59,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-col text-left items-center mt-[100px] lg:mt-[200px] gap-[15px] lg:gap-[30px]">
+</Reveal>
+       <Reveal>
+       <div className="flex flex-col text-left items-center mt-[100px] lg:mt-[200px] gap-[15px] lg:gap-[30px]">
           <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
             Portfolio
           </div>
@@ -94,6 +101,8 @@ export default function Home() {
 
           <Button title="More Projects" destination="/portfolio" />
         </div>
+       </Reveal>
+        <Reveal>
         <div className="mt-40">
           <SlidingText
             text="Backend Frontend Mobile Web Game AI Development&nbsp;"
@@ -106,6 +115,8 @@ export default function Home() {
             />
           </div>
         </div>
+        </Reveal>
+        
       </div>
     </div>
   );
