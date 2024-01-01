@@ -2,11 +2,12 @@ import React from "react";
 import Navigation from "../../../components/Navigation";
 import SlidingText from "../../../components/SlidingText";
 import Footer from "../../../components/Footer";
-
+import Reveal from "../../../components/Reveal";
 export default function about() {
   return (
     <div className="">
       <Navigation page="abouts" />
+      <Reveal>
       <div className="flex flex-col text-left px-6 lg:px-24 font-custom">
         <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
           Lorem Ipsum dolor sit
@@ -20,6 +21,8 @@ export default function about() {
           nisi ut aliquip ex ea commodo consequat.
         </div>
       </div>
+      </Reveal>
+      <Reveal>
       <div className="mt-40">
         <SlidingText
           text="Backend Frontend Mobile Web Game AI Development&nbsp;"
@@ -32,7 +35,10 @@ export default function about() {
           />
         </div>
       </div>
+      </Reveal>
+      
       {/* Resume Start */}
+      <Reveal>
       <div className="flex flex-col px-6 lg:px-24 mt-40 gap-y-[90px]">
         <div className="flex flex-col lg:flex-row justify-between">
           <div className="flex flex-col gap-y-[10px] py-[10px]">
@@ -112,6 +118,8 @@ export default function about() {
         </div>
         
       </div>
+      </Reveal>
+      
    
     </div>
   );

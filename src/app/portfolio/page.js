@@ -2,12 +2,14 @@ import React from "react";
 import Project from "../../../components/Project";
 import Navigation from "../../../components/Navigation";
 import Footer from "../../../components/Footer";
+import Reveal from "../../../components/Reveal";
 
 
 export default function projects() {
   return (
     <div className="">
       <Navigation page="portfolio" />
+      <Reveal>
       <div className="flex flex-col text-left items-center font-custom">
         <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
           Portfolio
@@ -55,6 +57,8 @@ export default function projects() {
           />
         </div>
       </div>
+      </Reveal>
+      
     </div>
   );
 }
