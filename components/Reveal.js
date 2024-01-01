@@ -4,7 +4,7 @@ import {motion, useInView, useAnimation} from "framer-motion"
 import { useEffect, useRef } from 'react'
 export default function Reveal({children}) {
     const ref = useRef(null)
-    const isInView = useInView(ref,{once:true})
+    const isInView = useInView(ref,{once:false})
     const controls = useAnimation()
     useEffect(()=>{
         if (isInView){
