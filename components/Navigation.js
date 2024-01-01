@@ -163,7 +163,7 @@ export default function Navigation({ page }) {
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
                 className={`w-full flex justify-center text-[18px] font-custom p-1 ${
-                  page == "home" ? "text-fourtary" : ""
+                  page == "home" ? "text-[#61BC7A] dark:text-fourtary" : ""
                 }`}
               >
                 Home
@@ -174,7 +174,7 @@ export default function Navigation({ page }) {
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
                 className={`w-full flex justify-center text-[18px] font-custom p-1 ${
-                  page == "abouts" ? "text-fourtary" : ""
+                  page == "abouts" ? "text-[#61BC7A] dark:text-fourtary" : ""
                 }`}
               >
                 About
@@ -186,7 +186,7 @@ export default function Navigation({ page }) {
                 variants={mobileNavListVariant}
                 {...mobileNavExitProps}
                 className={`w-full flex justify-center text-[18px] font-custom p-1 pb-4 ${
-                  page == "portfolio" ? "text-fourtary" : ""
+                  page == "portfolio" ? "text-[#61BC7A] dark:text-fourtary" : ""
                 }`}
               >
                 Portfolio
