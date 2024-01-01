@@ -42,7 +42,7 @@ export default function Navigation({ page }) {
     },
   };
   const mobileNavListVariant = {
-    hidden: { y: -20, opacity: 0 },
+    hidden: { y: -30, opacity: 0 },
     show: { opacity: 1, y: 0 },
   };
 
@@ -50,7 +50,7 @@ export default function Navigation({ page }) {
     exit: {
       opacity: 0,
       height: 0,
-      transition: { duration: 0.2, ease: "easeIn" },
+      transition: { duration: 0.1, ease: "easeIn" },
     },
   };
   const [showMenu, setshowMenu] = useState(false);
