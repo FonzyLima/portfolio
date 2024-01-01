@@ -39,7 +39,7 @@ export default function about() {
       
       {/* Resume Start */}
       <Reveal>
-      <div className="flex flex-col px-6 lg:px-24 mt-40 gap-y-[90px]">
+      <div className="flex flex-col px-6 lg:px-24 mt-32 gap-y-[90px]">
         <div className="flex flex-col lg:flex-row justify-between">
           <div className="flex flex-col gap-y-[10px] py-[10px]">
             <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
