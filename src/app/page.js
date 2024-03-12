@@ -10,8 +10,16 @@ import SlidingText from "../../components/SlidingText";
 import Reveal from "../../components/Reveal";
 import DarkContext from "@/app/context/darkContext";
 import { useContext } from "react";
+import React from 'react';
 export default function Home() {
+
   const [isDark, setisDark] = useContext(DarkContext);
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
   return (
     <div className={`${isDark ? "dark" : ""}`}>
       <Navigation page="home" />
@@ -31,7 +39,7 @@ export default function Home() {
             <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px]">
               Currently based in Manila, Philippines
             </div>
-            <div className="w-[150px] lg:w-[190px]">
+            <div onClick={scrollToBottom} className="w-[150px] lg:w-[190px]">
               <Button title="Get in touch" />
             </div>
           </div>
@@ -52,12 +60,10 @@ export default function Home() {
               </Reveal>
               <Reveal>
               <div className="text-fiftary dark:text-tertiary leading-[147.5%] text-left text-[22px] lg:text-[40px] max-w-[475px] lg:max-w-[775px]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+                I am an aspiring Software Engineer who specializes in Web and App Development{" "}
                 <br />
                 <br />
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                I recently graduated with honors in Computer Science with a minor in Social Technopreneurship in De La Salle University - Manila
               </div>
               </Reveal>
               
@@ -69,7 +75,13 @@ export default function Home() {
               Portfolio
             </div>
             <div className="flex flex-col justify-center items-center lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12">
-              
+            <Project
+            name="Serbiz Website"
+            date="February 2024"
+            image="/serbiz.png"
+            link="https://serbiz.com.ph"
+            words={["Website", "NextJS", "Tailwind", "Firebase"]}
+          />
               <Project
                 name="925 Wear"
                 date="October 2023"
@@ -77,22 +89,16 @@ export default function Home() {
                 link="https://925studio.online"
                 words={["Website", "NextJS", "Tailwind", "Freelance"]}
               />
-              <Project
+             
+            </div>
+            <div className="flex flex-col justify-center items-center  lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12 mb-6">
+               <Project
                 name="Mutya (2D Game)"
                 date="December 2022"
                 image="/mutya.png"
                 link="https://alfygl.itch.io/mutya"
                 git="https://github.com/FonzyLima/mutya"
                 words={["Game", "Unity", "C#", "Project"]}
-              />
-            </div>
-            <div className="flex flex-col justify-center items-center  lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12 mb-6">
-              <Project
-                name="Blitz (Wordle Discord Bot)"
-                date="March 2022"
-                image="/blitz.png"
-                git="https://github.com/FonzyLima/blitz-bot"
-                words={["Bot", "Python", "Discord.py", "Project"]}
               />
               <Project
                 name="Bok Fried Chicken"
