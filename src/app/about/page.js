@@ -10,7 +10,7 @@ export default function about() {
       <Reveal>
       <div className="flex flex-col text-left px-6 lg:px-24 font-custom">
         <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
-          Lorem Ipsum dolor sit
+          More About Me
         </div>
         <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -54,8 +54,7 @@ export default function about() {
               Software Engineering Intern
             </div>
             <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Enhanced functionality and resolved technical issues within the company's web application by implementing new features and addressing bugs
             </div>
           </div>
         </div>
@@ -73,8 +72,7 @@ export default function about() {
               Web Development Intern
             </div>
             <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Contributed to the creation of a comprehensive time-in/time-out system for the company, leveraging Next.js for efficient and streamlined development.
             </div>
           </div>
         </div>
@@ -92,8 +90,7 @@ export default function about() {
               DevOps Intern
             </div>
             <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Led the development process for an application that organizes the DevOps process of the teams more efficiently using .NET, ReactJS, and Azure technologies.
             </div>
           </div>
         </div>
@@ -111,8 +108,7 @@ export default function about() {
               Web Development Intern
             </div>
             <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Developed additional features for the company’s software products using ReactJS and AWS technologies.
             </div>
           </div>
         </div>
