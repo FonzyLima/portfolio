@@ -13,15 +13,15 @@ export default function about() {
             More About Me
           </div>
           <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
-            I'm a coder driven by the thrill of creation. Building websites and
-            software solutions is not just a job for me; it's a passion that
+            I&apos;m a coder driven by the thrill of creation. Building websites and
+            software solutions is not just a job for me; it&apos;s a passion that
             ignites my creativity. Constantly seeking new challenges, I find joy
             in transforming ideas into tangible digital experiences.
           </div>
           <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
-            Beyond coding, I'm an avid learner, especially in tech. Each project
+            Beyond coding, I&apos;m an avid learner, especially in tech. Each project
             offers a chance to deepen my understanding and find innovative
-            solutions to real-world problems. I'm dedicated to growth, always
+            solutions to real-world problems. I&apos;m dedicated to growth, always
             seeking to master new languages and trends, propelled by my
             unwavering passion for coding.
           </div>
@@ -60,7 +60,7 @@ export default function about() {
               </div>
               <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
                 Enhanced functionality and resolved technical issues within the
-                company's web application by implementing new features and
+                company&apos;s web application by implementing new features and
                 addressing bugs
               </div>
             </div>
