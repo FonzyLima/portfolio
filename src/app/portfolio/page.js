@@ -3,7 +3,7 @@ import Project from "../../../components/Project";
 import Navigation from "../../../components/Navigation";
 import Footer from "../../../components/Footer";
 import Reveal from "../../../components/Reveal";
-
+import Link from "next/link"
 export default function projects() {
   return (
     <div className="">
@@ -12,6 +12,9 @@ export default function projects() {
         <div className="flex flex-col text-left items-center font-custom pb-[18px]">
           <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
             Portfolio
+          </div>
+          <div className="text-primary dark:text-secondary text-left text-[22px] lg:text-[40px] font-semibold ">
+            More projects can be found on my <Link href="https://github.com/FonzyLima" target="_blank"><span className="underline">Github</span></Link>
           </div>
           <div className="flex flex-col justify-center items-center lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12">
             <Project
