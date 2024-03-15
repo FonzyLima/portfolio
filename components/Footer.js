@@ -7,8 +7,8 @@ export default function Footer() {
       <div className="text-primary dark:text-secondary text-[40px] lg:text-[70px] text-center font-semibold">
         Get in Touch
       </div>
-      <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-4/5">
-      Feel free to reach out and connect with me through any of the following channels.<br/> I&apos;m available and eager to engage with you
+      <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-4/5 text-left">
+      Feel free to reach out and connect with me through any of the following channels.<br/> <br/> I&apos;m available and eager to engage with you
       </div>
    
 

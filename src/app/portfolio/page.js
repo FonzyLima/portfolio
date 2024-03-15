@@ -10,10 +10,10 @@ export default function projects() {
       <Navigation page="portfolio" />
       <Reveal>
         <div className="flex flex-col text-left items-center font-custom pb-[18px]">
-          <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
+          <div className="text-primary dark:text-secondary text-center text-[36px] lg:text-[70px] font-semibold mt-20">
             Portfolio
           </div>
-          <div className="text-primary dark:text-secondary text-left text-[22px] lg:text-[40px] font-semibold ">
+          <div className="text-primary dark:text-secondary text-[22px] lg:text-[40px] font-semibold text-center">
             More projects can be found on my <Link href="https://github.com/FonzyLima" target="_blank"><span className="underline">Github</span></Link>
           </div>
           <div className="flex flex-col justify-center items-center lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12">
