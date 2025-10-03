@@ -59,11 +59,11 @@ export default function Home() {
             </Reveal>
             <Reveal>
               <div className="text-fiftary dark:text-tertiary leading-[147.5%] text-left text-[22px] lg:text-[40px] max-w-[475px] lg:max-w-[775px]">
-                I am a Software Engineer who specializes in Web and
-                Mobile Development using React and React Native<br />
-                <br />I graduated with honors in Computer Science with
-                a minor in Social Technopreneurship in De La Salle University -
-                Manila
+                I am a Software Engineer who specializes in Web and Mobile
+                Development using React and React Native
+                <br />
+                <br />I graduated with honors in Computer Science with a minor
+                in Social Technopreneurship in De La Salle University - Manila
               </div>
             </Reveal>
           </div>
@@ -78,7 +78,8 @@ export default function Home() {
                 name="Queue Up"
                 date="August 2025"
                 image="/qup.png"
-                git="https://github.com/FonzyLima/blitz-bot"
+                git="/"
+                link="/"
                 words={["App", "React Native", "NodeJS", "Startup"]}
               />
               <Project

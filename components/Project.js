@@ -9,7 +9,7 @@ export default function Project({ name, date, image, link = "/", git = "/" ,word
         src={image}
         width={500}
         height={500}
-      ></Image>
+      />
       <div className="absolute top-[230px] lg:top-[330px] bg-[#2a2a2a] dark:bg-secondary flex-row justify-between w-auto lg:w-auto inline-block pr-4 rounded-full">
         <ul className="text-secondary dark:text-primary flex flex-row gap-2 items-center">
           <li className="text-[11px] lg:text-[18px] px-4 bg-[#61BC7A] dark:bg-fourtary h-full py-2 rounded-full">

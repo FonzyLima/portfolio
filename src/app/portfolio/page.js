@@ -24,7 +24,8 @@ export default function projects() {
               name="Queue Up"
               date="August 2025"
               image="/qup.png"
-              git="https://github.com/FonzyLima/blitz-bot"
+              git="/"
+              link="/"
               words={["App", "React Native", "NodeJS", "Startup"]}
             />
             <Project
