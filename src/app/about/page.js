@@ -13,17 +13,20 @@ export default function about() {
             More About Me
           </div>
           <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
-            I&apos;m a coder driven by the thrill of creation. Building websites and
-            software solutions is not just a job for me; it&apos;s a passion that
-            ignites my creativity. Constantly seeking new challenges, I find joy
-            in transforming ideas into tangible digital experiences.
+            I&apos;m a software engineer with a background in web,
+            mobile, game, and AI development. I enjoy building user-friendly
+            applications, whether it&apos;s a sleek mobile app, a dynamic website, or
+            an interactive game. Alongside that, I&apos;ve explored AI technologies
+            to create smarter, more innovative solutions. My goal is always to
+            combine creativity with technical skill—delivering projects that are
+            both functional and engaging across different platforms.
           </div>
           <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
-            Beyond coding, I&apos;m an avid learner, especially in tech. Each project
-            offers a chance to deepen my understanding and find innovative
-            solutions to real-world problems. I&apos;m dedicated to growth, always
-            seeking to master new languages and trends, propelled by my
-            unwavering passion for coding.
+            Beyond coding, I&apos;m an avid learner, especially in tech. Each
+            project offers a chance to deepen my understanding and find
+            innovative solutions to real-world problems. I&apos;m dedicated to
+            growth, always seeking to master new languages and trends, propelled
+            by my unwavering passion for coding.
           </div>
         </div>
       </Reveal>
@@ -45,6 +48,26 @@ export default function about() {
       {/* Resume Start */}
       <Reveal>
         <div className="flex flex-col px-6 lg:px-24 mt-32 gap-y-[90px]">
+          <div className="flex flex-col lg:flex-row justify-between">
+            <div className="flex flex-col gap-y-[10px] py-[10px]">
+              <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
+                The Mobile App Factory
+              </div>
+              <div className="text-fiftary dark:text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
+                June 2024 - Present
+              </div>
+            </div>
+            <div className="flex flex-col gap-y-[10px] ">
+              <div className="text-sixtary dark:text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
+                Software Engineer
+              </div>
+              <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
+                Developed a variety of IOS and Android applications such as
+                Natasha (E-commerce), Filicoola (Video Streaming), and HiDoc
+                (Telehealth)
+              </div>
+            </div>
+          </div>
           <div className="flex flex-col lg:flex-row justify-between">
             <div className="flex flex-col gap-y-[10px] py-[10px]">
               <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
