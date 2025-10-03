@@ -38,7 +38,7 @@ export default function Footer() {
         </Link>
       </ul>
       <div className="text-fiftary dark:text-tertiary text-[12px] lg:text-[18px] pb-8">
-        Copyright &copy; Alfonso Gabriel V. Lima - 2024
+        Copyright &copy; Alfonso Gabriel V. Lima - 2025
       </div>
     </div>
   );
