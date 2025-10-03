@@ -10,14 +10,13 @@ import SlidingText from "../../components/SlidingText";
 import Reveal from "../../components/Reveal";
 import DarkContext from "@/app/context/darkContext";
 import { useContext } from "react";
-import React from 'react';
+import React from "react";
 export default function Home() {
-
   const [isDark, setisDark] = useContext(DarkContext);
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
   return (
@@ -34,7 +33,7 @@ export default function Home() {
             </div>
             <div className="font-semibold text-primary dark:text-secondary text-[30px] lg:text-[90px] flex flex-col">
               <div className="lg:h-[95px] lg:mt-[-45px]">Alfonso Lima</div>
-              <div className="lg:h-[95px]">Software Developer</div>
+              <div className="lg:h-[95px]">Full Stack Software Developer</div>
             </div>
             <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px]">
               Currently based in Manila, Philippines
@@ -50,38 +49,38 @@ export default function Home() {
             <Image src="/gameboy.svg" alt="Gameboy" width={330} height={210} />
           </div>
         </Reveal>
-    
-          <div className="flex flex-col px-6 text-left items-left lg:items-center mt-[100px] lg:mt-[200px]">
-            <div className="lg:w-[775px] flex flex-col gap-[40px] lg:ml-[-90px]">
-              <Reveal>
+
+        <div className="flex flex-col px-6 text-left items-left lg:items-center mt-[100px] lg:mt-[200px]">
+          <div className="lg:w-[775px] flex flex-col gap-[40px] lg:ml-[-90px]">
+            <Reveal>
               <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
                 Who I am
               </div>
-              </Reveal>
-              <Reveal>
+            </Reveal>
+            <Reveal>
               <div className="text-fiftary dark:text-tertiary leading-[147.5%] text-left text-[22px] lg:text-[40px] max-w-[475px] lg:max-w-[775px]">
-                I am an aspiring Software Engineer who specializes in Web and App Development{" "}
-                <br />
-                <br />
-                I recently graduated with honors in Computer Science with a minor in Social Technopreneurship in De La Salle University - Manila
+                I am a Software Engineer who specializes in Web and
+                Mobile Development using React and React Native<br />
+                <br />I graduated with honors in Computer Science with
+                a minor in Social Technopreneurship in De La Salle University -
+                Manila
               </div>
-              </Reveal>
-              
-            </div>
+            </Reveal>
           </div>
+        </div>
         <Reveal>
           <div className="flex flex-col text-left items-center mt-[100px] lg:mt-[200px] gap-[15px] lg:gap-[30px]">
             <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
               Portfolio
             </div>
             <div className="flex flex-col justify-center items-center lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12">
-            <Project
-            name="Serbiz Website"
-            date="February 2024"
-            image="/serbiz.png"
-            link="https://serbiz.com.ph"
-            words={["Website", "NextJS", "Tailwind", "Firebase"]}
-          />
+              <Project
+                name="Queue Up"
+                date="August 2025"
+                image="/qup.png"
+                git="https://github.com/FonzyLima/blitz-bot"
+                words={["App", "React Native", "NodeJS", "Startup"]}
+              />
               <Project
                 name="925 Wear"
                 date="October 2023"
@@ -89,10 +88,9 @@ export default function Home() {
                 link="https://925studio.online"
                 words={["Website", "NextJS", "Tailwind", "Freelance"]}
               />
-             
             </div>
             <div className="flex flex-col justify-center items-center  lg:flex-row space-x-0 lg:space-x-6 space-y-12 lg:space-y-0 mt-12 mb-6">
-               <Project
+              <Project
                 name="Mutya (2D Game)"
                 date="December 2022"
                 image="/mutya.png"
@@ -101,11 +99,11 @@ export default function Home() {
                 words={["Game", "Unity", "C#", "Project"]}
               />
               <Project
-                name="Bok Fried Chicken"
-                date="December 2021"
-                image="/bok.png"
-                link="https://bokfriedchicken.com"
-                words={["Website", "NextJS", "CSS", "Freelance"]}
+                name="Blitz (Wordle Discord Bot)"
+                date="March 2022"
+                image="/blitz.png"
+                git="https://github.com/FonzyLima/blitz-bot"
+                words={["Bot", "Python", "Discord.py", "Project"]}
               />
             </div>
 
@@ -113,19 +111,18 @@ export default function Home() {
           </div>
         </Reveal>
 
-          <div className="mt-40">
+        <div className="mt-40">
+          <SlidingText
+            text="Backend Frontend Mobile Web Game AI Development&nbsp;"
+            direction={-1}
+          />
+          <div className="mt-[-45px]">
             <SlidingText
-              text="Backend Frontend Mobile Web Game AI Development&nbsp;"
-              direction={-1}
+              text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
+              direction={1}
             />
-            <div className="mt-[-45px]">
-              <SlidingText
-                text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
-                direction={1}
-              />
-            </div>
           </div>
-        
+        </div>
       </div>
     </div>
   );
