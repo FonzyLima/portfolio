@@ -1,9 +1,9 @@
 import React from "react";
 import Navigation from "../../../components/Navigation";
 import SlidingText from "../../../components/SlidingText";
-import Footer from "../../../components/Footer";
 import Reveal from "../../../components/Reveal";
-export default function about() {
+import { experiences, profile } from "@/app/data/portfolioData";
+export default function About() {
   return (
     <div className="">
       <Navigation page="abouts" />
@@ -13,32 +13,22 @@ export default function about() {
             More About Me
           </div>
           <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
-            I&apos;m a software engineer with a background in web,
-            mobile, game, and AI development. I enjoy building user-friendly
-            applications, whether it&apos;s a sleek mobile app, a dynamic website, or
-            an interactive game. Alongside that, I&apos;ve explored AI technologies
-            to create smarter, more innovative solutions. My goal is always to
-            combine creativity with technical skill—delivering projects that are
-            both functional and engaging across different platforms.
+            {profile.summary}
           </div>
           <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
-            Beyond coding, I&apos;m an avid learner, especially in tech. Each
-            project offers a chance to deepen my understanding and find
-            innovative solutions to real-world problems. I&apos;m dedicated to
-            growth, always seeking to master new languages and trends, propelled
-            by my unwavering passion for coding.
+            {profile.intro} {profile.education}
           </div>
         </div>
       </Reveal>
       <Reveal>
         <div className="mt-32">
           <SlidingText
-            text="Backend Frontend Mobile Web Game AI Development&nbsp;"
+            text={profile.skillsPrimary}
             direction={-1}
           />
           <div className="mt-[-45px]">
             <SlidingText
-              text="ReactJS NextJS NodeJS Python Java C# C++ PHP SQL&nbsp;"
+              text={profile.skillsSecondary}
               direction={1}
             />
           </div>
@@ -48,105 +38,34 @@ export default function about() {
       {/* Resume Start */}
       <Reveal>
         <div className="flex flex-col px-6 lg:px-24 mt-32 gap-y-[90px]">
-          <div className="flex flex-col lg:flex-row justify-between">
-            <div className="flex flex-col gap-y-[10px] py-[10px]">
-              <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
-                The Mobile App Factory
+          {experiences.map((experience) => (
+            <div
+              key={`${experience.company}-${experience.period}`}
+              className="flex flex-col lg:flex-row justify-between gap-y-6"
+            >
+              <div className="flex flex-col gap-y-[10px] py-[10px]">
+                <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
+                  {experience.company}
+                </div>
+                <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] font-custom font-normal">
+                  {experience.period}
+                </div>
+                <div className="text-fiftary dark:text-tertiary text-[16px] lg:text-[18px] font-custom font-normal">
+                  {experience.location}
+                </div>
               </div>
-              <div className="text-fiftary dark:text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
-                June 2024 - Present
-              </div>
-            </div>
-            <div className="flex flex-col gap-y-[10px] ">
-              <div className="text-sixtary dark:text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
-                Software Engineer
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-                Developed a variety of IOS and Android applications such as
-                Natasha (E-commerce), Filicoola (Video Streaming), and HiDoc
-                (Telehealth)
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col lg:flex-row justify-between">
-            <div className="flex flex-col gap-y-[10px] py-[10px]">
-              <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
-                WRSHealth
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
-                June 2023 - Sept 2023
+              <div className="flex flex-col gap-y-[10px]">
+                <div className="text-sixtary dark:text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
+                  {experience.role}
+                </div>
+                <ul className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal list-disc pl-5 space-y-3">
+                  {experience.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
               </div>
             </div>
-            <div className="flex flex-col gap-y-[10px] ">
-              <div className="text-sixtary dark:text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
-                Software Engineering Intern
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-                Enhanced functionality and resolved technical issues within the
-                company&apos;s web application by implementing new features and
-                addressing bugs
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col lg:flex-row justify-between">
-            <div className="flex flex-col gap-y-[10px] py-[10px]">
-              <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
-                xDNA Digital Agency
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
-                April 2023 - June 2023
-              </div>
-            </div>
-            <div className="flex flex-col gap-y-[10px] ">
-              <div className="text-sixtary dark:text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
-                Web Development Intern
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-                Contributed to the creation of a comprehensive time-in/time-out
-                system for the company, leveraging Next.js for efficient and
-                streamlined development.
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col lg:flex-row justify-between">
-            <div className="flex flex-col gap-y-[10px] py-[10px]">
-              <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
-                WTW
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
-                April 2022 - October 2023
-              </div>
-            </div>
-            <div className="flex flex-col gap-y-[10px] ">
-              <div className="text-sixtary dark:text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
-                DevOps Intern
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-                Led the development process for an application that organizes
-                the DevOps process of the teams more efficiently using .NET,
-                ReactJS, and Azure technologies.
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col lg:flex-row justify-between">
-            <div className="flex flex-col gap-y-[10px] py-[10px]">
-              <div className="text-primary dark:text-secondary text-[26px] lg:text-[50px] font-custom font-semibold">
-                Meetbit
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[22px] lg:text-[22px] font-custom font-normal">
-                April 2022 - October 2023
-              </div>
-            </div>
-            <div className="flex flex-col gap-y-[10px] ">
-              <div className="text-sixtary dark:text-fourtary text-[22px] lg:text-[30px] font-custom font-normal">
-                Web Development Intern
-              </div>
-              <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px] w-[320px] lg:w-[730px] font-custom font-normal">
-                Developed additional features for the company’s software
-                products using ReactJS and AWS technologies.
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </Reveal>
     </div>

@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
 import { useState, useEffect, useContext } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { motion, AnimatePresence } from "framer-motion";
