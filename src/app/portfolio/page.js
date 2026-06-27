@@ -9,22 +9,60 @@ export default function Projects() {
     <div className="">
       <Navigation page="portfolio" />
       <Reveal>
-        <div className="flex flex-col text-left items-center font-custom pb-[18px]">
-          <div className="text-primary dark:text-secondary text-center text-[36px] lg:text-[70px] font-semibold mt-20">
-            Portfolio
+        <section className="mx-auto flex w-full max-w-[1160px] flex-col px-6 pb-[18px] pt-20 font-custom lg:px-10">
+          <div className="flex flex-col gap-5">
+            <div className="text-[36px] font-semibold text-primary dark:text-secondary lg:text-[70px]">
+              Portfolio
+            </div>
+            <div className="max-w-[900px] text-[22px] font-normal leading-[147.5%] text-fiftary dark:text-tertiary lg:text-[40px]">
+              A collection of games, websites, mobile apps, and product experiments built across the full stack.
+            </div>
+            <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[22px]">
+              More work can be found on my{" "}
+              <Link
+                href="https://github.com/FonzyLima"
+                target="_blank"
+                className="underline text-primary hover:text-sixtary dark:text-secondary dark:hover:text-fourtary"
+              >
+                GitHub
+              </Link>
+              .
+            </div>
           </div>
-          <div className="text-primary dark:text-secondary text-[22px] lg:text-[40px] font-semibold text-center">
-            More projects can be found on my{" "}
-            <Link href="https://github.com/FonzyLima" target="_blank">
-              <span className="underline">Github</span>
-            </Link>
+
+          <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <div className="border-t-[0.5px] border-[#171717] pt-4 dark:border-[#EBEBEB]">
+              <div className="text-[30px] font-semibold text-primary dark:text-secondary lg:text-[50px]">
+                {projects.length}
+              </div>
+              <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[22px]">
+                Selected projects
+              </div>
+            </div>
+            <div className="border-t-[0.5px] border-[#171717] pt-4 dark:border-[#EBEBEB]">
+              <div className="text-[30px] font-semibold text-primary dark:text-secondary lg:text-[50px]">
+                Web
+              </div>
+              <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[22px]">
+                Next.js, React, responsive interfaces
+              </div>
+            </div>
+            <div className="border-t-[0.5px] border-[#171717] pt-4 dark:border-[#EBEBEB]">
+              <div className="text-[30px] font-semibold text-primary dark:text-secondary lg:text-[50px]">
+                Apps
+              </div>
+              <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[22px]">
+                Mobile builds, games, bots, and APIs
+              </div>
+            </div>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-12 mt-12 mb-6">
+
+          <div className="mt-12 grid grid-cols-1 justify-items-center gap-8 lg:grid-cols-2">
             {projects.map((project) => (
               <Project key={project.name} {...project} />
             ))}
           </div>
-        </div>
+        </section>
       </Reveal>
     </div>
   );

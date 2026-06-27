@@ -73,34 +73,76 @@ export const projects = [
   {
     name: "925 Wear",
     date: "October 2023",
+    category: "Website",
     image: "/925.png",
+    description:
+      "A storefront website for a clothing studio, built around clean product browsing and a lightweight brand experience.",
     link: "https://925studio.online",
-    words: ["Website", "Next.js", "Tailwind", "Freelance"],
+    tools: ["Next.js", "Tailwind CSS", "Vercel"],
     featured: true,
   },
   {
     name: "Mutya (2D Game)",
     date: "December 2022",
+    category: "Game",
     image: "/mutya.png",
+    description:
+      "A 2D narrative game project with custom scenes, character interactions, and a browser-playable release.",
     link: "https://alfygl.itch.io/mutya",
     git: "https://github.com/FonzyLima/mutya",
-    words: ["Game", "Unity", "C#", "Project"],
+    tools: ["Unity", "C#", "Itch.io"],
     featured: true,
   },
   {
     name: "Bok Fried Chicken",
     date: "December 2021",
+    category: "Website",
     image: "/bok.png",
+    description:
+      "A restaurant website designed to present the brand, menu, and customer-facing information in a fast, direct layout.",
     link: "https://bokfriedchicken.com",
-    words: ["Website", "Next.js", "CSS", "Freelance"],
+    tools: ["Next.js", "CSS", "Vercel"],
     featured: true,
   },
   {
     name: "Blitz (Wordle Discord Bot)",
     date: "March 2022",
+    category: "Bot",
     image: "/blitz.png",
+    description:
+      "A Discord bot that brings a Wordle-style game loop into servers with automated prompts and player interaction.",
     git: "https://github.com/FonzyLima/blitz-bot",
-    words: ["Bot", "Python", "Discord.py", "Project"],
+    tools: ["Python", "Discord.py", "GitHub"],
     featured: true,
+  },
+  {
+    name: "Serbiz Mobile App",
+    date: "September 2024",
+    category: "Mobile App",
+    image: "/serbiz.png",
+    description:
+      "A cross-platform mobile application for service discovery and booking flows, built with a React Native frontend and backend APIs.",
+    tools: ["React Native", "Django", "REST APIs"],
+    featured: true,
+  },
+  {
+    name: "Qup",
+    date: "May 2023",
+    category: "Website",
+    image: "/qup.png",
+    description:
+      "A web project focused on clear product presentation, responsive layouts, and a concise user flow.",
+    tools: ["React", "CSS", "Responsive UI"],
+    featured: false,
+  },
+  {
+    name: "Ashure",
+    date: "April 2023",
+    category: "Website",
+    image: "/Ashure.png",
+    description:
+      "A polished web interface project with brand-forward visuals, structured content sections, and responsive presentation.",
+    tools: ["React", "CSS", "UI Design"],
+    featured: false,
   },
 ];

@@ -67,17 +67,22 @@ export default function Home() {
           </div>
         </div>
         <Reveal>
-          <div className="flex flex-col text-left items-center mt-[100px] lg:mt-[200px] gap-[15px] lg:gap-[30px]">
-            <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
-              Portfolio
+          <div className="mx-auto mt-[100px] flex w-full max-w-[1160px] flex-col gap-[30px] px-6 lg:mt-[200px] lg:px-10">
+            <div className="flex flex-col gap-4">
+              <div className="text-left text-[36px] font-semibold text-primary dark:text-secondary lg:text-[70px]">
+                Featured projects
+              </div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-12 mt-12 mb-6">
+
+            <div className="grid grid-cols-1 justify-items-center gap-8 lg:grid-cols-2">
               {featuredProjects.map((project) => (
                 <Project key={project.name} {...project} />
               ))}
             </div>
 
-            <Button title="More Projects" destination="/portfolio" />
+            <div className="w-[170px] lg:w-[220px] self-center">
+              <Button title="More Projects" destination="/portfolio" />
+            </div>
           </div>
         </Reveal>
 
