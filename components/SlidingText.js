@@ -5,26 +5,32 @@ import gsap from "gsap";
 export default function SlidingText({ text, direction }) {
   const firstLText = useRef(null);
   const secondLText = useRef(null);
-
-  let xPercent = 0;
+  const xPercent = useRef(0);
+  const animationFrame = useRef(null);
 
   useEffect(() => {
-    requestAnimationFrame(animation);
-  });
+    const animation = () => {
+      if (xPercent.current < -100 && direction === -1) {
+        xPercent.current = 0;
+      } else if (xPercent.current > 0 && direction === 1) {
+        xPercent.current = -100;
+      }
 
-  const animation = () => {
-    if (xPercent < -100 && direction == -1) {
-      xPercent = 0;
-    } else if (xPercent > 0 && direction == 1) {
-      xPercent = -100;
+      gsap.set(firstLText.current, { xPercent: xPercent.current });
+      gsap.set(secondLText.current, { xPercent: xPercent.current });
+
+      xPercent.current += 0.1 * direction;
+      animationFrame.current = requestAnimationFrame(animation);
+    };
+
+    animationFrame.current = requestAnimationFrame(animation);
+
+    return () => {
+      if (animationFrame.current) {
+        cancelAnimationFrame(animationFrame.current);
+      }
     }
-
-    gsap.set(firstLText.current, { xPercent: xPercent });
-    gsap.set(secondLText.current, { xPercent: xPercent });
-
-    requestAnimationFrame(animation);
-    xPercent += 0.1 * direction;
-  };
+  }, [direction]);
 
   return (
     <div className="">
