@@ -1,10 +1,45 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Project from "../../../components/Project";
 import Navigation from "../../../components/Navigation";
 import Reveal from "../../../components/Reveal";
 import Link from "next/link";
 import { projects } from "@/app/data/portfolioData";
+
+const filterOptions = [
+  {
+    id: "all",
+    label: "All",
+    description: "Selected projects",
+    matches: () => true,
+  },
+  {
+    id: "websites",
+    label: "Websites",
+    description: "Next.js, React, responsive interfaces",
+    matches: (project) => project.category === "Website",
+  },
+  {
+    id: "mobile-apps",
+    label: "Mobile Apps",
+    description: "React Native and app workflows",
+    matches: (project) => project.category === "Mobile App",
+  },
+  {
+    id: "others",
+    label: "Others",
+    description: "Games, bots, and experiments",
+    matches: (project) => !["Website", "Mobile App"].includes(project.category),
+  },
+];
+
 export default function Projects() {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const selectedFilter =
+    filterOptions.find((filter) => filter.id === activeFilter) ?? filterOptions[0];
+  const filteredProjects = projects.filter(selectedFilter.matches);
+
   return (
     <div className="">
       <Navigation page="portfolio" />
@@ -30,35 +65,40 @@ export default function Projects() {
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
-            <div className="border-t-[0.5px] border-[#171717] pt-4 dark:border-[#EBEBEB]">
-              <div className="text-[30px] font-semibold text-primary dark:text-secondary lg:text-[50px]">
-                {projects.length}
-              </div>
-              <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[22px]">
-                Selected projects
-              </div>
-            </div>
-            <div className="border-t-[0.5px] border-[#171717] pt-4 dark:border-[#EBEBEB]">
-              <div className="text-[30px] font-semibold text-primary dark:text-secondary lg:text-[50px]">
-                Web
-              </div>
-              <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[22px]">
-                Next.js, React, responsive interfaces
-              </div>
-            </div>
-            <div className="border-t-[0.5px] border-[#171717] pt-4 dark:border-[#EBEBEB]">
-              <div className="text-[30px] font-semibold text-primary dark:text-secondary lg:text-[50px]">
-                Apps
-              </div>
-              <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[22px]">
-                Mobile builds, games, bots, and APIs
-              </div>
-            </div>
+          <div className="mt-12 flex flex-wrap gap-3" aria-label="Project filters">
+            {filterOptions.map((filter) => {
+              const isActive = filter.id === activeFilter;
+              const count = projects.filter(filter.matches).length;
+
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  onClick={() => setActiveFilter(filter.id)}
+                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-[14px] duration-200 lg:text-[18px] ${
+                    isActive
+                      ? "border-[#61BC7A] bg-[#61BC7A] text-secondary dark:border-[#7DF39D] dark:bg-[#7DF39D] dark:text-primary"
+                      : "border-[#171717] text-primary hover:border-[#61BC7A] hover:text-sixtary dark:border-[#EBEBEB] dark:text-secondary dark:hover:border-[#7DF39D] dark:hover:text-fourtary"
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  <span className="font-normal">{filter.label}</span>
+                  <span
+                    className={`flex h-6 min-w-6 items-center justify-center rounded-full px-2 text-[12px] lg:text-[14px] ${
+                      isActive
+                        ? "bg-secondary text-primary dark:bg-primary dark:text-secondary"
+                        : "bg-[#d8d8d8] text-primary dark:bg-[#202020] dark:text-secondary"
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           <div className="mt-12 grid grid-cols-1 justify-items-center gap-8 lg:grid-cols-2">
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
               <Project key={project.name} {...project} />
             ))}
           </div>
