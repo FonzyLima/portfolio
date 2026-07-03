@@ -47,13 +47,13 @@ export default function Projects() {
       <Reveal>
         <section className="mx-auto flex w-full max-w-[1160px] flex-col px-6 pb-[18px] pt-20 font-custom lg:px-10">
           <div className="flex flex-col gap-5">
-            <div className="text-[36px] font-semibold text-primary dark:text-secondary lg:text-[70px]">
+            <div className="text-[36px] font-semibold text-primary dark:text-secondary lg:text-[56px] xl:text-[70px]">
               Portfolio
             </div>
-            <div className="max-w-[900px] text-[22px] font-normal leading-[147.5%] text-fiftary dark:text-tertiary lg:text-[40px]">
+            <div className="max-w-[900px] text-[22px] font-normal leading-[147.5%] text-fiftary dark:text-tertiary lg:text-[32px] xl:text-[40px]">
               A collection of games, websites, mobile apps, and product experiments built across the full stack.
             </div>
-            <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[22px]">
+            <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[20px] xl:text-[22px]">
               More work can be found on my{" "}
               <Link
                 href="https://github.com/FonzyLima"
@@ -76,7 +76,7 @@ export default function Projects() {
                   key={filter.id}
                   type="button"
                   onClick={() => setActiveFilter(filter.id)}
-                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-[14px] duration-200 lg:text-[18px] ${
+                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-[14px] duration-200 lg:text-[16px] xl:text-[18px] ${
                     isActive
                       ? "border-[#61BC7A] bg-[#61BC7A] text-secondary dark:border-[#7DF39D] dark:bg-[#7DF39D] dark:text-primary"
                       : "border-[#171717] text-primary hover:border-[#61BC7A] hover:text-sixtary dark:border-[#EBEBEB] dark:text-secondary dark:hover:border-[#7DF39D] dark:hover:text-fourtary"
@@ -85,7 +85,7 @@ export default function Projects() {
                 >
                   <span className="font-normal">{filter.label}</span>
                   <span
-                    className={`flex h-6 min-w-6 items-center justify-center rounded-full px-2 text-[12px] lg:text-[14px] ${
+                    className={`flex h-6 min-w-6 items-center justify-center rounded-full px-2 text-[12px] xl:text-[14px] ${
                       isActive
                         ? "bg-secondary text-primary dark:bg-primary dark:text-secondary"
                         : "bg-[#d8d8d8] text-primary dark:bg-[#202020] dark:text-secondary"

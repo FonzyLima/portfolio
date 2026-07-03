@@ -8,7 +8,7 @@ function ProjectLink({ href, children }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-[14px] lg:text-[18px] underline text-primary dark:text-secondary hover:text-sixtary dark:hover:text-fourtary duration-200"
+      className="text-[14px] lg:text-[16px] xl:text-[18px] underline text-primary dark:text-secondary hover:text-sixtary dark:hover:text-fourtary duration-200"
     >
       {children}
     </Link>
@@ -40,21 +40,21 @@ export default function Project({
         />
       </div>
 
-      <div className="flex flex-col gap-5 px-6 py-7 lg:px-8 lg:py-8">
+      <div className="flex flex-col gap-5 px-6 py-7 lg:px-7 xl:px-8 xl:py-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="rounded-full bg-[#61BC7A] px-4 py-2 text-[12px] text-secondary dark:bg-fourtary dark:text-primary lg:text-[14px]">
+          <div className="rounded-full bg-[#61BC7A] px-4 py-2 text-[12px] text-secondary dark:bg-fourtary dark:text-primary xl:text-[14px]">
             {category}
           </div>
-          <div className="text-[14px] text-fiftary dark:text-tertiary lg:text-[18px]">
+          <div className="text-[14px] text-fiftary dark:text-tertiary xl:text-[18px]">
             {date}
           </div>
         </div>
 
         <div className="flex flex-col gap-3">
-          <h2 className="text-[26px] font-semibold text-primary dark:text-secondary lg:text-[40px]">
+          <h2 className="text-[26px] font-semibold text-primary dark:text-secondary lg:text-[32px] xl:text-[40px]">
             {name}
           </h2>
-          <p className="text-[18px] leading-[147.5%] text-fiftary dark:text-tertiary lg:text-[22px]">
+          <p className="text-[18px] leading-[147.5%] text-fiftary dark:text-tertiary lg:text-[20px] xl:text-[22px]">
             {description}
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function Project({
           {projectTools.map((tool) => (
             <span
               key={tool}
-              className="rounded-full border border-[#171717] px-3 py-1 text-[12px] text-primary dark:border-[#EBEBEB] dark:text-secondary lg:text-[14px]"
+              className="rounded-full border border-[#171717] px-3 py-1 text-[12px] text-primary dark:border-[#EBEBEB] dark:text-secondary xl:text-[14px]"
             >
               {tool}
             </span>
@@ -74,7 +74,7 @@ export default function Project({
           {link && <ProjectLink href={link}>View project</ProjectLink>}
           {git && <ProjectLink href={git}>Source code</ProjectLink>}
           {!link && !git && (
-            <div className="text-[14px] text-fiftary dark:text-tertiary lg:text-[18px]">
+            <div className="text-[14px] text-fiftary dark:text-tertiary xl:text-[18px]">
               Private project
             </div>
           )}

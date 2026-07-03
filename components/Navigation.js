@@ -81,18 +81,18 @@ export default function Navigation({ page }) {
         hideNavbar ? "hidden-nav" : ""
       }`}
     >
-      <div className="w-full flex flex-row justify-between">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-row justify-between px-4 md:px-8 xl:px-24">
         <div>
           <Link href="/">
-            <div className="pl-[16px] lg:pl-[96px] pt-[15px] text-[25px] font-custom hover:cursor-pointer">
+            <div className="pt-[15px] text-[22px] font-custom hover:cursor-pointer md:text-[25px]">
               AlfonsoLima
             </div>
           </Link>
         </div>
-        <div className="flex-row flex">
+        <div className="flex-row flex items-start gap-1 md:gap-2">
           <Link href="/">
             <div
-              className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
+              className={`md:flex hidden p-3 pt-[20px] text-[16px] hover:text-tertiary xl:p-4 xl:pt-[20px] xl:text-[18px] ${
                 page == "home" ? "text-[#61BC7A] dark:text-fourtary" : ""
               }`}
             >
@@ -101,7 +101,7 @@ export default function Navigation({ page }) {
           </Link>
           <Link href="/about">
             <div
-              className={`lg:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary ${
+              className={`md:flex hidden p-3 pt-[20px] text-[16px] hover:text-tertiary xl:p-4 xl:pt-[20px] xl:text-[18px] ${
                 page == "abouts" ? "text-[#61BC7A] dark:text-fourtary" : ""
               }`}
             >
@@ -110,7 +110,7 @@ export default function Navigation({ page }) {
           </Link>
           <Link href="/portfolio">
             <div
-              className={`md:flex hidden p-4 pt-[20px] text-[18px] hover:text-tertiary pr-[20px] ${
+              className={`md:flex hidden p-3 pt-[20px] text-[16px] hover:text-tertiary xl:p-4 xl:pt-[20px] xl:text-[18px] ${
                 page == "portfolio" ? "text-[#61BC7A] dark:text-fourtary" : ""
               }`}
             >
@@ -119,7 +119,7 @@ export default function Navigation({ page }) {
           </Link>
 
           <div
-            className="flex mt-[20px] lg:mr-[100px] cursor-pointer"
+            className="flex mt-[20px] cursor-pointer md:ml-2"
             onClick={() => setisDark(!isDark)}
           >
             <svg

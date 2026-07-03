@@ -36,13 +36,13 @@ export default function SlidingText({ text, direction }) {
     <div className="">
       <div className="flex whitespace-nowrap overflow-x-hidden">
         <p
-          className="font-normal text-[70px] lg:text-[100px] text-fiftary dark:text-tertiary font-custom"
+          className="font-normal text-[56px] md:text-[72px] xl:text-[100px] text-fiftary dark:text-tertiary font-custom"
           ref={firstLText}
         >
           {text}
         </p>
         <p
-          className="font-normal text-[70px] lg:text-[100px] text-fiftary dark:text-tertiary font-custom"
+          className="font-normal text-[56px] md:text-[72px] xl:text-[100px] text-fiftary dark:text-tertiary font-custom"
           ref={secondLText}
         >
           {text}

@@ -22,43 +22,43 @@ export default function Home() {
   return (
     <div className={`${isDark ? "dark" : ""}`}>
       <Navigation page="home" />
-      <div className="gradient-green w-full absolute h-[260px] lg:h-[800px] top-[390px] lg:top-[430px] z-10"></div>
+      <div className="gradient-green w-full absolute h-[260px] lg:h-[520px] xl:h-[800px] top-[390px] lg:top-[420px] xl:top-[430px] z-10"></div>
 
       <div className="z-20 relative mt-[60px]">
         {/* Introduction Start*/}
         <Reveal>
-          <div className="flex flex-col gap-[15px] lg:gap-[30px] text-left pt-[60px] px-6 items-left lg:text-center lg:items-center">
-            <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px]">
+          <div className="flex flex-col gap-[15px] lg:gap-[24px] xl:gap-[30px] text-left pt-[60px] px-6 items-left lg:text-center lg:items-center">
+            <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[20px] xl:text-[22px]">
               Hi there! &#128075; I am
             </div>
-            <div className="font-semibold text-primary dark:text-secondary text-[30px] lg:text-[90px] flex flex-col">
-              <div className="lg:h-[95px] lg:mt-[-45px]">{profile.name}</div>
-              <div className="lg:h-[95px]">{profile.title}</div>
+            <div className="flex max-w-[1120px] flex-col font-semibold leading-[1.05] text-primary dark:text-secondary text-[34px] sm:text-[48px] lg:text-[72px] xl:text-[90px]">
+              <div>{profile.name}</div>
+              <div>{profile.title}</div>
             </div>
-            <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[22px]">
+            <div className="text-fiftary dark:text-tertiary text-[18px] lg:text-[20px] xl:text-[22px]">
               Currently based in {profile.location}
             </div>
-            <div onClick={scrollToBottom} className="w-[150px] lg:w-[190px]">
+            <div onClick={scrollToBottom} className="w-[150px] lg:w-[180px] xl:w-[190px]">
               <Button title="Get in touch" />
             </div>
           </div>
-          <div className="hidden lg:flex flex-row justify-center mt-[80px]">
-            <Image src="/gameboy.svg" alt="Gameboy" width={960} height={510} />
+          <div className="hidden lg:flex flex-row justify-center mt-[70px] xl:mt-[80px] px-8">
+            <Image src="/gameboy.svg" alt="Gameboy" width={960} height={510} className="h-auto w-full max-w-[860px] xl:max-w-[960px]" />
           </div>
           <div className="lg:hidden flex flex-row justify-center mt-10">
             <Image src="/gameboy.svg" alt="Gameboy" width={330} height={210} />
           </div>
         </Reveal>
 
-        <div className="flex flex-col px-6 text-left items-left lg:items-center mt-[100px] lg:mt-[200px]">
-          <div className="lg:w-[775px] flex flex-col gap-[40px] lg:ml-[-90px]">
+        <div className="flex flex-col px-6 text-left items-left lg:items-center mt-[100px] lg:mt-[160px] xl:mt-[200px]">
+          <div className="flex w-full max-w-[775px] flex-col gap-[40px] lg:ml-[-60px] xl:ml-[-90px]">
             <Reveal>
-              <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold">
+              <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[56px] xl:text-[70px] font-semibold">
                 Who I am
               </div>
             </Reveal>
             <Reveal>
-              <div className="text-fiftary dark:text-tertiary leading-[147.5%] text-left text-[22px] lg:text-[40px] max-w-[475px] lg:max-w-[775px]">
+              <div className="text-fiftary dark:text-tertiary leading-[147.5%] text-left text-[22px] md:max-w-[640px] lg:text-[32px] lg:max-w-[775px] xl:text-[40px]">
                 {profile.intro}
                 <br />
                 <br />
@@ -68,9 +68,9 @@ export default function Home() {
           </div>
         </div>
         <Reveal>
-          <div className="mx-auto mt-[100px] flex w-full max-w-[1160px] flex-col gap-[30px] px-6 lg:mt-[200px] lg:px-10">
+          <div className="mx-auto mt-[100px] flex w-full max-w-[1160px] flex-col gap-[30px] px-6 lg:mt-[160px] lg:px-10 xl:mt-[200px]">
             <div className="flex flex-col gap-4">
-              <div className="text-left text-[36px] font-semibold text-primary dark:text-secondary lg:text-[70px]">
+              <div className="text-left text-[36px] font-semibold text-primary dark:text-secondary lg:text-[56px] xl:text-[70px]">
                 Featured projects
               </div>
             </div>
@@ -81,18 +81,18 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="w-[170px] lg:w-[220px] self-center">
+            <div className="w-[170px] lg:w-[200px] xl:w-[220px] self-center">
               <Button title="More Projects" destination="/portfolio" />
             </div>
           </div>
         </Reveal>
 
-        <div className="mt-40">
+        <div className="mt-32 xl:mt-40">
           <SlidingText
             text={profile.skillsPrimary}
             direction={-1}
           />
-          <div className="mt-[-45px]">
+          <div className="mt-[-30px] xl:mt-[-45px]">
             <SlidingText
               text={profile.skillsSecondary}
               direction={1}
