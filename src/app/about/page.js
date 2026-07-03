@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Navigation from "../../../components/Navigation";
 import SlidingText from "../../../components/SlidingText";
 import Reveal from "../../../components/Reveal";
@@ -12,11 +13,27 @@ export default function About() {
           <div className="text-primary dark:text-secondary text-left text-[36px] lg:text-[70px] font-semibold mt-20">
             More About Me
           </div>
-          <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
-            {profile.summary}
-          </div>
-          <div className="text-fiftary dark:text-tertiary text-left text-[22px] lg:text-[40px] max-w-[348px] lg:max-w-[1028px] mt-10">
-            {profile.intro} {profile.education}
+          <div className="mt-10 flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+            <div className="flex max-w-[348px] flex-col gap-10 lg:w-[70%] lg:max-w-none">
+              <div className="text-left text-[22px] text-fiftary dark:text-tertiary lg:text-[40px]">
+                {profile.summary}
+              </div>
+              <div className="text-left text-[22px] text-fiftary dark:text-tertiary lg:text-[40px]">
+                {profile.intro} {profile.education}
+              </div>
+            </div>
+            <div className="flex w-full justify-center lg:w-[30%] lg:justify-center">
+              <div className="relative h-[240px] w-[240px] shrink-0 overflow-hidden rounded-full border border-[#171717] bg-[#d8d8d8] shadow-proj dark:border-[#EBEBEB] dark:bg-[#202020] lg:h-[380px] lg:w-[380px]">
+                <Image
+                  src="/about-profile.jpg"
+                  alt="Alfonso Lima"
+                  fill
+                  sizes="(min-width: 1024px) 380px, 240px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </div>
       </Reveal>
