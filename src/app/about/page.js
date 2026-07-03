@@ -19,7 +19,7 @@ export default function About() {
                 {profile.summary}
               </div>
               <div className="text-left text-[22px] text-fiftary dark:text-tertiary lg:text-[32px] xl:text-[40px]">
-                {profile.intro} {profile.education}
+                {profile.intro} 
               </div>
             </div>
             <div className="flex w-full justify-center lg:w-[30%] lg:justify-center">

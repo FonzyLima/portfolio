@@ -11,7 +11,7 @@ export const profile = {
     "I graduated from De La Salle University - Manila with a BS in Computer Science, specializing in Software Technology with a minor in Social Technopreneurship.",
   skillsPrimary: "Backend Frontend Mobile Web AI Product Development\u00a0",
   skillsSecondary:
-    "React Native TypeScript Next.js Django Node.js Firebase REST APIs Figma\u00a0",
+    "React Native TypeScript Next.js Django Node.js Firebase REST APIs Figma LLMs OpenAI Claude\u00a0",
 };
 
 export const experiences = [
