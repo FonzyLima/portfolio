@@ -6,12 +6,13 @@ import Button from "../../components/Button";
 import SlidingText from "../../components/SlidingText";
 import Reveal from "../../components/Reveal";
 import DarkContext from "@/app/context/darkContext";
-import { profile, projects } from "@/app/data/portfolioData";
+import { profile } from "@/app/data/portfolioData";
+import { useProjects } from "@/app/hooks/useProjects";
 import { useContext } from "react";
 import React from "react";
 export default function Home() {
   const [isDark] = useContext(DarkContext);
-  const featuredProjects = projects.filter((project) => project.featured).slice(0, 4);
+  const featuredProjects = useProjects({ featuredOnly: true, limit: 4 });
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,

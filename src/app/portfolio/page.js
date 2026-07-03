@@ -5,7 +5,7 @@ import Project from "../../../components/Project";
 import Navigation from "../../../components/Navigation";
 import Reveal from "../../../components/Reveal";
 import Link from "next/link";
-import { projects } from "@/app/data/portfolioData";
+import { useProjects } from "@/app/hooks/useProjects";
 
 const filterOptions = [
   {
@@ -35,6 +35,7 @@ const filterOptions = [
 ];
 
 export default function Projects() {
+  const projects = useProjects();
   const [activeFilter, setActiveFilter] = useState("all");
   const selectedFilter =
     filterOptions.find((filter) => filter.id === activeFilter) ?? filterOptions[0];
