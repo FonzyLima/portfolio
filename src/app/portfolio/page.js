@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Project from "../../../components/Project";
+import Project, { ProjectSkeleton } from "../../../components/Project";
 import Navigation from "../../../components/Navigation";
 import Reveal from "../../../components/Reveal";
 import Link from "next/link";
@@ -35,7 +35,7 @@ const filterOptions = [
 ];
 
 export default function Projects() {
-  const projects = useProjects();
+  const { projects, isLoading: isLoadingProjects } = useProjects();
   const [activeFilter, setActiveFilter] = useState("all");
   const selectedFilter =
     filterOptions.find((filter) => filter.id === activeFilter) ?? filterOptions[0];
@@ -91,7 +91,7 @@ export default function Projects() {
                         : "bg-[#d8d8d8] text-primary dark:bg-[#202020] dark:text-secondary"
                     }`}
                   >
-                    {count}
+                    {isLoadingProjects ? "-" : count}
                   </span>
                 </button>
               );
@@ -99,9 +99,13 @@ export default function Projects() {
           </div>
 
           <div className="mt-12 grid grid-cols-1 justify-items-center gap-8 lg:grid-cols-2">
-            {filteredProjects.map((project) => (
-              <Project key={project.name} {...project} />
-            ))}
+            {isLoadingProjects
+              ? Array.from({ length: 4 }, (_, index) => (
+                  <ProjectSkeleton key={`project-skeleton-${index}`} />
+                ))
+              : filteredProjects.map((project) => (
+                  <Project key={project.name} {...project} />
+                ))}
           </div>
         </section>
       </Reveal>

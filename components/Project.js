@@ -83,3 +83,32 @@ export default function Project({
     </article>
   );
 }
+
+export function ProjectSkeleton() {
+  return (
+    <article className="w-full max-w-[520px] overflow-hidden rounded-[8px] bg-secondary dark:bg-[#171717] shadow-proj">
+      <div className="aspect-[605/422] w-full animate-pulse bg-[#d8d8d8] dark:bg-[#202020]" />
+
+      <div className="flex flex-col gap-5 px-6 py-7 lg:px-7 xl:px-8 xl:py-8">
+        <div className="flex items-center justify-between gap-3">
+          <div className="h-8 w-24 animate-pulse rounded-full bg-[#d8d8d8] dark:bg-[#202020]" />
+          <div className="h-5 w-28 animate-pulse rounded-full bg-[#d8d8d8] dark:bg-[#202020]" />
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <div className="h-10 w-3/4 animate-pulse rounded bg-[#d8d8d8] dark:bg-[#202020]" />
+          <div className="h-5 w-full animate-pulse rounded bg-[#d8d8d8] dark:bg-[#202020]" />
+          <div className="h-5 w-5/6 animate-pulse rounded bg-[#d8d8d8] dark:bg-[#202020]" />
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <div className="h-7 w-20 animate-pulse rounded-full bg-[#d8d8d8] dark:bg-[#202020]" />
+          <div className="h-7 w-24 animate-pulse rounded-full bg-[#d8d8d8] dark:bg-[#202020]" />
+          <div className="h-7 w-16 animate-pulse rounded-full bg-[#d8d8d8] dark:bg-[#202020]" />
+        </div>
+
+        <div className="h-5 w-28 animate-pulse rounded bg-[#d8d8d8] dark:bg-[#202020]" />
+      </div>
+    </article>
+  );
+}

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Navigation from "../../components/Navigation";
-import Project from "../../components/Project";
+import Project, { ProjectSkeleton } from "../../components/Project";
 import Button from "../../components/Button";
 import SlidingText from "../../components/SlidingText";
 import Reveal from "../../components/Reveal";
@@ -12,7 +12,10 @@ import { useContext } from "react";
 import React from "react";
 export default function Home() {
   const [isDark] = useContext(DarkContext);
-  const featuredProjects = useProjects({ featuredOnly: true, limit: 4 });
+  const { projects: featuredProjects, isLoading: isLoadingProjects } = useProjects({
+    featuredOnly: true,
+    limit: 4,
+  });
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -76,9 +79,13 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 justify-items-center gap-8 lg:grid-cols-2">
-              {featuredProjects.map((project) => (
-                <Project key={project.name} {...project} />
-              ))}
+              {isLoadingProjects
+                ? Array.from({ length: 4 }, (_, index) => (
+                    <ProjectSkeleton key={`featured-project-skeleton-${index}`} />
+                  ))
+                : featuredProjects.map((project) => (
+                    <Project key={project.name} {...project} />
+                  ))}
             </div>
 
             <div className="w-[170px] lg:w-[200px] xl:w-[220px] self-center">

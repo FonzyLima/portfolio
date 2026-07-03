@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { projects as localProjects } from "@/app/data/portfolioData";
 
 export function useProjects({ featuredOnly = false, limit } = {}) {
-  const [projects, setProjects] = useState(localProjects);
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
@@ -14,16 +15,29 @@ export function useProjects({ featuredOnly = false, limit } = {}) {
         const response = await fetch("/api/projects");
 
         if (!response.ok) {
+          if (isMounted) {
+            setProjects(localProjects);
+          }
           return;
         }
 
         const data = await response.json();
 
-        if (isMounted && Array.isArray(data.projects) && data.projects.length > 0) {
-          setProjects(data.projects);
+        if (isMounted) {
+          if (Array.isArray(data.projects) && data.projects.length > 0) {
+            setProjects(data.projects);
+          } else {
+            setProjects(localProjects);
+          }
         }
       } catch {
-        // Keep the local fallback projects when the CMS is not configured or reachable.
+        if (isMounted) {
+          setProjects(localProjects);
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     }
 
@@ -34,7 +48,7 @@ export function useProjects({ featuredOnly = false, limit } = {}) {
     };
   }, []);
 
-  return useMemo(() => {
+  const selectedProjects = useMemo(() => {
     let selectedProjects = projects;
 
     if (featuredOnly) {
@@ -47,4 +61,6 @@ export function useProjects({ featuredOnly = false, limit } = {}) {
 
     return selectedProjects;
   }, [featuredOnly, limit, projects]);
+
+  return { projects: selectedProjects, isLoading };
 }
