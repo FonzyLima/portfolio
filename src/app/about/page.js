@@ -4,6 +4,61 @@ import Navigation from "../../../components/Navigation";
 import SlidingText from "../../../components/SlidingText";
 import Reveal from "../../../components/Reveal";
 import { experiences, profile } from "@/app/data/portfolioData";
+
+const technicalSkills = [
+  {
+    category: "Frontend & Mobile",
+    skills: [
+      "React",
+      "Next.js",
+      "React Native",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    category: "Backend & APIs",
+    skills: [
+      "Node.js",
+      "Django",
+      "REST APIs",
+      "Laravel",
+      "Symfony",
+    ],
+  },
+  {
+    category: "Databases & Cloud Data",
+    skills: [
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "Firebase",
+      "Supabase",
+    ],
+  },
+  {
+    category: "AI & Automation",
+    skills: [
+      "OpenAI API",
+      "LangChain",
+      "Anthropic / Claude",
+      "RAG",
+      "ElevenLabs",
+    ],
+  },
+  {
+    category: "DevOps & Tools",
+    skills: [
+      "Git",
+      "GitHub",
+      "GitLab",
+      "Docker",
+      "Vercel",
+      "Postman",
+    ],
+  },
+];
+
 export default function About() {
   return (
     <div className="">
@@ -52,9 +107,44 @@ export default function About() {
         </div>
       </Reveal>
 
+      <Reveal>
+        <section className="px-6 lg:px-12 xl:px-24 mt-28 xl:mt-32 font-custom">
+          <div className="flex flex-col gap-8">
+            <div className="text-primary dark:text-secondary text-[36px] lg:text-[56px] xl:text-[70px] font-semibold">
+              Technical Skills
+            </div>
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5">
+              {technicalSkills.map((group) => (
+                <div
+                  key={group.category}
+                  className="flex flex-col gap-4 rounded-[8px] border border-[#171717] bg-secondary p-5 dark:border-[#EBEBEB] dark:bg-[#171717]"
+                >
+                  <div className="text-[22px] font-semibold text-primary dark:text-secondary lg:text-[26px] xl:text-[30px]">
+                    {group.category}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {group.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="rounded-full border border-[#171717] px-3 py-1 text-[12px] text-primary dark:border-[#EBEBEB] dark:text-secondary xl:text-[14px]"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
       {/* Resume Start */}
       <Reveal>
         <div className="flex flex-col px-6 lg:px-12 xl:px-24 mt-28 xl:mt-32 gap-y-[72px] xl:gap-y-[90px]">
+          <div className="text-primary dark:text-secondary text-[36px] lg:text-[56px] xl:text-[70px] font-custom font-semibold">
+            My Resume
+          </div>
           {experiences.map((experience) => (
             <div
               key={`${experience.company}-${experience.period}`}

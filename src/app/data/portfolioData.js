@@ -40,7 +40,7 @@ export const experiences = [
   {
     company: "Serbiz",
     location: "Taft, Manila City",
-    role: "Full Stack Software Developer",
+    role: "Founding Engineer",
     period: "August 2023 - September 2024",
     highlights: [
       "Led development for a flagship web application using Next.js, Node.js, and Firebase.",
