@@ -1,114 +1,52 @@
-"use client";
-
-import React, { useState } from "react";
-import Project, { ProjectSkeleton } from "../../../components/Project";
-import Navigation from "../../../components/Navigation";
+import React from "react";
 import Reveal from "../../../components/Reveal";
+import PortfolioFilters from "../../../components/PortfolioFilters";
 import Link from "next/link";
-import { useProjects } from "@/app/hooks/useProjects";
+import { getProjects } from "@/sanity/lib/projects";
+import { socials } from "@/app/data/portfolioData";
 
-const filterOptions = [
-  {
-    id: "all",
-    label: "All",
-    description: "Selected projects",
-    matches: () => true,
-  },
-  {
-    id: "websites",
-    label: "Websites",
-    description: "Next.js, React, responsive interfaces",
-    matches: (project) => project.category === "Website",
-  },
-  {
-    id: "mobile-apps",
-    label: "Mobile Apps",
-    description: "React Native and app workflows",
-    matches: (project) => project.category === "Mobile App",
-  },
-  {
-    id: "others",
-    label: "Others",
-    description: "Games, bots, and experiments",
-    matches: (project) => !["Website", "Mobile App"].includes(project.category),
-  },
-];
+// Rebuild the page (and re-query Sanity) at most once an hour.
+export const revalidate = 3600;
 
-export default function Projects() {
-  const { projects, isLoading: isLoadingProjects } = useProjects();
-  const [activeFilter, setActiveFilter] = useState("all");
-  const selectedFilter =
-    filterOptions.find((filter) => filter.id === activeFilter) ?? filterOptions[0];
-  const filteredProjects = projects.filter(selectedFilter.matches);
+export default async function Projects() {
+  const { projects } = await getProjects();
+  const github = socials.find((social) => social.label === "GitHub");
 
   return (
     <div className="">
-      <Navigation page="portfolio" />
-      <Reveal>
-        <section className="mx-auto flex w-full max-w-[1160px] flex-col px-6 pb-[18px] pt-20 font-custom lg:px-10">
-          <div className="flex flex-col gap-5">
-            <div className="text-[36px] font-semibold text-primary dark:text-secondary lg:text-[56px] xl:text-[70px]">
+      <section className="page-container flex flex-col pb-[18px] pt-24 font-custom lg:pt-32">
+        <Reveal immediate>
+          <div className="flex flex-col gap-6 lg:gap-8">
+            <h1 className="type-h2 text-fg">
               Portfolio
-            </div>
-            <div className="max-w-[900px] text-[22px] font-normal leading-[147.5%] text-fiftary dark:text-tertiary lg:text-[32px] xl:text-[40px]">
-              A collection of games, websites, mobile apps, and product experiments built across the full stack.
-            </div>
-            <div className="text-[18px] text-fiftary dark:text-tertiary lg:text-[20px] xl:text-[22px]">
-              More work can be found on my{" "}
-              <Link
-                href="https://github.com/FonzyLima"
-                target="_blank"
-                className="underline text-primary hover:text-sixtary dark:text-secondary dark:hover:text-fourtary"
-              >
-                GitHub
-              </Link>
-              .
-            </div>
-          </div>
-
-          <div className="mt-12 flex flex-wrap gap-3" aria-label="Project filters">
-            {filterOptions.map((filter) => {
-              const isActive = filter.id === activeFilter;
-              const count = projects.filter(filter.matches).length;
-
-              return (
-                <button
-                  key={filter.id}
-                  type="button"
-                  onClick={() => setActiveFilter(filter.id)}
-                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-[14px] duration-200 lg:text-[16px] xl:text-[18px] ${
-                    isActive
-                      ? "border-[#61BC7A] bg-[#61BC7A] text-secondary dark:border-[#7DF39D] dark:bg-[#7DF39D] dark:text-primary"
-                      : "border-[#171717] text-primary hover:border-[#61BC7A] hover:text-sixtary dark:border-[#EBEBEB] dark:text-secondary dark:hover:border-[#7DF39D] dark:hover:text-fourtary"
-                  }`}
-                  aria-pressed={isActive}
+            </h1>
+            <div className="flex flex-col gap-4">
+              <div className="type-lead max-w-[65ch] font-normal text-fg-muted">
+                A collection of games, websites, mobile apps, and product experiments built across the full stack.
+              </div>
+              <div className="type-body text-fg-muted">
+                More work can be found on my{" "}
+                <Link
+                  href={github.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-fg hover:text-accent-strong transition-colors duration-150"
                 >
-                  <span className="font-normal">{filter.label}</span>
-                  <span
-                    className={`flex h-6 min-w-6 items-center justify-center rounded-full px-2 text-[12px] xl:text-[14px] ${
-                      isActive
-                        ? "bg-secondary text-primary dark:bg-primary dark:text-secondary"
-                        : "bg-[#d8d8d8] text-primary dark:bg-[#202020] dark:text-secondary"
-                    }`}
-                  >
-                    {isLoadingProjects ? "-" : count}
-                  </span>
-                </button>
-              );
-            })}
+                  GitHub
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </Link>
+                .
+              </div>
+            </div>
           </div>
+        </Reveal>
 
-          <div className="mt-12 grid grid-cols-1 justify-items-center gap-8 lg:grid-cols-2">
-            {isLoadingProjects
-              ? Array.from({ length: 4 }, (_, index) => (
-                  <ProjectSkeleton key={`project-skeleton-${index}`} />
-                ))
-              : filteredProjects.map((project) => (
-                  <Project key={project.name} {...project} />
-                ))}
-          </div>
-        </section>
-      </Reveal>
+        {/* Grid is above the fold on mobile and holds the LCP image, so it
+            must not wait on the scroll observer. */}
+        <Reveal immediate delay={60}>
+          <PortfolioFilters projects={projects} />
+        </Reveal>
+      </section>
     </div>
   );
 }

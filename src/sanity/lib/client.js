@@ -12,5 +12,8 @@ export const sanityClient = isSanityConfigured
       dataset,
       apiVersion,
       useCdn: true,
+      // Fail fast instead of the client's 5-minute default, so a hung request
+      // can't stall a build or an ISR regeneration.
+      timeout: 5000,
     })
   : null;
