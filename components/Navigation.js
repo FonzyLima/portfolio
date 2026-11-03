@@ -1,198 +1,213 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { useState, useEffect, useContext } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { motion, AnimatePresence } from "framer-motion";
-import DarkContext from "@/app/context/darkContext";
+import { useRef } from "react";
+import { MenuIcon } from "./nav/icons";
+import {
+  MENU_ID,
+  NAV_ITEMS,
+  NAV_LAB_PATH,
+  focusRing,
+  iconButtonClass,
+  isActiveRoute,
+  isAnchor,
+  linkClass,
+} from "./nav/config";
+import { LinkLabel, LogoContent, MenuSocials } from "./nav/parts";
+import { SegmentedThemeToggle } from "./nav/ThemeToggle";
+import { useMarkerSlide } from "./nav/useMarkerSlide";
+import { useNavMenu } from "./nav/useNavMenu";
+import { useNavScroll } from "./nav/useNavScroll";
+import { scrollToAnchor } from "@/app/lib/scrollToAnchor";
 
-export default function Navigation({ page }) {
-  const [isDark, setisDark] = useContext(DarkContext);
-  const [scrollY, setScrollY] = useState(0);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState("down");
-  const variants = {
-    open: {
-      staggerChildren: 0.07,
-      delayChildren: 0.2,
-      transition: {
-        type: "spring",
-        stiffness: 20,
-        restDelta: 2,
-      },
-    },
-    closed: {
-      staggerChildren: 0.05,
-      staggerDirection: -1,
-      transition: {
-        delay: 0.5,
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-      },
-    },
+// The site nav, rendered once from src/app/layout.js. Nav items are in
+// ./nav/config.js. Only the shipping design lives here: a hanging glass bar
+// (attached to the top edge, rounded below, inset from the page so its
+// content lines up with the page's), links on the right, underline marker,
+// segmented light/dark toggle, hides on scroll down, dropdown menu on
+// phones. Design variants are tried out at /lab/nav, whose preview nav
+// (./nav/NavigationLab.js, imported only by the lab) shares this one's
+// pieces from ./nav/.
+//
+// Mobile menu motion is CSS (.nav-dropdown, .nav-menu-item and .nav-scrim in
+// src/app/globals.css): the dropdown's height opens ease-out and the links
+// stagger in 30ms apart (--i is each item's index); on close the links fade
+// first while the height starts slowly (ease-in-out). Reduced motion is an
+// opacity-only fade with no height, slide or stagger. The menu stays mounted
+// and is `inert` while closed.
+export default function Navigation() {
+  const {
+    pathname,
+    showMenu,
+    setShowMenu,
+    navRef,
+    toggleRef,
+    firstMenuLinkRef,
+    deferAnchor,
+    onMenuBlur,
+    onToggleClick,
+  } = useNavMenu();
+  const { isScrolledAway, revealNav } = useNavScroll();
+  const desktopListRef = useRef(null);
+  const activeHref = NAV_ITEMS.find(({ href }) => isActiveRoute(pathname, href))?.href;
+  useMarkerSlide(desktopListRef, activeHref);
+
+  const onItemClick = (event, href) => {
+    if (isAnchor(href) && showMenu) {
+      // Defer the scroll until the menu has closed, so focus can move to
+      // the target.
+      event.preventDefault();
+      deferAnchor(href);
+    } else if (isAnchor(href)) {
+      scrollToAnchor(event, href);
+    }
+    setShowMenu(false);
   };
-  const mobileNavContainerVariant = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 },
-    },
-  };
-  const mobileNavListVariant = {
-    hidden: { y: -30, opacity: 0 },
-    show: { opacity: 1, y: 0 },
+
+  const onLogoClick = (event) => {
+    // Already home: a same-URL link does nothing, so go back to the top.
+    if (pathname !== "/") return;
+    event.preventDefault();
+    setShowMenu(false);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   };
 
-  const mobileNavExitProps = {
-    exit: {
-      opacity: 0,
-      height: 0,
-      transition: { duration: 0.1, ease: "easeIn" },
-    },
-  };
-  const [showMenu, setshowMenu] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollY(currentScrollY);
+  // Every hook has run; now this instance can step aside for the nav lab's
+  // preview instance.
+  if (pathname === NAV_LAB_PATH) return null;
 
-      if (currentScrollY > lastScrollY) {
-        setScrollDirection("down");
-      } else {
-        setScrollDirection("up");
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY]);
-
-  const hideNavbar = scrollY > 100 && scrollDirection === "down";
+  const hideNavbar = isScrolledAway && !showMenu;
+  // Glass. Solid while the mobile menu is open, so page content doesn't show
+  // through behind the large menu links.
+  const surface = `${showMenu ? "bg-surface-raised" : "bg-surface-raised/85"} backdrop-blur-md shadow-2`;
 
   return (
-    <nav
-      className={`w-full bg-[#EBEBEB] dark:bg-navprimary text-primary dark:text-secondary backdrop-filter backdrop-blur-md border-b-[0.5px] border-[#171717] dark:border-[#EBEBEB] font-custom fixed z-40 top-0 transition-transform duration-300 ease-in-out ${
-        hideNavbar ? "hidden-nav" : ""
-      }`}
-    >
-      <div className="mx-auto flex w-full max-w-[1440px] flex-row justify-between px-4 md:px-8 xl:px-24">
-        <div>
-          <Link href="/">
-            <div className="pt-[15px] text-[22px] font-custom hover:cursor-pointer md:text-[25px]">
-              AlfonsoLima
-            </div>
-          </Link>
-        </div>
-        <div className="flex-row flex items-start gap-1 md:gap-2">
-          <Link href="/">
-            <div
-              className={`md:flex hidden p-3 pt-[20px] text-[16px] hover:text-tertiary xl:p-4 xl:pt-[20px] xl:text-[18px] ${
-                page == "home" ? "text-[#61BC7A] dark:text-fourtary" : ""
-              }`}
-            >
-              Home
-            </div>
-          </Link>
-          <Link href="/about">
-            <div
-              className={`md:flex hidden p-3 pt-[20px] text-[16px] hover:text-tertiary xl:p-4 xl:pt-[20px] xl:text-[18px] ${
-                page == "abouts" ? "text-[#61BC7A] dark:text-fourtary" : ""
-              }`}
-            >
-              About
-            </div>
-          </Link>
-          <Link href="/portfolio">
-            <div
-              className={`md:flex hidden p-3 pt-[20px] text-[16px] hover:text-tertiary xl:p-4 xl:pt-[20px] xl:text-[18px] ${
-                page == "portfolio" ? "text-[#61BC7A] dark:text-fourtary" : ""
-              }`}
-            >
-              Portfolio
-            </div>
-          </Link>
-
-          <div
-            className="flex mt-[20px] cursor-pointer md:ml-2"
-            onClick={() => setisDark(!isDark)}
+    <>
+      <nav
+        ref={navRef}
+        aria-label="Main"
+        // Reveal the nav when keyboard focus moves into it while it's hidden.
+        onFocus={revealNav}
+        onBlur={onMenuBlur}
+        // Inset (8px) + the row's padding (px-4, lg:px-6) add up to the page
+        // gutter (24px, lg 32px), so the logo and links line up with the
+        // content below. Hiding slides it past its own shadow.
+        className={`inset-x-2 top-0 mx-auto max-w-[1104px] rounded-b-lg ${surface} text-fg font-custom fixed z-40 transition-transform duration-[240ms] ease-[cubic-bezier(0.77,0,0.175,1)] motion-reduce:transition-none${
+          hideNavbar ? " translate-y-[calc(-100%-2.5rem)]" : ""
+        }`}
+      >
+        <div className="flex h-16 flex-row items-center justify-between px-4 lg:px-6">
+          <Link
+            href="/"
+            aria-current={pathname === "/" ? "page" : undefined}
+            onClick={onLogoClick}
+            className={`-mx-2 flex h-16 items-center gap-2 px-2 text-[18px] lg:gap-2.5 lg:text-[20px] ${focusRing} focus-visible:outline-offset-[-6px]`}
           >
-            <svg
-              width="22"
-              height="23"
-              viewBox="0 0 22 23"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <LogoContent />
+          </Link>
+          <div className="flex flex-row items-center gap-1 md:gap-2">
+            {/* The marker slide only measures inside this list, so the fixed
+                nav and scroll-to-top on navigation never add a vertical
+                jump. */}
+            <ul
+              ref={desktopListRef}
+              className="hidden md:flex flex-row items-center gap-1 md:gap-2"
             >
-              <path
-                d="M5.05 4.14005L4.66 3.75005C4.27 3.36005 3.64 3.37005 3.26 3.75005L3.25 3.76005C2.86 4.15005 2.86 4.78005 3.25 5.16005L3.64 5.55005C4.03 5.94005 4.65 5.94005 5.04 5.55005L5.05 5.54005C5.44 5.16005 5.44 4.52005 5.05 4.14005ZM2.01 10.5H0.99C0.44 10.5 0 10.94 0 11.49V11.5C0 12.05 0.44 12.49 0.99 12.49H2C2.56 12.5 3 12.06 3 11.51V11.5C3 10.94 2.56 10.5 2.01 10.5ZM11.01 0.550049H11C10.44 0.550049 10 0.990049 10 1.54005V2.50005C10 3.05005 10.44 3.49005 10.99 3.49005H11C11.56 3.50005 12 3.06005 12 2.51005V1.54005C12 0.990049 11.56 0.550049 11.01 0.550049ZM18.75 3.76005C18.36 3.37005 17.73 3.37005 17.34 3.75005L16.95 4.14005C16.56 4.53005 16.56 5.16005 16.95 5.54005L16.96 5.55005C17.35 5.94005 17.98 5.94005 18.36 5.55005L18.75 5.16005C19.14 4.77005 19.14 4.15005 18.75 3.76005ZM16.94 18.8601L17.33 19.25C17.72 19.64 18.35 19.64 18.74 19.25C19.13 18.8601 19.13 18.23 18.74 17.84L18.35 17.4501C17.96 17.0601 17.33 17.0701 16.95 17.4501C16.55 17.85 16.55 18.4701 16.94 18.8601ZM19 11.49V11.5C19 12.05 19.44 12.49 19.99 12.49H21C21.55 12.49 21.99 12.05 21.99 11.5V11.49C21.99 10.94 21.55 10.5 21 10.5H19.99C19.44 10.5 19 10.94 19 11.49ZM11 5.50005C7.69 5.50005 5 8.19005 5 11.5C5 14.81 7.69 17.5 11 17.5C14.31 17.5 17 14.81 17 11.5C17 8.19005 14.31 5.50005 11 5.50005ZM10.99 22.4501H11C11.55 22.4501 11.99 22.01 11.99 21.46V20.5C11.99 19.9501 11.55 19.51 11 19.51H10.99C10.44 19.51 10 19.9501 10 20.5V21.46C10 22.01 10.44 22.4501 10.99 22.4501ZM3.25 19.24C3.64 19.63 4.27 19.63 4.66 19.24L5.05 18.85C5.44 18.4601 5.43 17.83 5.05 17.4501L5.04 17.4401C4.65 17.0501 4.02 17.0501 3.63 17.4401L3.24 17.83C2.86 18.23 2.86 18.85 3.25 19.24Z"
-                fill={`${isDark ? "#EBEBEB" : "#171717"}`}
-              />
-            </svg>
-          </div>
-          <div
-            className="flex md:hidden p-4 pt-[25px] text-[18px] hover:text-tertiary"
-            onClick={() => setshowMenu(!showMenu)}
-          >
-            <GiHamburgerMenu />
+              {NAV_ITEMS.map(({ label, href }) => {
+                const isActive = isActiveRoute(pathname, href);
+                return (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={(event) => onItemClick(event, href)}
+                      className={`h-16 px-3 ${linkClass(isActive)}`}
+                    >
+                      <LinkLabel label={label} isActive={isActive} markerFor={href} />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <SegmentedThemeToggle className="md:ml-2" />
+            <button
+              ref={toggleRef}
+              type="button"
+              aria-label="Menu"
+              aria-expanded={showMenu}
+              aria-controls={MENU_ID}
+              className={`${iconButtonClass} md:hidden -mr-[11px]`}
+              onClick={onToggleClick}
+            >
+              <MenuIcon open={showMenu} />
+            </button>
           </div>
         </div>
-      </div>
-      {/* {showMenu ? <div className="transition-transform duration-500 ease-in-out">
-        <div className="w-full flex justify-center text-[18px] p-1">Home</div>
-        <div className="w-full flex justify-center text-[18px] p-1">About</div>
-        <div className="w-full flex justify-center text-[18px] p-1">Portfolio</div>
-      </div>:null} */}
-      <AnimatePresence>
-        {showMenu && (
-          <motion.div
-            variants={mobileNavContainerVariant}
-            initial="hidden"
-            animate="show"
-            className={`flex flex-col transition duration-500 ease-out`}
-          >
-            <Link href="/">
-              <motion.div
-                variants={mobileNavListVariant}
-                {...mobileNavExitProps}
-                className={`w-full flex justify-center text-[18px] font-custom p-1 ${
-                  page == "home" ? "text-[#61BC7A] dark:text-fourtary" : ""
-                }`}
-              >
-                Home
-              </motion.div>
-            </Link>
-            <Link href="/about">
-              <motion.div
-                variants={mobileNavListVariant}
-                {...mobileNavExitProps}
-                className={`w-full flex justify-center text-[18px] font-custom p-1 ${
-                  page == "abouts" ? "text-[#61BC7A] dark:text-fourtary" : ""
-                }`}
-              >
-                About
-              </motion.div>
-            </Link>
 
-            <Link href="/portfolio">
-              <motion.div
-                variants={mobileNavListVariant}
-                {...mobileNavExitProps}
-                className={`w-full flex justify-center text-[18px] font-custom p-1 pb-4 ${
-                  page == "portfolio" ? "text-[#61BC7A] dark:text-fourtary" : ""
-                }`}
+        {/* Always mounted, so it can animate closed: `inert` while closed
+            (no focus, no clicks, hidden from assistive tech) and
+            visibility: hidden once the close has played. */}
+        <div id={MENU_ID} className="md:hidden">
+          <div
+            data-open={showMenu ? "" : undefined}
+            inert={!showMenu}
+            className="nav-dropdown"
+          >
+            <div>
+              {/* Mobile links use the h2 scale (not type-small like the
+                  desktop row): on a phone the menu is the page's main
+                  navigation, so it gets big, tappable, typographic links,
+                  separated by hairlines. */}
+              <ul className="flex flex-col px-4 pt-2 pb-2">
+                {NAV_ITEMS.map(({ label, href }, index) => {
+                  const isActive = isActiveRoute(pathname, href);
+                  return (
+                    <li
+                      key={href}
+                      style={{ "--i": index }}
+                      className="nav-menu-item border-t-[0.5px] border-line first:border-t-0"
+                    >
+                      <Link
+                        ref={index === 0 ? firstMenuLinkRef : undefined}
+                        href={href}
+                        aria-current={isActive ? "page" : undefined}
+                        onClick={(event) => onItemClick(event, href)}
+                        // Left-aligned with the logo: -mx-3/px-3 keeps the
+                        // text on the container edge and leaves room for the
+                        // inset focus ring.
+                        className={`-mx-3 px-3 min-h-[56px] py-3 ${linkClass(isActive, "type-h2")}`}
+                      >
+                        {/* Static marker: the menu is only open briefly,
+                            so nothing needs to slide. */}
+                        <LinkLabel label={label} isActive={isActive} />
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <div
+                style={{ "--i": NAV_ITEMS.length }}
+                className="nav-menu-item px-4 pb-4"
               >
-                Portfolio
-              </motion.div>
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+                <div className="border-t-[0.5px] border-line pt-2">
+                  <MenuSocials />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Dims the page behind the open mobile menu. It sits outside <nav>, so
+        a tap on it counts as "outside" and closes the menu; it also catches
+        that tap, so nothing underneath gets activated by accident. */}
+      <div
+        aria-hidden="true"
+        data-open={showMenu ? "" : undefined}
+        className="nav-scrim fixed inset-0 z-30 bg-scrim/50 md:hidden"
+      />
+    </>
   );
 }
