@@ -2,23 +2,859 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Colour tokens (see DESIGN_SYSTEM.md > Color System). Stored as RGB channels
+   so Tailwind's opacity modifiers work: bg-page/85 -> rgb(var(--page) / .85).
+   The `dark` class on <html> is set before first paint by the inline script
+   in src/app/layout.js. */
+@layer base {
+  :root {
+    color-scheme: light;
+    --page: 235 235 235; /* #EBEBEB */
+    --surface: 245 245 245; /* #F5F5F5 */
+    --surface-raised: 255 255 255; /* #FFFFFF */
+    --placeholder: 216 216 216; /* #D8D8D8 */
+    --line: 194 194 194; /* #C2C2C2 */
+    --line-strong: 23 23 23; /* #171717 */
+    --fg: 23 23 23; /* #171717 */
+    --fg-muted: 96 96 96; /* #606060 */
+    --accent: 97 188 122; /* #61BC7A */
+    --accent-hover: 79 168 102; /* #4FA866 */
+    --accent-strong: 26 110 55; /* #1A6E37 */
+    --on-accent: 23 23 23; /* #171717 */
+    --focus: 26 110 55; /* #1A6E37 */
+    --scrim: 23 23 23; /* #171717, used at /50 behind the mobile menu */
+    /* Showcase card tag bar (lab). Same in both themes, like on-accent: it
+       sits on the thumbnails' baked, always-dark #2A2A2A frame. */
+    --tag-bar: 235 235 235; /* #EBEBEB */
+    --on-tag-bar: 23 23 23; /* #171717, 15:1 on tag-bar */
+
+    --shadow-1: 0 1px 2px rgb(23 23 23 / 0.06), 0 4px 12px rgb(23 23 23 / 0.08);
+    --shadow-2: 0 2px 4px rgb(23 23 23 / 0.06), 0 12px 32px rgb(23 23 23 / 0.14);
+    --glow: 97 188 122;
+    --glow-a: 0.35;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --page: 23 23 23; /* #171717 */
+    --surface: 32 32 32; /* #202020 */
+    --surface-raised: 42 42 42; /* #2A2A2A */
+    --placeholder: 51 51 51; /* #333333 */
+    --line: 51 51 51; /* #333333 */
+    --line-strong: 235 235 235; /* #EBEBEB */
+    --fg: 235 235 235; /* #EBEBEB */
+    --fg-muted: 169 169 169; /* #A9A9A9 */
+    --accent: 125 243 157; /* #7DF39D */
+    --accent-hover: 164 248 186; /* #A4F8BA */
+    --accent-strong: 125 243 157; /* #7DF39D */
+    --on-accent: 23 23 23; /* #171717 */
+    --focus: 125 243 157; /* #7DF39D */
+    --scrim: 0 0 0; /* #000000, used at /50 behind the mobile menu */
+
+    --shadow-1: 0 0 0 1px rgb(255 255 255 / 0.08), 0 4px 12px rgb(0 0 0 / 0.4);
+    --shadow-2: 0 0 0 1px rgb(255 255 255 / 0.1), 0 12px 32px rgb(0 0 0 / 0.6);
+    --glow: 125 243 157;
+    --glow-a: 0.3;
+  }
+
+  body {
+    @apply bg-page text-fg;
+  }
+
+  /* One focus ring for every interactive element. Components only override
+     the offset (e.g. the nav's inset ring) or, for the Gameboy art, the colour. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--focus));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Layout */
+  .page-container {
+    @apply mx-auto w-full max-w-[1120px] px-6 lg:px-8;
+  }
+  .section-gap {
+    @apply mt-20 lg:mt-28;
+  }
+
+  /* Type scale */
+  .type-display {
+    @apply text-[36px] lg:text-[48px] xl:text-[56px] font-medium leading-[1.1] tracking-[-0.02em];
+  }
+  .type-h2 {
+    @apply text-[28px] lg:text-[36px] font-medium leading-[1.2] tracking-[-0.01em];
+  }
+  .type-h3 {
+    @apply text-[18px] lg:text-[20px] font-medium leading-[1.3];
+  }
+  .type-lead {
+    @apply text-[17px] lg:text-[20px] leading-[1.6];
+  }
+  .type-body {
+    @apply text-[16px] lg:text-[17px] leading-[1.6];
+  }
+  .type-small {
+    @apply text-[14px] lg:text-[15px];
+  }
+  .type-marquee {
+    @apply text-[28px] md:text-[36px] lg:text-[44px] font-normal leading-[1.1];
+  }
+}
+
+/* ==========================================================================
+   Motion
+   Two eases (out for entering/revealing/presses, in-out for on-screen
+   movement) and four durations. Tailwind's `ease-out` / `ease-in-out` map to
+   the same vars (tailwind.config.js); components/nav/motion.js mirrors the
+   eases and the fast/base/move durations for JS. Movement is transform/opacity;
+   the exceptions are the nav's height/grid-row changes (mobile dropdown, tier
+   rows, logo row), colour transitions and the 404 sprite's stepped clip-path.
+   Every rule here has a reduced-motion answer.
+   ========================================================================== */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entering, revealing, presses */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* on-screen movement */
+  --motion-fast: 120ms; /* exits, reduced-motion fades */
+  --motion-base: 180ms; /* icon swaps, menu items entering */
+  --motion-move: 240ms; /* nav slide, indicator, menu height */
+  --motion-reveal: 500ms; /* page entrances and scroll reveals */
+}
+
+/* Card tilt angles (components/trainer/usePointerTilt.js writes them once a
+   frame on the tilting element, which reads them itself). Registered as
+   non-inherited so each write restyles only that element, not every node in
+   the card. */
+@property --rx {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Reveal (components/Reveal.js) ------------------------------------------- */
+
+/* <Reveal immediate>: above the fold. Pure CSS, starts at first paint. The
+   content is readable on the very first frame (opacity starts at .6, never 0),
+   so LCP is the first paint; the motion is a short, confident 12px rise.
+   `backwards` holds the first frame during the stagger delay and leaves no
+   transform behind afterwards (no lingering stacking context). */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-immediate {
+    animation: reveal-rise var(--motion-reveal) var(--ease-out)
+      var(--reveal-delay, 0ms) backwards;
+  }
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0.6;
+    transform: translate3d(0, 12px, 0);
+  }
+}
+
+/* <Reveal>: below the fold, revealed once by one shared IntersectionObserver.
+   The server HTML never hides anything. Once JS runs, Reveal.js marks only the
+   blocks that start below the viewport data-reveal="pending" (offscreen, so
+   nobody sees them go), then "shown" as they scroll in: a 16px fade-up.
+   On-screen blocks are never touched, so nothing flashes. Reduced motion:
+   nothing is hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .reveal[data-reveal="pending"] {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  /* Keyboard focus inside a not-yet-revealed block shows it at once. */
+  html.js .reveal[data-reveal="pending"]:focus-within {
+    opacity: 1;
+    transform: none;
+  }
+  /* The transition only exists on the reveal itself, so revealed content
+     never animates again. */
+  .reveal[data-reveal="shown"] {
+    transition:
+      opacity var(--motion-reveal) var(--ease-out) var(--reveal-delay, 0ms),
+      transform var(--motion-reveal) var(--ease-out) var(--reveal-delay, 0ms);
+  }
+}
+
+@media print {
+  .reveal,
+  .reveal-immediate {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Marquee (components/SlidingText.js) -------------------------------------
+   `overflow: clip` (not `overflow-x: hidden`) so the box never becomes a scroll
+   container: `overflow-x: hidden` silently turns overflow-y into `auto`, which
+   let the trackpad/wheel and text-selection drags scroll the text.
+   Clipped horizontally only: the tight 1.1 line-height puts descenders (the
+   y/p in "TypeScript", j/g in "Django") below the line box, and clipping the
+   y axis sliced them off. `clip` on one axis leaves the other `visible`
+   (unlike `hidden`, which would force it to `auto`). Old browsers without
+   `clip` fall back to `hidden` on both axes. */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@supports (overflow-x: clip) {
+  .marquee {
+    overflow: visible;
+    overflow-x: clip;
+  }
+}
+
+/* Two identical groups slide by exactly -50%, so the loop restarts on a
+   pixel-identical frame. --marquee-duration is set per row from its length so
+   every row moves at the same speed (SlidingText also corrects it to the
+   measured width). Paused while offscreen via data-paused, and on hover,
+   tap or keyboard focus of the row (WCAG 2.2.2). The track ignores the
+   pointer, so hover lands on .marquee itself. */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  pointer-events: none;
+  animation: marquee-scroll var(--marquee-duration, 36s) linear infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    will-change: transform;
+  }
+}
+
+.marquee-track[data-reverse] {
+  animation-direction: reverse;
+}
+
+.marquee[data-paused] .marquee-track,
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Navigation (components/Navigation.js, components/nav/*; lab variants in components/nav/NavigationLab.js) ----------
+   All CSS: no animation library on the nav, so it costs nothing on routes
+   that don't otherwise animate. All nav motion is 120-240ms. */
+
+/* Theme icon crossfade: the outgoing icon turns away one way while the
+   incoming one turns in from the other. Opacity only with reduced motion. */
+.icon-swap-enter {
+  animation: icon-swap-in var(--motion-base) var(--ease-out) both;
+}
+.icon-swap-exit {
+  animation: icon-swap-out var(--motion-base) var(--ease-out) both;
+  pointer-events: none;
+}
+@keyframes icon-swap-in {
+  from {
+    opacity: 0;
+    transform: rotate(calc(var(--swap-angle, 90deg) * -1)) scale(0.6);
+  }
+}
+@keyframes icon-swap-out {
+  to {
+    opacity: 0;
+    transform: rotate(var(--swap-angle, 90deg)) scale(0.6);
+  }
+}
+@keyframes icon-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes icon-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon-swap-enter {
+    animation: icon-fade-in var(--motion-fast) var(--ease-out) both;
+  }
+  .icon-swap-exit {
+    animation: icon-fade-out var(--motion-fast) var(--ease-out) both;
+  }
+}
+
+/* Menu icons: lines meet in the middle, then rotate into an X (240ms total,
+   each half ease-in-out). Closing runs the same two steps in reverse, so the
+   delays swap with the state. Each line is a mover (Y) around a turner
+   (rotate), so the two steps are separate transitions. Instant when reduced. */
+.menu-line-move,
+.menu-line-turn {
+  transition: transform calc(var(--motion-move) / 2) var(--ease-in-out);
+}
+.menu-line-move {
+  transition-delay: calc(var(--motion-move) / 2);
+}
+[data-open] .menu-line-move {
+  transition-delay: 0ms;
+}
+[data-open] .menu-line-turn {
+  transition-delay: calc(var(--motion-move) / 2);
+}
+.menu-line-length {
+  transform-origin: right;
+  transition: transform var(--motion-move) var(--ease-in-out);
+}
+.menu-line-fade {
+  transition: opacity calc(var(--motion-move) / 2) var(--ease-in-out)
+    calc(var(--motion-move) / 2);
+}
+[data-open] .menu-line-fade {
+  transition-delay: 0ms;
+}
+.menu-label-word {
+  transition: opacity var(--motion-base) var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-line-move,
+  .menu-line-turn,
+  .menu-line-length,
+  .menu-line-fade {
+    transition: none;
+  }
+  .menu-label-word {
+    transition-duration: var(--motion-fast);
+  }
+}
+
+/* Theme toggle variants (components/nav/ThemeToggle.js, tried at /lab/nav).
+   State comes from the `dark` class on <html>, so these are transitions
+   that run whenever it flips. Instant with reduced motion. */
+.theme-slide {
+  transition: transform var(--motion-move) var(--ease-in-out);
+}
+.theme-fade {
+  transition: opacity var(--motion-base) var(--ease-out);
+}
+/* Eclipse: light mode shows the moon (body r9, cut over its top right, no
+   rays); dark mode shows the sun (cut slid off, body scaled to the core,
+   rays grown out). Transforms are in viewBox units around the centre. */
+.theme-eclipse-body,
+.theme-eclipse-cut,
+.theme-eclipse-rays {
+  transform-origin: 12px 12px;
+  transition:
+    transform var(--motion-move) var(--ease-in-out),
+    opacity var(--motion-move) var(--ease-in-out);
+}
+.theme-eclipse-rays {
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.5);
+}
+.dark .theme-eclipse-body {
+  transform: scale(0.5);
+}
+.dark .theme-eclipse-cut {
+  transform: translate(8px, -8px);
+}
+.dark .theme-eclipse-rays {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--motion-move) / 3);
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-slide,
+  .theme-fade,
+  .theme-eclipse-body,
+  .theme-eclipse-cut,
+  .theme-eclipse-rays {
+    transition: none;
+  }
+}
+
+/* Mobile menu. It stays mounted (inert while closed) so it can animate out
+   without a presence library. Dropdown: height opens ease-out and the links
+   stagger in 30ms apart; closing, the links fade first while the height
+   starts slowly (ease-in-out), so they're gone before the edge clips them.
+   `visibility` flips after the close, taking it out of tab order. */
+.nav-dropdown {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--motion-move) var(--ease-in-out),
+    visibility 0s linear var(--motion-move);
+}
+.nav-dropdown[data-open] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows var(--motion-move) var(--ease-out),
+    visibility 0s;
+}
+.nav-dropdown > * {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Full-screen sheet: fades in with the same link stagger, fades out fast. */
+.nav-sheet {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--motion-fast) var(--ease-out),
+    visibility 0s linear var(--motion-fast);
+}
+.nav-sheet[data-open] {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--motion-move) var(--ease-out),
+    visibility 0s;
+}
+
+.nav-menu-item {
+  opacity: 0;
+  transform: translate3d(0, -8px, 0);
+  transition:
+    opacity var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out);
+}
+[data-open] .nav-menu-item {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--motion-base);
+  transition-delay: calc(var(--i, 0) * 30ms);
+}
+
+/* Dims the page behind the open dropdown. */
+.nav-scrim {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--motion-move) var(--ease-out),
+    visibility 0s linear var(--motion-move);
+}
+.nav-scrim[data-open] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity var(--motion-move) var(--ease-out),
+    visibility 0s;
+}
+
+/* Reduced motion: the menus only fade (no height, slide or stagger). */
+@media (prefers-reduced-motion: reduce) {
+  /* Full height at once on open; on close it keeps its height through the
+     fade, then collapses. */
+  .nav-dropdown {
+    opacity: 0;
+    transition:
+      opacity var(--motion-fast) linear,
+      grid-template-rows 0s linear var(--motion-fast),
+      visibility 0s linear var(--motion-fast);
+  }
+  .nav-dropdown[data-open] {
+    opacity: 1;
+    transition:
+      opacity var(--motion-fast) linear,
+      grid-template-rows 0s,
+      visibility 0s;
+  }
+  .nav-sheet,
+  .nav-sheet[data-open],
+  .nav-scrim,
+  .nav-scrim[data-open] {
+    transition-duration: var(--motion-fast), 0s;
+  }
+  .nav-menu-item,
+  [data-open] .nav-menu-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Glow behind the home Gameboy. Colour and strength come from --glow/--glow-a. */
 .gradient-green {
-  border-radius: 1346px;
   background: radial-gradient(
     50% 50% at 50% 50%,
-    rgba(0, 252, 131, 0.4) 0%,
-    rgba(0, 252, 131, 0) 100%
+    rgb(var(--glow) / var(--glow-a)) 0%,
+    transparent 100%
   );
   filter: blur(28.5px);
 }
 
-.shadow-proj {
-  filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.25));
+/* Light mode only: lift the Gameboy off the pale page. In dark mode the glow
+   does that job. */
+:root:not(.dark) .gameboy-lift {
+  filter: drop-shadow(0 12px 32px rgb(23 23 23 / 0.14));
 }
 
-.nav-up {
-  top: -70px;
-}
 .hidden-nav {
   transform: translateY(-100%);
+}
+
+/* Nav lab variants (/lab/nav, see "Combination rules" in
+   components/nav/NavigationLab.js). The shipping defaults use none of these. */
+
+/* Surface "inverted": the bar takes the other theme's colour tokens, so
+   every pair inside it (text, muted text, accent text and underline, pill,
+   focus ring, logo mark) is one already contrast-checked on that theme's
+   page. Shiny mode keeps its gold, also swapped. */
+:root:not(.dark) .nav-inverted {
+  color-scheme: dark;
+  --page: 23 23 23;
+  --surface: 32 32 32;
+  --surface-raised: 42 42 42;
+  --placeholder: 51 51 51;
+  --line: 51 51 51;
+  --line-strong: 235 235 235;
+  --fg: 235 235 235;
+  --fg-muted: 169 169 169;
+  --accent: 125 243 157;
+  --accent-hover: 164 248 186;
+  --accent-strong: 125 243 157;
+  --on-accent: 23 23 23;
+  --focus: 125 243 157;
+}
+.dark .nav-inverted {
+  color-scheme: light;
+  --page: 235 235 235;
+  --surface: 245 245 245;
+  --surface-raised: 255 255 255;
+  --placeholder: 216 216 216;
+  --line: 194 194 194;
+  --line-strong: 23 23 23;
+  --fg: 23 23 23;
+  --fg-muted: 96 96 96;
+  --accent: 97 188 122;
+  --accent-hover: 79 168 102;
+  --accent-strong: 26 110 55;
+  --on-accent: 23 23 23;
+  --focus: 26 110 55;
+}
+.shiny:not(.dark) .nav-inverted {
+  --accent: 247 211 96;
+  --accent-hover: 250 225 140;
+  --accent-strong: 247 211 96;
+  --focus: 247 211 96;
+}
+.shiny.dark .nav-inverted {
+  --accent: 240 196 64;
+  --accent-hover: 224 178 42;
+  --accent-strong: 138 90 0;
+  --focus: 138 90 0;
+}
+
+/* Surface "clear": the background (with its hairline or shadow) is a layer
+   behind the content that fades in past the top. Only the layer fades. */
+.nav-surface-layer {
+  opacity: 0;
+  transition: opacity var(--motion-move) var(--ease-out);
+}
+.nav-surface-layer[data-visible] {
+  opacity: 1;
+}
+
+/* Shape "island": the desktop links and theme toggle sit in a column that
+   opens from zero width (hover, keyboard focus or the Menu trigger). Closed
+   it's visibility: hidden, so its links aren't tab stops; keyboard focus on
+   the logo or trigger opens it before Tab gets there. Display comes from
+   Tailwind (hidden md:grid). */
+.nav-island-expand {
+  grid-template-columns: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-columns var(--motion-move) var(--ease-out),
+    visibility 0s linear var(--motion-move);
+}
+.nav-island-expand[data-open] {
+  grid-template-columns: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-columns var(--motion-move) var(--ease-out),
+    visibility 0s;
+}
+.nav-island-expand > * {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Layout "stacked": logo centred on top, links centred on a second tier
+   (md+). Past 100px ([data-compact]) it collapses to the standard single
+   row: the tier's height animates, the items move to the row at once.
+   --nav-row is the top row's height (set inline per shape / shrink). */
+.nav-stacked {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: var(--nav-row, 4rem) 0rem;
+  grid-template-areas: ". logo tools" "links links links";
+  align-items: center;
+  transition: grid-template-rows var(--motion-move) var(--ease-in-out);
+}
+@media (min-width: 768px) {
+  .nav-stacked {
+    grid-template-rows: var(--nav-row, 4rem) 3rem;
+  }
+}
+.nav-stacked[data-compact] {
+  grid-template-columns: 1fr auto auto;
+  grid-template-rows: var(--nav-row, 4rem) 0rem;
+  grid-template-areas: "logo links tools" ". . .";
+}
+.nav-stacked > [data-area="logo"] {
+  grid-area: logo;
+}
+.nav-stacked[data-compact] > [data-area="logo"] {
+  justify-self: start;
+}
+.nav-stacked > [data-area="links"] {
+  grid-area: links;
+  justify-self: center;
+  height: 100%;
+}
+.nav-stacked > [data-area="tools"] {
+  grid-area: tools;
+  justify-self: end;
+}
+
+/* Scroll "shrink": past 100px the row goes 64 -> 48px and the logo scales
+   down a little. The logo's hit area keeps the full row height. */
+.nav-shrink-row {
+  transition: height var(--motion-move) var(--ease-in-out);
+}
+.nav-shrink-logo {
+  transform-origin: left center;
+  transition: transform var(--motion-move) var(--ease-in-out);
+}
+[data-compact] .nav-shrink-logo {
+  transform: scale(0.85);
+}
+
+/* Position "bottom" (preview only): room under the page for the docked bar. */
+@media (max-width: 767.98px) {
+  .nav-dock-bottom body {
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-surface-layer {
+    transition-duration: var(--motion-fast);
+  }
+  .nav-island-expand,
+  .nav-island-expand[data-open],
+  .nav-stacked,
+  .nav-shrink-row,
+  .nav-shrink-logo {
+    transition: none;
+  }
+}
+
+/* Desktop-only shapes in preview: room for the rail (left) and for the
+   bottom pieces of dock and corners. */
+@media (min-width: 768px) {
+  .nav-rail-left body {
+    padding-left: 88px;
+  }
+  .nav-dock-desktop body {
+    padding-bottom: 6rem;
+  }
+}
+
+/* Dock and corners (md+): fixed pieces that hide on their own when the nav
+   has [data-hidden]. Corners fade; dock slides each pill off its edge. */
+.nav-piece {
+  transition:
+    opacity var(--motion-base) var(--ease-out),
+    transform var(--motion-move) var(--ease-in-out);
+}
+@media (min-width: 768px) {
+  [data-hidden] .nav-piece-fade {
+    opacity: 0;
+    pointer-events: none;
+  }
+  [data-hidden] .nav-piece-up {
+    transform: translateY(calc(-100% - 2.5rem));
+  }
+  [data-hidden] .nav-piece-down {
+    transform: translateY(calc(100% + 2.5rem));
+  }
+}
+
+/* Dock: the hovered item scales up a little (no neighbour magnification). */
+.nav-dock-item {
+  transition: transform 150ms var(--ease-out);
+}
+@media (hover: hover) {
+  .nav-dock-item:hover {
+    transform: scale(1.08);
+  }
+}
+
+/* FAB popover: scales and fades out of the button's corner. Inert and
+   visibility: hidden while closed, like the phone menus. */
+.nav-popover {
+  opacity: 0;
+  transform: scale(0.96);
+  transform-origin: top right;
+  visibility: hidden;
+  transition:
+    opacity var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out),
+    visibility 0s linear var(--motion-fast);
+}
+.nav-popover[data-open] {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity var(--motion-move) var(--ease-out),
+    transform var(--motion-move) var(--ease-out),
+    visibility 0s;
+}
+
+/* Reduced motion: pieces fade instead of sliding, no dock scaling, and the
+   popover only fades. */
+@media (prefers-reduced-motion: reduce) {
+  .nav-piece {
+    transition: opacity var(--motion-fast) var(--ease-out);
+  }
+}
+@media (prefers-reduced-motion: reduce) and (min-width: 768px) {
+  [data-hidden] .nav-piece-up,
+  [data-hidden] .nav-piece-down {
+    transform: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-dock-item,
+  .nav-dock-item:hover {
+    transform: none;
+    transition: none;
+  }
+  .nav-popover,
+  .nav-popover[data-open] {
+    transform: none;
+  }
+}
+
+/* 404 wild encounter (src/app/not-found.js). The sprite "glitches" like a
+   MissingNo every few seconds: hard-stepped jitters with scanline cuts, so it
+   reads as a GBA frame skip rather than a smooth tween. The dialog prompt
+   blinks like the hero's "press A" arrow, six times (4.8s, under WCAG
+   2.2.2's 5s), then stays on. Both are off with reduced motion. */
+.encounter-sprite {
+  animation: encounter-glitch 3.6s steps(1, end) infinite;
+}
+
+@keyframes encounter-glitch {
+  0%,
+  86% {
+    transform: none;
+    clip-path: none;
+    opacity: 1;
+  }
+  87% {
+    transform: translate(-6px, 0);
+    clip-path: inset(0 0 55% 0);
+  }
+  89% {
+    transform: translate(6px, 2px);
+    clip-path: inset(40% 0 0 0);
+  }
+  91% {
+    transform: translate(-3px, -2px);
+    clip-path: none;
+    opacity: 0.55;
+  }
+  93% {
+    transform: none;
+    opacity: 1;
+  }
+  94% {
+    transform: translate(4px, 0);
+    clip-path: inset(20% 0 50% 0);
+  }
+  96%,
+  100% {
+    transform: none;
+    clip-path: none;
+    opacity: 1;
+  }
+}
+
+.encounter-prompt {
+  animation: encounter-blink 0.8s steps(1, end) 6;
+}
+
+@keyframes encounter-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .encounter-sprite,
+  .encounter-prompt {
+    animation: none;
+  }
+}
+
+/* Shiny mode (src/app/lib/shiny.js): the `shiny` class on <html>, beside `dark`.
+   Gold replaces green in every accent token, and Charmander gets its shiny
+   colours. Contrast holds: #8A5A00 on #EBEBEB is 5.0:1, #F7D360 on #171717 is 12.7:1. */
+.shiny {
+  --accent: 240 196 64; /* #F0C440 */
+  --accent-hover: 224 178 42; /* #E0B22A */
+  --accent-strong: 138 90 0; /* #8A5A00 */
+  --focus: 138 90 0; /* #8A5A00 */
+  --glow: 240 196 64;
+}
+
+.shiny.dark {
+  --accent: 247 211 96; /* #F7D360 */
+  --accent-hover: 250 225 140; /* #FAE18C */
+  --accent-strong: 247 211 96; /* #F7D360 */
+  --focus: 247 211 96; /* #F7D360 */
+  --glow: 247 211 96;
+}
+
+/* Shiny Charmander: recolour the generated sprite (components/gameboy/gameboyArt.js)
+   by its baked fills, so the art file stays untouched. The flame keeps its colours.
+   Covers the hero sprite and the 404 encounter sprite. */
+.shiny :is(#gb-mon-sprite, .encounter-sprite) [fill="#E98E3D"] {
+  fill: #f2c94c; /* body: orange -> gold */
+}
+.shiny :is(#gb-mon-sprite, .encounter-sprite) [fill="#E5BB52"] {
+  fill: #fbf0c0; /* belly, claws: cream -> pale */
+}
+.shiny :is(#gb-mon-sprite, .encounter-sprite) [fill="#D33C30"] {
+  fill: #c98a1e; /* shading: red -> amber */
+}
+.shiny :is(#gb-mon-sprite, .encounter-sprite) [fill="#E9D98E"] {
+  fill: #fff8d6; /* highlight */
 }

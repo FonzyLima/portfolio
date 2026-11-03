@@ -1,11 +1,18 @@
 import React from "react";
 import Link from "next/link";
-export default function Button({ title, destination = "/" }) {
+import { ButtonIcon, buttonClass } from "./buttonStyles";
+
+// Site CTA, a link styled as a pill button (see components/buttonStyles.js).
+//   variant: "primary" (default) or "secondary"
+//   icon:    "next" (another page), "down" (further down this page) or
+//            "external" (new tab); omit for none
+// `onClick` is optional and forwarded to the Link (e.g. to smooth-scroll an
+// in-page destination like "#footer"); it needs a client component parent.
+export default function Button({ title, destination = "/", onClick, variant = "primary", icon }) {
   return (
-    <Link href={destination}>
-      <div className="py-2 px-6 lg:py-3 text-[18px] lg:text-[20px] xl:text-[22px] duration-200 bg-[#61BC7A] text-secondary dark:text-primary dark:bg-[#7DF39D] hover:bg-[#6CD488] dark:hover:bg-[#7df39cc4] flex justify-center text-center rounded-[10px] items-center cursor-pointer">
-        {title}
-      </div>
+    <Link href={destination} onClick={onClick} className={buttonClass(variant)}>
+      {title}
+      <ButtonIcon type={icon} />
     </Link>
   );
 }
