@@ -9,14 +9,21 @@ export const profile = {
     "I build production-ready mobile, web, and AI-enabled applications across the full stack, from clean React Native and Next.js interfaces to backend APIs, release workflows, and shipped iOS/Android apps.",
   education:
     "I graduated from De La Salle University - Manila with a BS in Computer Science, specializing in Software Technology with a minor in Social Technopreneurship.",
+  // Short forms of `education` for compact fact lists on the About page.
+  degree: "BS Computer Science",
+  school: "De La Salle University - Manila",
   skillsPrimary: "Backend Frontend Mobile Web AI Product Development\u00a0",
   skillsSecondary:
     "React Native TypeScript Next.js Django Node.js Firebase REST APIs Figma LLMs OpenAI Claude\u00a0",
 };
 
+// `badge` picks the trainer-card badge icon for that job: spark, phone, rocket,
+// heart or gear (see BADGE_ICONS in components/TrainerCard.js). Leave it out
+// to fall back to the company's initials.
 export const experiences = [
   {
     company: "Tenext AI",
+    badge: "spark",
     location: "Rockwell, Makati City",
     role: "AI Engineer",
     period: "May 2026 - Present",
@@ -28,6 +35,7 @@ export const experiences = [
   },
   {
     company: "The Mobile App Factory",
+    badge: "phone",
     location: "Loyola Heights, Quezon City",
     role: "Software Engineer",
     period: "June 2024 - May 2026",
@@ -39,6 +47,7 @@ export const experiences = [
   },
   {
     company: "Serbiz",
+    badge: "rocket",
     location: "Taft, Manila City",
     role: "Founding Engineer",
     period: "August 2023 - September 2024",
@@ -49,6 +58,7 @@ export const experiences = [
   },
   {
     company: "WRSHealth",
+    badge: "heart",
     location: "Goshen, New York City",
     role: "Software Engineer",
     period: "July 2023 - October 2023",
@@ -59,6 +69,7 @@ export const experiences = [
   },
   {
     company: "Willis Towers Watson",
+    badge: "gear",
     location: "Bonifacio Global City, Taguig City",
     role: "DevOps Intern",
     period: "April 2022 - October 2022",
@@ -145,4 +156,27 @@ export const projects = [
     tools: ["React", "CSS", "UI Design"],
     featured: false,
   },
+];
+
+// "GitHub Activity" (last row of Technical Skills on the About page, plus the
+// Contributions line on the trainer card). Just paste links, no token needed.
+// Refreshes every hour.
+export const github = {
+  // Profile for the contribution graph.
+  profile: "https://github.com/FonzyLima",
+  // Repos linked under the graph, in this order. Any public repo works, even
+  // one from another account. Leave the list empty to hide them.
+  repos: [
+    "https://github.com/FonzyLima/mutya",
+    "https://github.com/FonzyLima/blitz-bot",
+    "https://github.com/FonzyLima/FonzyLima.github.io",
+  ],
+};
+
+// Shared by the footer and the mobile menu.
+export const socials = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/alfonso-lima/" },
+  { label: "GitHub", href: "https://github.com/FonzyLima" },
+  { label: "Discord", href: "https://discord.com/users/702050752490897479" },
+  { label: "Instagram", href: "https://www.instagram.com/fonzylima/" },
 ];
