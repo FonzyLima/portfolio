@@ -1,14 +1,18 @@
 import Button from "../../components/Button";
-import { GEOMETRY, MonArt } from "../../components/gameboy/gameboyArt";
+import EggMark from "../../components/EggMark";
+import { PARTNER_BOX, STAGE_ARTS } from "../../components/gameboy/partnerArt";
 
 export const metadata = {
-  title: "404 | Alfonso Lima",
-  description: "A wild 404 appeared. The page you were looking for fled into the tall grass.",
+  title: "Page not found",
+  description:
+    "A wild 404 appeared. The page you were looking for fled into the tall grass.",
 };
 
-// Crop the hero's Charmander back sprite to its own bounding box (it's drawn
-// in the full 960x511 Game Boy viewBox) with a little breathing room.
-const { mon } = GEOMETRY;
+// Crop the hero's partner sprite (whichever stage the visitor has, see
+// src/app/lib/partner.js; every stage is drawn and CSS picks one) to the
+// stages' shared bounding box in the 960x511 Game Boy viewBox, with a little
+// breathing room.
+const mon = PARTNER_BOX;
 const PAD = 6;
 const SPRITE_VIEWBOX = `${mon.x0 - PAD} ${mon.y0 - PAD} ${mon.x1 - mon.x0 + PAD * 2} ${
   mon.y1 - mon.y0 + PAD * 2
@@ -50,7 +54,12 @@ function TallGrass() {
       focusable="false"
     >
       <defs>
-        <pattern id="encounter-grass" width={PX * 8} height={PX * 4} patternUnits="userSpaceOnUse">
+        <pattern
+          id="encounter-grass"
+          width={PX * 8}
+          height={PX * 4}
+          patternUnits="userSpaceOnUse"
+        >
           {TUFT.map(([x, y]) => (
             <rect
               key={`${x}-${y}`}
@@ -71,14 +80,15 @@ function TallGrass() {
 export default function NotFound() {
   return (
     <div className="page-container pt-24 lg:pt-32">
+      <EggMark id="encounter" />
       <div className="flex flex-col gap-4 lg:gap-5 lg:items-center lg:text-center">
         <p className="type-body text-fg-muted">Route 404</p>
         <h1 className="type-display text-fg [text-wrap:balance]">
           A wild <span className="text-accent-strong">404</span> appeared!
         </h1>
         <p className="type-lead max-w-[65ch] text-fg-muted">
-          The page you were looking for fled into the tall grass. It may have moved, been renamed, or
-          never existed.
+          The page you were looking for fled into the tall grass. It may have
+          moved, been renamed, or never existed.
         </p>
       </div>
 
@@ -87,12 +97,16 @@ export default function NotFound() {
         <div className="relative flex h-[220px] items-end justify-center overflow-hidden rounded-lg bg-surface shadow-1 sm:h-[260px]">
           <svg
             role="img"
-            aria-label="A glitching Charmander sprite standing in tall grass"
+            aria-label="Your glitching partner Pokémon standing in tall grass"
             viewBox={SPRITE_VIEWBOX}
             className="encounter-sprite relative z-10 mb-5 h-[150px] w-auto sm:h-[180px]"
             shapeRendering="crispEdges"
           >
-            <MonArt />
+            {STAGE_ARTS.map((Art, stage) => (
+              <g key={stage} className="gb-mon" data-stage={stage}>
+                <Art />
+              </g>
+            ))}
           </svg>
           <TallGrass />
         </div>
@@ -113,8 +127,13 @@ export default function NotFound() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <Button title="Run" destination="/" />
-          <Button title="Fight back: see my work" destination="/portfolio" variant="secondary" icon="next" />
+          <Button title="Run home" destination="/" />
+          <Button
+            title="Fight back: see my projects"
+            destination="/projects"
+            variant="secondary"
+            icon="next"
+          />
         </div>
       </div>
     </div>

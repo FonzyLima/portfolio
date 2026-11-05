@@ -30,6 +30,14 @@ const nextConfig = {
       },
     ],
   },
+  // /portfolio was renamed to /projects to match the nav label. Keep old links
+  // (resume, LinkedIn, shared ?filter= URLs) working; the query string carries over.
+  async redirects() {
+    return [
+      { source: "/portfolio", destination: "/projects", permanent: true },
+      { source: "/portfolio/:path*", destination: "/projects/:path*", permanent: true },
+    ];
+  },
   async headers() {
     const cache = [{ key: "Cache-Control", value: PUBLIC_ASSET_CACHE }];
     return [

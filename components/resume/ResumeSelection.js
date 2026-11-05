@@ -9,8 +9,8 @@ import React, { createContext, useContext, useState } from "react";
 const SelectionContext = createContext([0, () => {}]);
 
 // Renders the layout's outer <div> (`className`) and provides the selection.
-export function ResumeSelection({ initial = 0, className = "", children }) {
-  const state = useState(initial);
+export function ResumeSelection({ className = "", children }) {
+  const state = useState(0);
   return (
     <SelectionContext.Provider value={state}>
       <div className={className}>{children}</div>
@@ -18,12 +18,11 @@ export function ResumeSelection({ initial = 0, className = "", children }) {
   );
 }
 
-// A toggle row: aria-pressed when its index is selected. `activeClassName` /
-// `inactiveClassName` are added on top of `className` for each state.
+// A toggle row: aria-pressed when its index is selected. `inactiveClassName`
+// is added on top of `className` while it isn't.
 export function SelectButton({
   index,
   className = "",
-  activeClassName = "",
   inactiveClassName = "",
   children,
 }) {
@@ -34,7 +33,7 @@ export function SelectButton({
       type="button"
       aria-pressed={selected}
       onClick={() => setActive(index)}
-      className={`${className} ${selected ? activeClassName : inactiveClassName}`}
+      className={`${className} ${selected ? "" : inactiveClassName}`}
     >
       {children}
     </button>
@@ -42,13 +41,12 @@ export function SelectButton({
 }
 
 // Shows the panel for the selected index. `panels` are server-rendered nodes.
-// With `sizeToLargest`, every panel is also laid out invisibly in the same grid
-// cell, so the container is as tall as the tallest one and switching never
-// shifts the page. The invisible copies are hidden from assistive tech and
-// can't be focused; only the selected panel is real content.
-export function SelectedPanel({ panels, sizeToLargest = false }) {
+// Every panel is also laid out invisibly in the same grid cell, so the
+// container is as tall as the tallest one and switching never shifts the
+// page. The invisible copies are hidden from assistive tech and can't be
+// focused; only the selected panel is real content.
+export function SelectedPanel({ panels }) {
   const [active] = useContext(SelectionContext);
-  if (!sizeToLargest) return panels[active] ?? null;
   return (
     <div className="grid">
       {panels.map((panel, index) => (

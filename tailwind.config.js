@@ -32,8 +32,6 @@ module.exports = {
         "on-accent": v("on-accent"),
         focus: v("focus"),
         scrim: v("scrim"),
-        "tag-bar": v("tag-bar"),
-        "on-tag-bar": v("on-tag-bar"),
       },
       boxShadow: {
         1: "var(--shadow-1)",

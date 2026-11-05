@@ -2,9 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-// Shared pointer tracking for the mouse tilts (trainer cards in ./TiltFlip and
-// the project-card tilt in components/CardTilt). Mouse only, off with reduced
-// motion. Per hover it checks the media query and measures the element once
+// Pointer tracking for the trainer card's mouse tilt (./TiltFlip). Mouse only,
+// off with reduced motion. Per hover it checks the media query and measures the element once
 // (on the first pointer event), then each pointermove only stores the position
 // and at most one requestAnimationFrame per frame hands it to `apply`.
 //

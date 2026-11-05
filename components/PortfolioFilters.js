@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useContext, useState, useSyncExternalStore } from "react";
-import Project, { gridClassFor } from "./Project";
-import CardVariantContext from "./CardVariantContext";
-import SegmentedFilter from "./SegmentedFilter";
+import React, { useState, useSyncExternalStore } from "react";
+import Project from "./Project";
+import UnderlineFilter from "./UnderlineFilter";
 
 const filterOptions = [
   {
@@ -20,14 +19,14 @@ const filterOptions = [
   },
   {
     id: "mobile-apps",
-    label: "Mobile Apps",
+    label: "Mobile apps",
     shortLabel: "Mobile",
     noun: ["mobile app", "mobile apps"],
     matches: (project) => project.category === "Mobile App",
   },
   {
     id: "others",
-    label: "Others",
+    label: "Other",
     noun: ["game, bot or experiment", "games, bots and experiments"],
     matches: (project) => !["Website", "Mobile App"].includes(project.category),
   },
@@ -61,15 +60,13 @@ function writeFilterToUrl(id) {
   window.dispatchEvent(new Event(CHANGE_EVENT));
 }
 
-// Filter chips + project grid for /portfolio. `projects` is fetched on the
-// server (src/app/portfolio/page.js), so the grid is in the initial HTML.
-// Card variants come from CardVariantContext, set only by /lab/cards.
+// Filter chips + project grid for /projects. `projects` is fetched on the
+// server (src/app/projects/page.js), so the grid is in the initial HTML.
 export default function PortfolioFilters({ projects }) {
   const activeFilter = useSyncExternalStore(subscribe, filterFromUrl, () => "all");
   // Only animate the grid on a chip click; the first paint already gets the
   // page's <Reveal>.
   const [animate, setAnimate] = useState(false);
-  const card = useContext(CardVariantContext);
 
   const selectFilter = (id) => {
     setAnimate(true);
@@ -86,13 +83,13 @@ export default function PortfolioFilters({ projects }) {
   const count = filteredProjects.length;
 
   // An odd count in the two-up grid leaves the last card alone on its row, so
-  // the first card goes wide instead. /lab/cards sets `grid` explicitly.
-  const grid = card.grid ?? (count % 2 === 1 ? "feature" : "two");
+  // the first card goes wide instead.
+  const featureFirst = count % 2 === 1;
 
   return (
     <>
       <div className="mt-8 lg:mt-10">
-        <SegmentedFilter
+        <UnderlineFilter
           label="Project filters"
           value={selectedFilter.id}
           onChange={selectFilter}
@@ -113,16 +110,13 @@ export default function PortfolioFilters({ projects }) {
       {/* Keyed on the filter so the new set eases in instead of snapping. */}
       <div
         key={selectedFilter.id}
-        className={`${animate ? "reveal-immediate" : ""} mt-8 lg:mt-10 ${gridClassFor(card.layout)}`}
+        className={`${animate ? "reveal-immediate" : ""} mt-8 lg:mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6 lg:gap-8`}
       >
         {filteredProjects.map((project, index) => (
           <Project
             key={project._id ?? project.name}
             {...project}
-            {...card}
-            grid={grid}
-            wide={index === 0}
-            flip={index % 2 === 1}
+            wide={featureFirst && index === 0}
             headingLevel="h2"
             // The first row can be the LCP element, so fetch it from <head>.
             preload={selectedFilter.id === "all" && index < 2}

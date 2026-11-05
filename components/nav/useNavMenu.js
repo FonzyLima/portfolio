@@ -2,18 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { scrollToAnchor } from "@/app/lib/scrollToAnchor";
 
-// The mobile menu's open state and its closing and focus rules, shared by the
-// site nav and the lab's preview nav.
+// The site nav's mobile menu: its open state and its closing and focus rules.
 //
 // Attach `navRef` to the <nav>, `toggleRef` to the menu button,
 // `firstMenuLinkRef` to the menu's first link; call `onMenuBlur` from the
 // nav's onBlur and `onToggleClick` from the button. For an anchor clicked
 // in the open menu, call `deferAnchor(href)` (after preventDefault): it's
 // scrolled to once the menu has closed.
-//
-// `closeOnDesktop`: close the menu when the viewport grows past md (the
-// phone menu doesn't exist there; the lab's FAB popover does).
-export function useNavMenu({ closeOnDesktop = true } = {}) {
+export function useNavMenu() {
   const pathname = usePathname();
   const [showMenu, setShowMenu] = useState(false);
   const navRef = useRef(null);
@@ -34,7 +30,7 @@ export function useNavMenu({ closeOnDesktop = true } = {}) {
   }
 
   // While the menu is open: focus the first link (keyboard opens only, so tap
-  // users don't get a focus ring on "Work"), close on Escape (returning focus
+  // users don't get a focus ring on "Projects"), close on Escape (returning focus
   // to the toggle), on a pointerdown outside the nav, and if the viewport
   // grows past md. Focus leaving the nav is handled by onMenuBlur.
   useEffect(() => {
@@ -53,7 +49,7 @@ export function useNavMenu({ closeOnDesktop = true } = {}) {
     };
     const desktop = window.matchMedia("(min-width: 768px)");
     const onBreakpoint = (event) => {
-      if (event.matches && closeOnDesktop) setShowMenu(false);
+      if (event.matches) setShowMenu(false);
     };
 
     document.addEventListener("keydown", onKeyDown);
@@ -64,11 +60,9 @@ export function useNavMenu({ closeOnDesktop = true } = {}) {
       document.removeEventListener("pointerdown", onPointerDown);
       desktop.removeEventListener("change", onBreakpoint);
     };
-  }, [showMenu, closeOnDesktop]);
+  }, [showMenu]);
 
-  // An anchor tapped in the open menu scrolls once the menu has closed. This
-  // runs after any scroll lock (the lab's full-screen sheet) has been
-  // released: React runs every effect cleanup before the next effects. No
+  // An anchor tapped in the open menu scrolls once the menu has closed. No
   // target on this page: fall back to the native hash jump.
   useEffect(() => {
     if (showMenu) return;

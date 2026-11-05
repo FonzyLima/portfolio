@@ -26,10 +26,14 @@ export default function SlidingText({ text, direction = -1, speed = SPEED }) {
   const rootRef = useRef(null);
   const trackRef = useRef(null);
   const groupRef = useRef(null);
+  // `text` is a string or a list of items. A list is shown space-separated but
+  // announced comma-separated, so "Product development" reads as one item.
   // Spacing between copies is handled here, so trailing spaces in data don't matter.
-  const label = text.trim();
-  const repeat = Math.max(2, Math.ceil(MIN_GROUP_CHARS / (label.length + 1)));
-  const estimate = ((label.length + 0.3) * repeat * EM_PER_CHAR) / speed;
+  const items = Array.isArray(text) ? text : [text.trim()];
+  const shown = items.join(" ");
+  const label = items.join(", ");
+  const repeat = Math.max(2, Math.ceil(MIN_GROUP_CHARS / (shown.length + 1)));
+  const estimate = ((shown.length + 0.3) * repeat * EM_PER_CHAR) / speed;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -60,7 +64,7 @@ export default function SlidingText({ text, direction = -1, speed = SPEED }) {
 
   const copies = Array.from({ length: repeat }, (_, i) => (
     <span key={i} className="type-marquee shrink-0 pr-[0.3em]">
-      {label}
+      {shown}
     </span>
   ));
 

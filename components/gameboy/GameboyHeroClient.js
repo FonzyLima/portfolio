@@ -1,11 +1,22 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import GameboyMenu, { DIALOG } from "./GameboyMenu";
-import { INTRO_PREFIX, TIMELINE as T, flashFrames, hold, holdFrames } from "./timeline";
+import {
+  INTRO_PREFIX,
+  TIMELINE as T,
+  flashFrames,
+  hold,
+  holdFrames,
+} from "./timeline";
 import { toggleShiny } from "../../src/app/lib/shiny";
+import { EXP, gainExp, usePartner } from "../../src/app/lib/partner";
+import { STAGE_NAMES } from "./partnerArt";
+import StatusName from "./StatusName";
+import Evolution from "./Evolution";
 
+// Must match the text drawn in public/gameboy.svg (the dialog-text path).
 const DIALOG_TEXT =
-  "Welcome to my software development portfolio, a showcase of my journey through coding and creativity. Here, you’ll find a curated collection of projects, from dynamic web applications to software solutions, each reflecting my passion for innovation.";
+  "Hi! I’m Alfonso, an AI engineer at Tenext AI. I build web, mobile, and AI apps, from React Native and Django to ElevenLabs voice calls. Press A to look around.";
 
 const SILHOUETTE = '[data-gb="mon-silhouette"]';
 const HOP = '[data-gb="mon-hop"]';
@@ -46,7 +57,10 @@ const prefersReducedMotion = () =>
  * - marks the intro done when it ends (or is skipped by poking Charmander), which
  *   enables the "press A" menu and the idle loops;
  * - runs the idle loops only while the hero is on screen and the tab is visible.
- *   Offscreen they're removed, not paused, so nothing ticks.
+ *   Offscreen they're removed, not paused, so nothing ticks;
+ * - draws the partner's live name and level in the status box (./StatusName)
+ *   and plays the evolution sequence (./Evolution) when the level has earned
+ *   a new stage (src/app/lib/partner.js).
  * No JS or reduced motion: the server-rendered finished frame, no loops.
  *
  * The art (`art`: base image + animated overlay with its inlined CSS) is
@@ -71,8 +85,21 @@ export default function GameboyHeroClient({ art, geometry, className = "" }) {
   const openMenu = useCallback(() => {
     setMenuOpen(true);
     setEverOpened(true);
+    gainExp("menu", EXP.menu);
   }, []);
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  // The partner: its name and level show in the status box; when the level has
+  // earned a stage beyond the one drawn, the evolution plays here (once the
+  // intro is done, the hero is on screen and the menu is closed) and commits.
+  const partner = usePartner();
+  const species = STAGE_NAMES[partner.shown];
+  const name = partner.nick || species;
+  // `scene` latches the sequence once it starts (Evolution calls onStart), so it
+  // plays to its last line after commitStage has already caught `shown` up.
+  const [scene, setScene] = useState(null); // { from, to }
+  const evolveStart = useCallback((next) => setScene(next), []);
+  const evolveDone = useCallback(() => setScene(null), []);
 
   // Find the running CSS intro and wait for it to end. All its animations share
   // one duration, so they end together. Cancelled (skip, or reduced motion
@@ -173,13 +200,23 @@ export default function GameboyHeroClient({ art, geometry, className = "" }) {
     figure
       .querySelector(HOP)
       ?.animate(
-        [{ transform: `translateY(${-T.hop.height}px)`, easing: hold }, { transform: "none" }],
+        [
+          { transform: `translateY(${-T.hop.height}px)`, easing: hold },
+          { transform: "none" },
+        ],
         { duration: T.hop.duration * 1000 },
       );
   }, [introDone, flashSilhouette]);
 
+  const pendingStage = partner.stage > partner.shown ? partner.stage : null;
+  const evolving =
+    scene ??
+    (pendingStage !== null && introDone && canSee && !menuOpen
+      ? { from: partner.shown, to: pendingStage }
+      : null);
+
   const idle = introDone && canSee;
-  const showHint = introDone && !everOpened;
+  const showHint = introDone && !everOpened && !evolving;
 
   return (
     <div className={`relative ${className}`}>
@@ -187,21 +224,40 @@ export default function GameboyHeroClient({ art, geometry, className = "" }) {
         ref={figureRef}
         data-intro={introDone ? "done" : undefined}
         data-idle={idle ? "" : undefined}
-        aria-label="Game Boy Advance SP showing a Pokémon battle: Charmander, level 5, 20 of 20 HP"
+        aria-label={`Game Boy Advance SP showing a Pokémon battle: ${name}${partner.nick ? ` the ${species}` : ""}, level ${partner.level}, 20 of 20 HP`}
         className="gb-hero gameboy-lift relative m-0 aspect-[960/511]"
       >
         {art}
+        <StatusName
+          figureRef={figureRef}
+          name={name}
+          level={partner.level}
+          show={partner.custom}
+        />
         <p className="sr-only">{DIALOG_TEXT}</p>
         <button
           type="button"
-          onClick={poke}
-          aria-label="Poke Charmander"
+          onClick={evolving ? undefined : poke}
+          aria-label={`Poke ${name}`}
           style={hit}
           className="absolute cursor-pointer rounded-lg bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171717] focus-visible:shadow-[0_0_0_6px_#EBEBEB]"
         />
+        {evolving && (
+          <Evolution
+            geometry={geometry}
+            figureRef={figureRef}
+            from={evolving.from}
+            to={evolving.to}
+            names={
+              partner.nick ? STAGE_NAMES.map(() => partner.nick) : STAGE_NAMES
+            }
+            onStart={evolveStart}
+            onDone={evolveDone}
+          />
+        )}
         <GameboyMenu
           geometry={geometry}
-          ready={introDone}
+          ready={introDone && !evolving}
           inView={inView === true}
           open={menuOpen}
           onOpen={openMenu}

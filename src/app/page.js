@@ -29,7 +29,7 @@ export default async function Home() {
             The Gameboy's screen intro assumes its wrapper starts at ~240ms. */}
         <div className="flex flex-col gap-4 lg:gap-5 text-left px-6 lg:text-center lg:items-center">
           <Reveal immediate className="type-body text-fg-muted">
-            Hi there! &#128075; I am
+            Hi there! <span aria-hidden="true">&#128075;</span> I’m
           </Reveal>
           <div className="flex max-w-[1120px] flex-col text-fg">
             <Reveal immediate delay={60}>
@@ -43,7 +43,7 @@ export default async function Home() {
           </div>
           <Reveal immediate delay={180} className="flex flex-col gap-4 lg:gap-5 lg:items-center">
             <div className="type-body text-fg-muted">
-              Currently based in {profile.location}
+              Based in {profile.location}
             </div>
             <div className="self-start lg:self-center">
               <ScrollToButton title="Get in touch" target="#footer" />
@@ -72,7 +72,7 @@ export default async function Home() {
             </div>
 
             <div className="self-center">
-              <Button title="View all projects" destination="/portfolio" icon="next" />
+              <Button title="View all projects" destination="/projects" icon="next" />
             </div>
           </div>
         </Reveal>

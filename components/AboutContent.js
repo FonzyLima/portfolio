@@ -2,20 +2,19 @@ import React from "react";
 import SlidingText from "./SlidingText";
 import Reveal from "./Reveal";
 import AboutIntro from "./AboutIntro";
+import TechnicalSkills from "./TechnicalSkills";
+import GitHubActivity from "./GitHubActivity";
 import Resume from "./Resume";
 import { profile } from "@/app/data/portfolioData";
 
-// Shared body of the About page. `intro` (More About Me), `skills` (Technical
-// Skills) and `resume` (My Resume) are slots so the /lab page can render the
-// real page with different variants of those sections.
-export default function AboutContent({
-  intro = <AboutIntro />,
-  skills,
-  resume = <Resume />,
-}) {
+// Body of the About page. `projectCount` feeds the trainer card's Pokédex and
+// `github` (getGitHubStats()) the GitHub activity row under the skills.
+export default function AboutContent({ projectCount, github }) {
   return (
     <div className="">
-      <Reveal immediate>{intro}</Reveal>
+      <Reveal immediate>
+        <AboutIntro projectCount={projectCount} />
+      </Reveal>
       <Reveal>
         <div className="section-gap">
           <SlidingText
@@ -29,9 +28,13 @@ export default function AboutContent({
         </div>
       </Reveal>
 
-      <Reveal>{skills}</Reveal>
+      <Reveal>
+        <TechnicalSkills footer={<GitHubActivity stats={github} />} />
+      </Reveal>
 
-      <Reveal>{resume}</Reveal>
+      <Reveal>
+        <Resume />
+      </Reveal>
     </div>
   );
 }

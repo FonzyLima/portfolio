@@ -6,7 +6,6 @@ import { MenuIcon } from "./nav/icons";
 import {
   MENU_ID,
   NAV_ITEMS,
-  NAV_LAB_PATH,
   focusRing,
   iconButtonClass,
   isActiveRoute,
@@ -15,6 +14,7 @@ import {
 } from "./nav/config";
 import { LinkLabel, LogoContent, MenuSocials } from "./nav/parts";
 import { SegmentedThemeToggle } from "./nav/ThemeToggle";
+import PaletteButton from "./palette/PaletteButton";
 import { useMarkerSlide } from "./nav/useMarkerSlide";
 import { useNavMenu } from "./nav/useNavMenu";
 import { useNavScroll } from "./nav/useNavScroll";
@@ -25,9 +25,7 @@ import { scrollToAnchor } from "@/app/lib/scrollToAnchor";
 // (attached to the top edge, rounded below, inset from the page so its
 // content lines up with the page's), links on the right, underline marker,
 // segmented light/dark toggle, hides on scroll down, dropdown menu on
-// phones. Design variants are tried out at /lab/nav, whose preview nav
-// (./nav/NavigationLab.js, imported only by the lab) shares this one's
-// pieces from ./nav/.
+// phones. Its constants, pieces and hooks live in ./nav/.
 //
 // Mobile menu motion is CSS (.nav-dropdown, .nav-menu-item and .nav-scrim in
 // src/app/globals.css): the dropdown's height opens ease-out and the links
@@ -72,10 +70,6 @@ export default function Navigation() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   };
-
-  // Every hook has run; now this instance can step aside for the nav lab's
-  // preview instance.
-  if (pathname === NAV_LAB_PATH) return null;
 
   const hideNavbar = isScrolledAway && !showMenu;
   // Glass. Solid while the mobile menu is open, so page content doesn't show
@@ -130,7 +124,8 @@ export default function Navigation() {
                 );
               })}
             </ul>
-            <SegmentedThemeToggle className="md:ml-2" />
+            <PaletteButton className="md:ml-1" />
+            <SegmentedThemeToggle />
             <button
               ref={toggleRef}
               type="button"

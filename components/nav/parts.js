@@ -1,36 +1,25 @@
-import React, { useContext } from "react";
-import { BsMoonFill } from "react-icons/bs";
-import DarkContext from "@/app/context/darkContext";
 import { socials } from "@/app/data/portfolioData";
 import LogoMark from "../LogoMark";
-import { IconSwap, SunIcon } from "./icons";
 import { indicatorClass } from "./motion";
-import { focusRing, iconButtonClass } from "./config";
+import { focusRing } from "./config";
 
-// Pieces shared by the site nav (components/Navigation.js) and the lab's
-// preview nav (./NavigationLab.js).
+// Pieces of the site nav (components/Navigation.js).
 
-// Link label plus its current-page marker (default: the underline). On
-// desktop (`markerFor` set) every link has a marker, hidden unless active,
-// so useMarkerSlide can slide it between links. In the mobile menus it's
-// static and only the active link has one. `behind`: the marker sits behind
-// the text (the lab's pill), so the text gets its own stacking layer.
-export function LinkLabel({ label, isActive, markerFor, markerClass = indicatorClass, behind = false }) {
+// Link label plus its current-page underline. On desktop (`markerFor` set)
+// every link has a marker, hidden unless active, so useMarkerSlide can slide
+// it between links. In the mobile menu it's static and only the active link
+// has one.
+export function LinkLabel({ label, isActive, markerFor }) {
   const marker = markerFor ? (
     <span
       aria-hidden="true"
       data-marker={markerFor}
-      className={`${markerClass} origin-left ${isActive ? "" : "invisible"}`}
+      className={`${indicatorClass} origin-left ${isActive ? "" : "invisible"}`}
     />
   ) : isActive ? (
-    <span aria-hidden="true" className={markerClass} />
+    <span aria-hidden="true" className={indicatorClass} />
   ) : null;
-  return behind ? (
-    <span className="relative">
-      {marker}
-      <span className="relative">{label}</span>
-    </span>
-  ) : (
+  return (
     <span className="relative">
       {label}
       {marker}
@@ -64,48 +53,10 @@ export function MenuSocials() {
             className={`inline-flex min-h-[44px] items-center px-2 type-small text-fg-muted hover:text-fg ${focusRing} focus-visible:outline-offset-[-6px]`}
           >
             {label}
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </li>
       ))}
     </ul>
-  );
-}
-
-export function ThemeButton({ placement = "md:ml-2 md:-mr-[11px]" }) {
-  const [isDark, setisDark] = useContext(DarkContext);
-  return (
-    <button
-      type="button"
-      aria-label={
-        isDark === null
-          ? "Switch theme"
-          : isDark
-            ? "Switch to light mode"
-            : "Switch to dark mode"
-      }
-      className={`${iconButtonClass} ${placement}`}
-      onClick={() => setisDark((dark) => !dark)}
-    >
-      {isDark === null ? (
-        // Before hydration the theme is only known to CSS, so the
-        // `dark` class picks the icon. No animation on this swap.
-        <span className="absolute inset-0 flex items-center justify-center">
-          <span className="hidden dark:contents">
-            <SunIcon />
-          </span>
-          <span className="contents dark:hidden">
-            <BsMoonFill size={19} aria-hidden="true" focusable="false" />
-          </span>
-        </span>
-      ) : (
-        <IconSwap iconKey={isDark ? "sun" : "moon"} angle={90}>
-          {isDark ? (
-            <SunIcon />
-          ) : (
-            <BsMoonFill size={19} aria-hidden="true" focusable="false" />
-          )}
-        </IconSwap>
-      )}
-    </button>
   );
 }

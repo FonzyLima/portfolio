@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { markEgg } from "./eggs";
 
 /**
  * Shiny mode: the easter-egg palette (gold instead of green, and a shiny
@@ -17,6 +18,7 @@ export function isShiny() {
 
 export function setShiny(on) {
   document.documentElement.classList.toggle("shiny", on);
+  if (on) markEgg("shiny");
   try {
     if (on) localStorage.setItem(SHINY_STORAGE_KEY, "1");
     else localStorage.removeItem(SHINY_STORAGE_KEY);

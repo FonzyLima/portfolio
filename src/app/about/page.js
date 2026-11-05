@@ -1,9 +1,5 @@
 import React from "react";
 import AboutContent from "../../../components/AboutContent";
-import AboutIntro from "../../../components/AboutIntro";
-import Resume from "../../../components/Resume";
-import TechnicalSkills from "../../../components/TechnicalSkills";
-import GitHubActivity from "../../../components/GitHubActivity";
 import { getProjects } from "@/sanity/lib/projects";
 import { getGitHubStats } from "@/app/lib/github";
 import { github as githubLinks } from "@/app/data/portfolioData";
@@ -12,30 +8,15 @@ import { github as githubLinks } from "@/app/data/portfolioData";
 // "time played", the resume durations and the GitHub stats current.
 export const revalidate = 3600;
 
+export const metadata = {
+  title: "About",
+  description:
+    "Experience, skills, and background of Alfonso Lima, AI Engineer at Tenext AI.",
+};
+
 export default async function About() {
   // Same project source as the Portfolio page, so the Pokédex count matches.
   const [{ projects }, github] = await Promise.all([getProjects(), getGitHubStats(githubLinks)]);
 
-  return (
-    <AboutContent
-      intro={
-        <AboutIntro
-          variant="trainer"
-          card="tcg"
-          side="facts"
-          badgeStyle="initials"
-          projectCount={projects.length}
-          contributions={github?.pastYear}
-        />
-      }
-      skills={
-        <TechnicalSkills
-          variant="panel"
-          chip="badge"
-          footer={<GitHubActivity stats={github} />}
-        />
-      }
-      resume={<Resume variant="map" />}
-    />
-  );
+  return <AboutContent projectCount={projects.length} github={github} />;
 }

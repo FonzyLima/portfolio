@@ -2,7 +2,7 @@
 /**
  * Derives structured, animatable assets from the flat Figma export
  * `public/gameboy.svg` (which itself is left untouched: it's the source of
- * truth, and the /lab GameboyStill demo renders it as-is).
+ * truth).
  *
  * Outputs
  *   public/gameboy/layered.svg            Full frame, regrouped into named layers:
@@ -517,8 +517,15 @@ ${children(monGroup)}
   );
 }
 `;
+// The baked "CHARMANDER♂ Lv5" text: tag its three drop-shadow groups so the
+// partner feature (components/gameboy/StatusName.js) can hide them and draw a
+// nickname, another stage's name or a higher level in their place.
+const STATUS_TEXT_TAGS = { "gb-filter4-d": "name", "gb-filter2-d": "gender", "gb-filter3-d": "level" };
+const tagged = jsx.replace(/<g filter="url\(#(gb-filter\d-d)\)">/g, (m, id) =>
+  STATUS_TEXT_TAGS[id] ? `<g filter="url(#${id})" data-gb="status-${STATUS_TEXT_TAGS[id]}">` : m,
+);
 fs.mkdirSync(path.dirname(OUT_JSX), { recursive: true });
-fs.writeFileSync(OUT_JSX, jsx);
+fs.writeFileSync(OUT_JSX, tagged);
 
 const kb = (f) => `${(fs.statSync(f).size / 1024).toFixed(1)} KB`;
 console.log(`layers: ${[...layers.keys()].map((k) => `${k}(${layers.get(k).length})`).join(", ")}`);

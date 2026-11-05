@@ -33,7 +33,7 @@ export const TIMELINE = {
   hp: { duration: 0.5, steps: 10 },
   exp: { perDot: 0.012 }, // 35 dots ~0.42s
 
-  // 4. Dialog typewriter (~1.9s for the 4 lines)
+  // 4. Dialog typewriter (~1.1s for the 3 lines; scales with the text in public/gameboy.svg)
   type: {
     unitsPerSecond: 1500, // reveal speed in viewBox units (one glyph is ~11 units)
     unitsPerStep: 11, // ~one glyph per step

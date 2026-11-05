@@ -6,6 +6,7 @@ import { buttonClass } from "./buttonStyles";
 import LogoMark from "./LogoMark";
 import CopyEmailButton from "./footer/CopyEmailButton";
 import BackToTop from "./footer/BackToTop";
+import VisitorCounter from "./footer/VisitorCounter";
 
 // Icons by social label (see `socials` in portfolioData). Unknown labels
 // just render without one.
@@ -84,6 +85,7 @@ export default function Footer() {
             <span>&copy; {year} {profile.name}</span>
             <span className="ml-2 hidden sm:inline">{profile.location}</span>
           </p>
+          <VisitorCounter />
           <BackToTop className="sm:-mr-2" />
         </div>
       </div>

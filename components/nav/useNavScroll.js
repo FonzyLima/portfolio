@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { ALWAYS_VISIBLE_ABOVE_Y, SCROLL_THRESHOLD } from "./config";
 
 // Scroll state for the nav: `isScrolledAway` (scrolling down past
-// ALWAYS_VISIBLE_ABOVE_Y, drives "hide") and `isPastTop` (past that line;
-// only the lab's clear, shrink and stacked variants read it).
-// `revealNav()` shows a hidden nav again (keyboard focus moved into it).
+// ALWAYS_VISIBLE_ABOVE_Y, drives "hide"). `revealNav()` shows a hidden nav
+// again (keyboard focus moved into it).
 //
 // One passive scroll listener for the component's lifetime, throttled to one
 // update per animation frame. The direction only changes after more than
@@ -12,12 +11,10 @@ import { ALWAYS_VISIBLE_ABOVE_Y, SCROLL_THRESHOLD } from "./config";
 // (trackpad momentum, iOS toolbar resize) don't toggle the nav.
 export function useNavScroll() {
   const [isScrolledAway, setIsScrolledAway] = useState(false);
-  const [isPastTop, setIsPastTop] = useState(false);
   const lastScrollY = useRef(0);
-  // Last values handed to setIsScrolledAway / setIsPastTop, so the listener
-  // only calls setState when one actually flips (not every frame).
+  // Last value handed to setIsScrolledAway, so the listener only calls
+  // setState when it actually flips (not every frame).
   const scrolledAwayRef = useRef(false);
-  const pastTopRef = useRef(false);
 
   useEffect(() => {
     let frame = 0;
@@ -31,12 +28,7 @@ export function useNavScroll() {
     const update = () => {
       frame = 0;
       const y = Math.max(window.scrollY, 0);
-      const pastTop = y > ALWAYS_VISIBLE_ABOVE_Y;
-      if (pastTopRef.current !== pastTop) {
-        pastTopRef.current = pastTop;
-        setIsPastTop(pastTop);
-      }
-      if (!pastTop) {
+      if (y <= ALWAYS_VISIBLE_ABOVE_Y) {
         setAway(false);
         lastScrollY.current = y;
         return;
@@ -64,5 +56,5 @@ export function useNavScroll() {
     setIsScrolledAway(false);
   };
 
-  return { isScrolledAway, isPastTop, revealNav };
+  return { isScrolledAway, revealNav };
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import GameboyHeroClient from "./GameboyHeroClient";
 import GameboySvg from "./GameboySvg";
 import { GEOMETRY } from "./gameboyArt";
+import { PARTNER_BOX } from "./partnerArt";
 // Imported rather than referenced by its /public URL so Next serves it from a
 // content-hashed /_next/static/media URL (cached immutably). A stable URL could
 // pair a stale cached base.svg with new GEOMETRY after scripts/split-gameboy.mjs
@@ -9,8 +10,16 @@ import { GEOMETRY } from "./gameboyArt";
 import baseSvg from "../../public/gameboy/base.svg";
 
 // Only what the client half reads, so the RSC payload stays small.
-const { width, height, viewBox, screen, mon, panelTop } = GEOMETRY;
-const CLIENT_GEOMETRY = { width, height, viewBox, screen, mon, panelTop };
+// `mon` is the union of every stage's sprite box, so the poke target fits Charizard too.
+const { width, height, viewBox, screen, panelTop } = GEOMETRY;
+const CLIENT_GEOMETRY = {
+  width,
+  height,
+  viewBox,
+  screen,
+  mon: PARTNER_BOX,
+  panelTop,
+};
 
 /**
  * Game Boy hero (server component). Renders the static art here, so it ships as

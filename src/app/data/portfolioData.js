@@ -1,64 +1,62 @@
 export const profile = {
   name: "Alfonso Lima",
-  title: "Full Stack Software Developer",
+  title: "Full Stack & AI Engineer",
   location: "Manila, Philippines",
   email: "alfonsogvlima@gmail.com",
-  summary:
-    "Software Engineer with 4 years of professional experience building mobile, web, and AI-enabled applications using React Native, TypeScript, Next.js, Django, Node.js, Firebase, and REST APIs.",
+  // Home "Who I am" lead: what I build. Keep it distinct from `summary`.
   intro:
-    "I build production-ready mobile, web, and AI-enabled applications across the full stack, from clean React Native and Next.js interfaces to backend APIs, release workflows, and shipped iOS/Android apps.",
+    "I build web, mobile, and AI apps end to end, from React Native and Next.js front ends to Django and Node.js APIs, through to App Store and Google Play releases.",
+  // About page lead: the story so far. Keep it distinct from `intro`.
+  summary:
+    "I've spent 4 years building software. Right now I'm an AI Engineer at Tenext AI, building a Next.js platform for AI voice calls with ElevenLabs. Before that, I spent two years at The Mobile App Factory shipping React Native and Django apps like Natasha, Filicoola, and HiDoc, and I was the founding engineer at Serbiz.",
   education:
     "I graduated from De La Salle University - Manila with a BS in Computer Science, specializing in Software Technology with a minor in Social Technopreneurship.",
-  // Short forms of `education` for compact fact lists on the About page.
+  // Short forms of `education` for the fact lists on the home and About pages.
   degree: "BS Computer Science",
   school: "De La Salle University - Manila",
-  skillsPrimary: "Backend Frontend Mobile Web AI Product Development\u00a0",
-  skillsSecondary:
-    "React Native TypeScript Next.js Django Node.js Firebase REST APIs Figma LLMs OpenAI Claude\u00a0",
+  // Marquee rows: shown space-separated, read to screen readers as a list.
+  skillsPrimary: ["Backend", "Frontend", "Mobile", "Web", "AI", "Product development"],
+  skillsSecondary: [
+    "React Native", "TypeScript", "Next.js", "Django", "Node.js", "Firebase",
+    "REST APIs", "Figma", "LLMs", "OpenAI", "Claude", "ElevenLabs",
+  ],
 };
 
-// `badge` picks the trainer-card badge icon for that job: spark, phone, rocket,
-// heart or gear (see BADGE_ICONS in components/TrainerCard.js). Leave it out
-// to fall back to the company's initials.
 export const experiences = [
   {
     company: "Tenext AI",
-    badge: "spark",
     location: "Rockwell, Makati City",
     role: "AI Engineer",
     period: "May 2026 - Present",
     highlights: [
-      "Developed a full-stack AI voice call platform in Next.js for creating, customizing, and managing AI-generated voice call experiences.",
+      "Built a full-stack Next.js platform where users create, customize, and manage AI voice calls.",
       "Integrated ElevenLabs for realistic AI voice generation based on user-created scripts and call scenarios.",
       "Built backend APIs for call creation, script management, voice generation requests, and call flow configuration.",
     ],
   },
   {
     company: "The Mobile App Factory",
-    badge: "phone",
     location: "Loyola Heights, Quezon City",
     role: "Software Engineer",
     period: "June 2024 - May 2026",
     highlights: [
       "Built and maintained full-stack web and mobile applications using React Native and Django across frontend, backend, and API work.",
       "Took features from development through testing and production for apps including Natasha, Filicoola, and HiDoc.",
-      "Managed App Store and Google Play releases, updates, and release requirements.",
+      "Ran App Store and Google Play releases end to end, including store requirements.",
     ],
   },
   {
     company: "Serbiz",
-    badge: "rocket",
     location: "Taft, Manila City",
     role: "Founding Engineer",
     period: "August 2023 - September 2024",
     highlights: [
-      "Led development for a flagship web application using Next.js, Node.js, and Firebase.",
+      "Led development of a flagship web application using Next.js, Node.js, and Firebase.",
       "Designed and implemented a cross-platform mobile application with React Native and Django.",
     ],
   },
   {
     company: "WRSHealth",
-    badge: "heart",
     location: "Goshen, New York City",
     role: "Software Engineer",
     period: "July 2023 - October 2023",
@@ -69,12 +67,11 @@ export const experiences = [
   },
   {
     company: "Willis Towers Watson",
-    badge: "gear",
     location: "Bonifacio Global City, Taguig City",
     role: "DevOps Intern",
     period: "April 2022 - October 2022",
     highlights: [
-      "Led development for an internal application that organized team DevOps processes using .NET, ReactJS, and Azure technologies.",
+      "Led development of an internal application that organized team DevOps processes using .NET, React, and Azure.",
       "Designed the UI prototype for the Service Management Application in Figma.",
     ],
   },
@@ -123,7 +120,7 @@ export const projects = [
     description:
       "A Discord bot that brings a Wordle-style game loop into servers with automated prompts and player interaction.",
     git: "https://github.com/FonzyLima/blitz-bot",
-    tools: ["Python", "Discord.py", "GitHub"],
+    tools: ["Python", "Discord.py"],
     featured: true,
   },
   {
@@ -143,7 +140,7 @@ export const projects = [
     image: "/qup.png",
     description:
       "A web project focused on clear product presentation, responsive layouts, and a concise user flow.",
-    tools: ["React", "CSS", "Responsive UI"],
+    tools: ["React", "CSS"],
     featured: false,
   },
   {
@@ -153,12 +150,12 @@ export const projects = [
     image: "/Ashure.png",
     description:
       "A polished web interface project with brand-forward visuals, structured content sections, and responsive presentation.",
-    tools: ["React", "CSS", "UI Design"],
+    tools: ["React", "CSS"],
     featured: false,
   },
 ];
 
-// "GitHub Activity" (last row of Technical Skills on the About page, plus the
+// "GitHub activity" (last row of Technical skills on the About page, plus the
 // Contributions line on the trainer card). Just paste links, no token needed.
 // Refreshes every hour.
 export const github = {
@@ -171,6 +168,13 @@ export const github = {
     "https://github.com/FonzyLima/blitz-bot",
     "https://github.com/FonzyLima/FonzyLima.github.io",
   ],
+};
+
+// Footer visitor counter ("Trainers met"). A hits.sh badge link: the counter
+// is keyed by the path, so any link works and nothing needs an account. Leave
+// it empty to hide the counter. See src/app/lib/visitors.js.
+export const visitors = {
+  counter: "https://hits.sh/github.com/FonzyLima/portfolio.svg",
 };
 
 // Shared by the footer and the mobile menu.

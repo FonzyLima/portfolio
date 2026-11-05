@@ -1,4 +1,5 @@
-import { ArtDefs, GEOMETRY, MonArt, StatusArt } from "./gameboyArt";
+import { ArtDefs, GEOMETRY, StatusArt } from "./gameboyArt";
+import { STAGE_ARTS } from "./partnerArt";
 import { ERASERS, GAMEBOY_CSS } from "./introCss";
 import { TIMELINE } from "./timeline";
 
@@ -6,7 +7,7 @@ export { ERASERS };
 
 /**
  * Inline overlay drawn on top of public/gameboy/base.svg with the same viewBox.
- * Holds only what animates: status box, Charmander, text erasers, the ▼ prompt
+ * Holds only what animates: status box, the partner (every stage), text erasers, the ▼ prompt
  * and the battle-transition bars. Server-rendered in its FINAL frame (everything
  * visible, transition layers transparent), so no-JS and reduced-motion users get
  * the finished screen. The intro and idle loops are CSS (./introCss), inlined
@@ -78,24 +79,47 @@ function GameboySvg() {
       <g clipPath="url(#gb-clip-top)">
         <g data-gb="status">
           <StatusArt />
+          {/* components/gameboy/StatusName.js portals the live name and level here
+              (the baked "CHARMANDER♂ Lv5" is hidden by html[data-partner-custom]). */}
+          <g data-gb="status-custom" />
         </g>
         <g data-gb="mon-hop">
           <g data-gb="mon-bob">
             <g data-gb="mon-send">
-              <g data-gb="mon-art">
-                {/* id on an inner group: <use> clones it, and must not inherit mon-art's opacity */}
-                <g id="gb-mon-sprite">
-                  <MonArt />
+              {/* One sprite per stage; .gb-mon[data-stage] in globals.css shows the one
+                  html[data-partner] names (the inline script sets it before first paint,
+                  src/app/lib/partner.js keeps it current). Each has its own silhouette
+                  <use>, so the send-out and the evolution flashes work for any stage. */}
+              {STAGE_ARTS.map((Art, stage) => (
+                <g key={stage} className="gb-mon" data-stage={stage}>
+                  <g data-gb="mon-art">
+                    {/* id on an inner group: <use> clones it, and must not inherit mon-art's opacity */}
+                    <g id={`gb-mon-sprite-${stage}`}>
+                      <Art />
+                    </g>
+                  </g>
+                  <use
+                    href={`#gb-mon-sprite-${stage}`}
+                    data-gb="mon-silhouette"
+                    filter="url(#gb-silhouette)"
+                    opacity={0}
+                  />
                 </g>
-              </g>
-              <use href="#gb-mon-sprite" data-gb="mon-silhouette" filter="url(#gb-silhouette)" opacity={0} />
+              ))}
             </g>
           </g>
         </g>
       </g>
 
       {ERASERS.map((r, i) => (
-        <rect key={i} data-gb="eraser" data-line={i} {...r} fill="#fff" opacity={0} />
+        <rect
+          key={i}
+          data-gb="eraser"
+          data-line={i}
+          {...r}
+          fill="#fff"
+          opacity={0}
+        />
       ))}
 
       <g data-gb="prompt" fill={ACCENT}>
@@ -107,9 +131,26 @@ function GameboySvg() {
       <g clipPath="url(#gb-clip-screen)">
         {BARS.map((b, i) => (
           // +0.5 overlap hides hairline seams between bars
-          <rect key={i} data-gb={b.side} x={S.x} y={b.y} width={S.width} height={BAR_H + 0.5} fill="#000" opacity={0} />
+          <rect
+            key={i}
+            data-gb={b.side}
+            x={S.x}
+            y={b.y}
+            width={S.width}
+            height={BAR_H + 0.5}
+            fill="#000"
+            opacity={0}
+          />
         ))}
-        <rect data-gb="flash" x={S.x} y={S.y} width={S.width} height={S.height} fill="#fff" opacity={0} />
+        <rect
+          data-gb="flash"
+          x={S.x}
+          y={S.y}
+          width={S.width}
+          height={S.height}
+          fill="#fff"
+          opacity={0}
+        />
       </g>
     </svg>
   );

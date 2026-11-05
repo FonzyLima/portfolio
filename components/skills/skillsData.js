@@ -32,15 +32,14 @@ import {
 // LangChain, Anthropic and ElevenLabs have no brand icon in react-icons 4.x,
 // so they use the closest generic Tabler icon.
 //
-// `color` is the brand colour used by the colourful chip styles. Brands whose
+// `color` is the brand colour of the skill chips' logo and its tinted circle
+// (components/TechnicalSkills.js). Brands whose
 // mark is black or near-black (Next.js, Django, GitHub, Vercel, OpenAI, ...)
 // have no colour and fall back to the text colour so they work in dark mode.
 export const technicalSkills = [
   {
     id: "frontend",
     category: "Frontend & Mobile",
-    short: "Frontend",
-    description: "Responsive web apps and cross-platform mobile experiences.",
     skills: [
       { name: "React", icon: SiReact, color: "#149ECA" },
       { name: "Next.js", icon: SiNextdotjs },
@@ -52,12 +51,10 @@ export const technicalSkills = [
   {
     id: "ai",
     category: "AI & Automation",
-    short: "AI",
-    description: "LLM-powered features, retrieval pipelines and voice.",
     skills: [
       { name: "OpenAI API", icon: SiOpenai },
       { name: "LangChain", icon: TbLink },
-      { name: "Anthropic / Claude", icon: TbSparkles, color: "#D97757" },
+      { name: "Claude API", icon: TbSparkles, color: "#D97757" },
       { name: "RAG", icon: TbDatabaseSearch },
       { name: "ElevenLabs", icon: TbWaveSine },
     ],
@@ -65,8 +62,6 @@ export const technicalSkills = [
   {
     id: "backend",
     category: "Backend & APIs",
-    short: "Backend",
-    description: "Services, APIs and the business logic behind them.",
     skills: [
       { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E" },
       { name: "Django", icon: SiDjango },
@@ -77,9 +72,7 @@ export const technicalSkills = [
   },
   {
     id: "data",
-    category: "Databases & Cloud Data",
-    short: "Data",
-    description: "Relational, document and realtime data stores.",
+    category: "Databases",
     skills: [
       { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
       { name: "MySQL", icon: SiMysql, color: "#4479A1" },
@@ -91,8 +84,6 @@ export const technicalSkills = [
   {
     id: "devops",
     category: "DevOps & Tools",
-    short: "DevOps",
-    description: "Version control, containers, deploys and API testing.",
     skills: [
       { name: "Git", icon: SiGit, color: "#F05032" },
       { name: "GitHub", icon: SiGithub },

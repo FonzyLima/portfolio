@@ -1,8 +1,8 @@
 /**
  * Tiny 5x7 pixel font for text drawn inside the Game Boy screen (the baked
  * dialog text in public/gameboy/base.svg is pixel art, so menu text has to be
- * pixel art too or it looks pasted on). Uppercase, digits-free; unknown
- * characters render as a space.
+ * pixel art too or it looks pasted on). Letters, digits and a few marks;
+ * unknown characters render as a space.
  *
  * `textPath` returns one SVG path `d` for a whole run, so a word is a single
  * <path> instead of ~150 <rect>s. Mixed case: capitals use rows 0-6, lowercase
@@ -39,6 +39,20 @@ const GLYPHS = {
   "?": [".###.", "#...#", "....#", "...#.", "..#..", ".....", "..#.."],
   "!": ["..#..", "..#..", "..#..", "..#..", "..#..", ".....", "..#.."],
   ".": [".....", ".....", ".....", ".....", ".....", ".....", "..#.."],
+  // Digits, for the Pokédex palette's entry numbers.
+  0: [".###.", "#...#", "#..##", "#.#.#", "##..#", "#...#", ".###."],
+  1: ["..#..", ".##..", "..#..", "..#..", "..#..", "..#..", ".###."],
+  2: [".###.", "#...#", "....#", "...#.", "..#..", ".#...", "#####"],
+  3: ["#####", "...#.", "..#..", "...#.", "....#", "#...#", ".###."],
+  4: ["...#.", "..##.", ".#.#.", "#..#.", "#####", "...#.", "...#."],
+  5: ["#####", "#....", "####.", "....#", "....#", "#...#", ".###."],
+  6: ["..##.", ".#...", "#....", "####.", "#...#", "#...#", ".###."],
+  7: ["#####", "....#", "...#.", "..#..", ".#...", ".#...", ".#..."],
+  8: [".###.", "#...#", "#...#", ".###.", "#...#", "#...#", ".###."],
+  9: [".###.", "#...#", "#...#", ".####", "....#", "..#..", ".##.."],
+  "/": ["....#", "....#", "...#.", "..#..", ".#...", "#....", "#...."],
+  // The game's "POKéDEX": an e with an acute in the cap rows.
+  é: ["..#..", ".#...", ".###.", "#...#", "#####", "#....", ".####"],
   // Lowercase: x-height on rows 2-6, descenders on row 7 (g j p q y).
   a: [".....", ".....", ".###.", "....#", ".####", "#...#", ".####"],
   b: ["#....", "#....", "####.", "#...#", "#...#", "#...#", "####."],

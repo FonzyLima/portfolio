@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CAP_ROWS, textPath, textWidth } from "./pixelFont";
 import { scrollToAnchor } from "../../src/app/lib/scrollToAnchor";
+import { openPalette } from "../../src/app/lib/palette";
 
 /**
  * "Press A" battle menu for the Game Boy hero.
@@ -13,7 +14,7 @@ import { scrollToAnchor } from "../../src/app/lib/scrollToAnchor";
  *
  * Open: the baked dialog text is covered and a FireRed-style action menu is
  * drawn in the same pixel style: "WHAT WILL ALFONSO DO?" on the left and a 2x2
- * grid (PROJECTS / ABOUT / SKILLS / CONTACT) on the right, the selected item
+ * grid (PROJECTS / ABOUT / POKéDEX / CONTACT) on the right, the selected item
  * marked by a ▶ cursor and an inverted (white on ink) label. The
  * visuals are SVG (so they scale with the viewBox); the semantics are real
  * links in an HTML layer on top. Arrow keys move the cursor, A/Enter select,
@@ -24,27 +25,31 @@ import { scrollToAnchor } from "../../src/app/lib/scrollToAnchor";
  */
 
 const pct = (v, of) => `${(v / of) * 100}%`;
-const boxIn = ({ width: W, height: H }) => (x0, y0, x1, y1) => ({
-  left: pct(x0, W),
-  top: pct(y0, H),
-  width: pct(x1 - x0, W),
-  height: pct(y1 - y0, H),
-});
+const boxIn =
+  ({ width: W, height: H }) =>
+  (x0, y0, x1, y1) => ({
+    left: pct(x0, W),
+    top: pct(y0, H),
+    width: pct(x1 - x0, W),
+    height: pct(y1 - y0, H),
+  });
 
 // Dialog box in public/gameboy/base.svg: green frame x 82..880, y 198..395 on the
 // #1F3236 panel; white inside x 93..866, y 211..376. Text sits at x 112, lines 35 apart.
 export const DIALOG = { x0: 82, y0: 198, x1: 880, y1: 395 };
-const INNER = { x0: 96, y0: 214, x1: 864, y1: 374 };
-const INK = "#1F3236"; // panel colour, reads like the baked text
+// Exported for components/gameboy/Evolution.js, which draws its lines the same way.
+export const INNER = { x0: 96, y0: 214, x1: 864, y1: 374 };
+export const INK = "#1F3236"; // panel colour, reads like the baked text
 const FRAME = "#7DF39D"; // dialog frame green
-const PX = 2.75; // font pixel: 7 cap rows ≈ the baked glyphs' 9 rows of ~2.2 units
+export const PX = 2.75; // font pixel: 7 cap rows ≈ the baked glyphs' 9 rows of ~2.2 units
 const CAP_H = CAP_ROWS * PX;
 
-const TEXT_X = 112;
+export const TEXT_X = 112;
+export const LINE_Y = [245, 280, 315]; // glyph top edges of the dialog's three lines
 // Mixed case like the game's "What will CHARMANDER do?"
 const PROMPT = [
-  ["What will", 245],
-  ["ALFONSO do?", 280],
+  ["What will", LINE_Y[0]],
+  ["ALFONSO do?", LINE_Y[1]],
 ];
 // FireRed splits the bottom bar into two framed boxes: the text box and the action
 // box. The baked art is one box, so a frame seam (green, panel gap, green) is drawn
@@ -53,9 +58,11 @@ const DIVIDER_X = 500;
 const SEAM = { green: 4, gap: 10 };
 
 const ITEMS = [
-  { label: "PROJECTS", name: "Projects", href: "/portfolio" },
+  { label: "PROJECTS", name: "Projects", href: "/projects" },
   { label: "ABOUT", name: "About", href: "/about" },
-  { label: "SKILLS", name: "Skills", href: "/about#technical-skills" },
+  // The Pokédex is the command palette (components/palette/CommandPalette.js),
+  // where Skills and everything else live. Opens as a button, not a link.
+  { label: "POKéDEX", name: "Pokédex", palette: true },
   { label: "CONTACT", name: "Contact", href: "#footer", anchor: true },
 ];
 // 2x2 grid: item i sits at column i % 2, row floor(i / 2).
@@ -117,7 +124,14 @@ const RING =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171717] focus-visible:shadow-[0_0_0_6px_#EBEBEB]";
 const LINK_RING = "outline-none";
 
-export default function GameboyMenu({ geometry, ready, inView, open, onOpen, onClose }) {
+export default function GameboyMenu({
+  geometry,
+  ready,
+  inView,
+  open,
+  onOpen,
+  onClose,
+}) {
   const box = boxIn(geometry);
   const [selected, setSelected] = useState(0);
   const rootRef = useRef(null);
@@ -270,7 +284,7 @@ export default function GameboyMenu({ geometry, ready, inView, open, onOpen, onC
         <>
           <button
             type="button"
-            aria-label="Close menu"
+            aria-label="Close Game Boy menu"
             onClick={onClose}
             style={box(DIALOG.x0, DIALOG.y0, DIVIDER_X, DIALOG.y1)}
             className={`absolute cursor-pointer rounded-lg bg-transparent ${RING}`}
@@ -289,6 +303,20 @@ export default function GameboyMenu({ geometry, ready, inView, open, onOpen, onC
                 className: `absolute cursor-pointer rounded-lg ${LINK_RING}`,
                 children: <span className="sr-only">{item.name}</span>,
               };
+              if (item.palette) {
+                return (
+                  <button
+                    key={item.name}
+                    type="button"
+                    {...common}
+                    onClick={() => {
+                      // The palette takes focus; don't pull it back to the hero.
+                      closeWithoutFocus();
+                      openPalette();
+                    }}
+                  />
+                );
+              }
               return item.anchor ? (
                 <a
                   key={item.name}

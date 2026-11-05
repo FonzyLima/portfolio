@@ -23,13 +23,10 @@
     --on-accent: 23 23 23; /* #171717 */
     --focus: 26 110 55; /* #1A6E37 */
     --scrim: 23 23 23; /* #171717, used at /50 behind the mobile menu */
-    /* Showcase card tag bar (lab). Same in both themes, like on-accent: it
-       sits on the thumbnails' baked, always-dark #2A2A2A frame. */
-    --tag-bar: 235 235 235; /* #EBEBEB */
-    --on-tag-bar: 23 23 23; /* #171717, 15:1 on tag-bar */
 
     --shadow-1: 0 1px 2px rgb(23 23 23 / 0.06), 0 4px 12px rgb(23 23 23 / 0.08);
-    --shadow-2: 0 2px 4px rgb(23 23 23 / 0.06), 0 12px 32px rgb(23 23 23 / 0.14);
+    --shadow-2:
+      0 2px 4px rgb(23 23 23 / 0.06), 0 12px 32px rgb(23 23 23 / 0.14);
     --glow: 97 188 122;
     --glow-a: 0.35;
   }
@@ -107,16 +104,16 @@
    Two eases (out for entering/revealing/presses, in-out for on-screen
    movement) and four durations. Tailwind's `ease-out` / `ease-in-out` map to
    the same vars (tailwind.config.js); components/nav/motion.js mirrors the
-   eases and the fast/base/move durations for JS. Movement is transform/opacity;
-   the exceptions are the nav's height/grid-row changes (mobile dropdown, tier
-   rows, logo row), colour transitions and the 404 sprite's stepped clip-path.
+   in-out ease and the move duration for JS. Movement is transform/opacity;
+   the exceptions are the nav's mobile dropdown height (grid rows), colour
+   transitions and the 404 sprite's stepped clip-path.
    Every rule here has a reduced-motion answer.
    ========================================================================== */
 :root {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entering, revealing, presses */
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* on-screen movement */
   --motion-fast: 120ms; /* exits, reduced-motion fades */
-  --motion-base: 180ms; /* icon swaps, menu items entering */
+  --motion-base: 180ms; /* icon fades, menu items entering */
   --motion-move: 240ms; /* nav slide, indicator, menu height */
   --motion-reveal: 500ms; /* page entrances and scroll reveals */
 }
@@ -258,51 +255,11 @@
   }
 }
 
-/* Navigation (components/Navigation.js, components/nav/*; lab variants in components/nav/NavigationLab.js) ----------
+/* Navigation (components/Navigation.js, components/nav/*) -----------------
    All CSS: no animation library on the nav, so it costs nothing on routes
    that don't otherwise animate. All nav motion is 120-240ms. */
 
-/* Theme icon crossfade: the outgoing icon turns away one way while the
-   incoming one turns in from the other. Opacity only with reduced motion. */
-.icon-swap-enter {
-  animation: icon-swap-in var(--motion-base) var(--ease-out) both;
-}
-.icon-swap-exit {
-  animation: icon-swap-out var(--motion-base) var(--ease-out) both;
-  pointer-events: none;
-}
-@keyframes icon-swap-in {
-  from {
-    opacity: 0;
-    transform: rotate(calc(var(--swap-angle, 90deg) * -1)) scale(0.6);
-  }
-}
-@keyframes icon-swap-out {
-  to {
-    opacity: 0;
-    transform: rotate(var(--swap-angle, 90deg)) scale(0.6);
-  }
-}
-@keyframes icon-fade-in {
-  from {
-    opacity: 0;
-  }
-}
-@keyframes icon-fade-out {
-  to {
-    opacity: 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .icon-swap-enter {
-    animation: icon-fade-in var(--motion-fast) var(--ease-out) both;
-  }
-  .icon-swap-exit {
-    animation: icon-fade-out var(--motion-fast) var(--ease-out) both;
-  }
-}
-
-/* Menu icons: lines meet in the middle, then rotate into an X (240ms total,
+/* Menu icon: lines meet in the middle, then rotate into an X (240ms total,
    each half ease-in-out). Closing runs the same two steps in reverse, so the
    delays swap with the state. Each line is a mover (Y) around a turner
    (rotate), so the two steps are separate transitions. Instant when reduced. */
@@ -323,69 +280,53 @@
   transform-origin: right;
   transition: transform var(--motion-move) var(--ease-in-out);
 }
-.menu-line-fade {
-  transition: opacity calc(var(--motion-move) / 2) var(--ease-in-out)
-    calc(var(--motion-move) / 2);
-}
-[data-open] .menu-line-fade {
-  transition-delay: 0ms;
-}
-.menu-label-word {
-  transition: opacity var(--motion-base) var(--ease-out);
-}
 @media (prefers-reduced-motion: reduce) {
   .menu-line-move,
   .menu-line-turn,
-  .menu-line-length,
-  .menu-line-fade {
+  .menu-line-length {
     transition: none;
-  }
-  .menu-label-word {
-    transition-duration: var(--motion-fast);
   }
 }
 
-/* Theme toggle variants (components/nav/ThemeToggle.js, tried at /lab/nav).
-   State comes from the `dark` class on <html>, so these are transitions
-   that run whenever it flips. Instant with reduced motion. */
+/* Pokédex button (components/palette/PaletteButton.js): the Poké Ball
+   wobbles once when hovered or focused, like a ball settling after a throw.
+   Rotation only, from the bottom of the ball, 240ms. Off with reduced motion. */
+@keyframes pokeball-wobble {
+  0% {
+    transform: rotate(0);
+  }
+  30% {
+    transform: rotate(-16deg);
+  }
+  65% {
+    transform: rotate(12deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+.pokeball {
+  transform-origin: 50% 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  button:hover .pokeball,
+  button:focus-visible .pokeball {
+    animation: pokeball-wobble var(--motion-move) var(--ease-in-out) 1;
+  }
+}
+
+/* Theme toggle (components/nav/ThemeToggle.js). State comes from the `dark`
+   class on <html>, so these are transitions that run whenever it flips.
+   Instant with reduced motion. */
 .theme-slide {
   transition: transform var(--motion-move) var(--ease-in-out);
 }
 .theme-fade {
   transition: opacity var(--motion-base) var(--ease-out);
 }
-/* Eclipse: light mode shows the moon (body r9, cut over its top right, no
-   rays); dark mode shows the sun (cut slid off, body scaled to the core,
-   rays grown out). Transforms are in viewBox units around the centre. */
-.theme-eclipse-body,
-.theme-eclipse-cut,
-.theme-eclipse-rays {
-  transform-origin: 12px 12px;
-  transition:
-    transform var(--motion-move) var(--ease-in-out),
-    opacity var(--motion-move) var(--ease-in-out);
-}
-.theme-eclipse-rays {
-  opacity: 0;
-  transform: rotate(-45deg) scale(0.5);
-}
-.dark .theme-eclipse-body {
-  transform: scale(0.5);
-}
-.dark .theme-eclipse-cut {
-  transform: translate(8px, -8px);
-}
-.dark .theme-eclipse-rays {
-  opacity: 1;
-  transform: none;
-  transition-delay: calc(var(--motion-move) / 3);
-}
 @media (prefers-reduced-motion: reduce) {
   .theme-slide,
-  .theme-fade,
-  .theme-eclipse-body,
-  .theme-eclipse-cut,
-  .theme-eclipse-rays {
+  .theme-fade {
     transition: none;
   }
 }
@@ -413,22 +354,6 @@
 .nav-dropdown > * {
   min-height: 0;
   overflow: hidden;
-}
-
-/* Full-screen sheet: fades in with the same link stagger, fades out fast. */
-.nav-sheet {
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity var(--motion-fast) var(--ease-out),
-    visibility 0s linear var(--motion-fast);
-}
-.nav-sheet[data-open] {
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity var(--motion-move) var(--ease-out),
-    visibility 0s;
 }
 
 .nav-menu-item {
@@ -463,7 +388,7 @@
     visibility 0s;
 }
 
-/* Reduced motion: the menus only fade (no height, slide or stagger). */
+/* Reduced motion: the menu only fades (no height, slide or stagger). */
 @media (prefers-reduced-motion: reduce) {
   /* Full height at once on open; on close it keeps its height through the
      fade, then collapses. */
@@ -481,8 +406,6 @@
       grid-template-rows 0s,
       visibility 0s;
   }
-  .nav-sheet,
-  .nav-sheet[data-open],
   .nav-scrim,
   .nav-scrim[data-open] {
     transition-duration: var(--motion-fast), 0s;
@@ -509,257 +432,6 @@
    does that job. */
 :root:not(.dark) .gameboy-lift {
   filter: drop-shadow(0 12px 32px rgb(23 23 23 / 0.14));
-}
-
-.hidden-nav {
-  transform: translateY(-100%);
-}
-
-/* Nav lab variants (/lab/nav, see "Combination rules" in
-   components/nav/NavigationLab.js). The shipping defaults use none of these. */
-
-/* Surface "inverted": the bar takes the other theme's colour tokens, so
-   every pair inside it (text, muted text, accent text and underline, pill,
-   focus ring, logo mark) is one already contrast-checked on that theme's
-   page. Shiny mode keeps its gold, also swapped. */
-:root:not(.dark) .nav-inverted {
-  color-scheme: dark;
-  --page: 23 23 23;
-  --surface: 32 32 32;
-  --surface-raised: 42 42 42;
-  --placeholder: 51 51 51;
-  --line: 51 51 51;
-  --line-strong: 235 235 235;
-  --fg: 235 235 235;
-  --fg-muted: 169 169 169;
-  --accent: 125 243 157;
-  --accent-hover: 164 248 186;
-  --accent-strong: 125 243 157;
-  --on-accent: 23 23 23;
-  --focus: 125 243 157;
-}
-.dark .nav-inverted {
-  color-scheme: light;
-  --page: 235 235 235;
-  --surface: 245 245 245;
-  --surface-raised: 255 255 255;
-  --placeholder: 216 216 216;
-  --line: 194 194 194;
-  --line-strong: 23 23 23;
-  --fg: 23 23 23;
-  --fg-muted: 96 96 96;
-  --accent: 97 188 122;
-  --accent-hover: 79 168 102;
-  --accent-strong: 26 110 55;
-  --on-accent: 23 23 23;
-  --focus: 26 110 55;
-}
-.shiny:not(.dark) .nav-inverted {
-  --accent: 247 211 96;
-  --accent-hover: 250 225 140;
-  --accent-strong: 247 211 96;
-  --focus: 247 211 96;
-}
-.shiny.dark .nav-inverted {
-  --accent: 240 196 64;
-  --accent-hover: 224 178 42;
-  --accent-strong: 138 90 0;
-  --focus: 138 90 0;
-}
-
-/* Surface "clear": the background (with its hairline or shadow) is a layer
-   behind the content that fades in past the top. Only the layer fades. */
-.nav-surface-layer {
-  opacity: 0;
-  transition: opacity var(--motion-move) var(--ease-out);
-}
-.nav-surface-layer[data-visible] {
-  opacity: 1;
-}
-
-/* Shape "island": the desktop links and theme toggle sit in a column that
-   opens from zero width (hover, keyboard focus or the Menu trigger). Closed
-   it's visibility: hidden, so its links aren't tab stops; keyboard focus on
-   the logo or trigger opens it before Tab gets there. Display comes from
-   Tailwind (hidden md:grid). */
-.nav-island-expand {
-  grid-template-columns: 0fr;
-  visibility: hidden;
-  transition:
-    grid-template-columns var(--motion-move) var(--ease-out),
-    visibility 0s linear var(--motion-move);
-}
-.nav-island-expand[data-open] {
-  grid-template-columns: 1fr;
-  visibility: visible;
-  transition:
-    grid-template-columns var(--motion-move) var(--ease-out),
-    visibility 0s;
-}
-.nav-island-expand > * {
-  min-width: 0;
-  overflow: hidden;
-}
-
-/* Layout "stacked": logo centred on top, links centred on a second tier
-   (md+). Past 100px ([data-compact]) it collapses to the standard single
-   row: the tier's height animates, the items move to the row at once.
-   --nav-row is the top row's height (set inline per shape / shrink). */
-.nav-stacked {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  grid-template-rows: var(--nav-row, 4rem) 0rem;
-  grid-template-areas: ". logo tools" "links links links";
-  align-items: center;
-  transition: grid-template-rows var(--motion-move) var(--ease-in-out);
-}
-@media (min-width: 768px) {
-  .nav-stacked {
-    grid-template-rows: var(--nav-row, 4rem) 3rem;
-  }
-}
-.nav-stacked[data-compact] {
-  grid-template-columns: 1fr auto auto;
-  grid-template-rows: var(--nav-row, 4rem) 0rem;
-  grid-template-areas: "logo links tools" ". . .";
-}
-.nav-stacked > [data-area="logo"] {
-  grid-area: logo;
-}
-.nav-stacked[data-compact] > [data-area="logo"] {
-  justify-self: start;
-}
-.nav-stacked > [data-area="links"] {
-  grid-area: links;
-  justify-self: center;
-  height: 100%;
-}
-.nav-stacked > [data-area="tools"] {
-  grid-area: tools;
-  justify-self: end;
-}
-
-/* Scroll "shrink": past 100px the row goes 64 -> 48px and the logo scales
-   down a little. The logo's hit area keeps the full row height. */
-.nav-shrink-row {
-  transition: height var(--motion-move) var(--ease-in-out);
-}
-.nav-shrink-logo {
-  transform-origin: left center;
-  transition: transform var(--motion-move) var(--ease-in-out);
-}
-[data-compact] .nav-shrink-logo {
-  transform: scale(0.85);
-}
-
-/* Position "bottom" (preview only): room under the page for the docked bar. */
-@media (max-width: 767.98px) {
-  .nav-dock-bottom body {
-    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-surface-layer {
-    transition-duration: var(--motion-fast);
-  }
-  .nav-island-expand,
-  .nav-island-expand[data-open],
-  .nav-stacked,
-  .nav-shrink-row,
-  .nav-shrink-logo {
-    transition: none;
-  }
-}
-
-/* Desktop-only shapes in preview: room for the rail (left) and for the
-   bottom pieces of dock and corners. */
-@media (min-width: 768px) {
-  .nav-rail-left body {
-    padding-left: 88px;
-  }
-  .nav-dock-desktop body {
-    padding-bottom: 6rem;
-  }
-}
-
-/* Dock and corners (md+): fixed pieces that hide on their own when the nav
-   has [data-hidden]. Corners fade; dock slides each pill off its edge. */
-.nav-piece {
-  transition:
-    opacity var(--motion-base) var(--ease-out),
-    transform var(--motion-move) var(--ease-in-out);
-}
-@media (min-width: 768px) {
-  [data-hidden] .nav-piece-fade {
-    opacity: 0;
-    pointer-events: none;
-  }
-  [data-hidden] .nav-piece-up {
-    transform: translateY(calc(-100% - 2.5rem));
-  }
-  [data-hidden] .nav-piece-down {
-    transform: translateY(calc(100% + 2.5rem));
-  }
-}
-
-/* Dock: the hovered item scales up a little (no neighbour magnification). */
-.nav-dock-item {
-  transition: transform 150ms var(--ease-out);
-}
-@media (hover: hover) {
-  .nav-dock-item:hover {
-    transform: scale(1.08);
-  }
-}
-
-/* FAB popover: scales and fades out of the button's corner. Inert and
-   visibility: hidden while closed, like the phone menus. */
-.nav-popover {
-  opacity: 0;
-  transform: scale(0.96);
-  transform-origin: top right;
-  visibility: hidden;
-  transition:
-    opacity var(--motion-fast) var(--ease-out),
-    transform var(--motion-fast) var(--ease-out),
-    visibility 0s linear var(--motion-fast);
-}
-.nav-popover[data-open] {
-  opacity: 1;
-  transform: none;
-  visibility: visible;
-  transition:
-    opacity var(--motion-move) var(--ease-out),
-    transform var(--motion-move) var(--ease-out),
-    visibility 0s;
-}
-
-/* Reduced motion: pieces fade instead of sliding, no dock scaling, and the
-   popover only fades. */
-@media (prefers-reduced-motion: reduce) {
-  .nav-piece {
-    transition: opacity var(--motion-fast) var(--ease-out);
-  }
-}
-@media (prefers-reduced-motion: reduce) and (min-width: 768px) {
-  [data-hidden] .nav-piece-up,
-  [data-hidden] .nav-piece-down {
-    transform: none;
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .nav-dock-item,
-  .nav-dock-item:hover {
-    transform: none;
-    transition: none;
-  }
-  .nav-popover,
-  .nav-popover[data-open] {
-    transform: none;
-  }
 }
 
 /* 404 wild encounter (src/app/not-found.js). The sprite "glitches" like a
@@ -843,18 +515,120 @@
   --glow: 247 211 96;
 }
 
-/* Shiny Charmander: recolour the generated sprite (components/gameboy/gameboyArt.js)
-   by its baked fills, so the art file stays untouched. The flame keeps its colours.
-   Covers the hero sprite and the 404 encounter sprite. */
-.shiny :is(#gb-mon-sprite, .encounter-sprite) [fill="#E98E3D"] {
+/* Shiny partner: recolour the sprites (components/gameboy/gameboyArt.js and
+   partnerArt.js) by their baked fills, so the art files stay untouched. The
+   flame keeps its colours. Covers the hero and the 404 encounter sprite
+   (both wrap each stage in .gb-mon). Charmander and Charmeleon go gold like
+   the games' shinies; Charizard goes black with purple wings and belly. The console's
+   copy of this map is SHINY_FILLS in components/DevtoolsSurprise.js. */
+.shiny .gb-mon [fill="#E98E3D"] {
   fill: #f2c94c; /* body: orange -> gold */
 }
-.shiny :is(#gb-mon-sprite, .encounter-sprite) [fill="#E5BB52"] {
+.shiny .gb-mon [fill="#E5BB52"] {
   fill: #fbf0c0; /* belly, claws: cream -> pale */
 }
-.shiny :is(#gb-mon-sprite, .encounter-sprite) [fill="#D33C30"] {
+.shiny .gb-mon [fill="#D33C30"] {
   fill: #c98a1e; /* shading: red -> amber */
 }
-.shiny :is(#gb-mon-sprite, .encounter-sprite) [fill="#E9D98E"] {
+.shiny .gb-mon [fill="#E9D98E"] {
   fill: #fff8d6; /* highlight */
+}
+.shiny .gb-mon [fill="#D9553A"] {
+  fill: #e8b93a; /* Charmeleon body: red -> gold */
+}
+.shiny .gb-mon [fill="#BB2B29"] {
+  fill: #b57a16; /* Charmeleon shade */
+}
+.shiny .gb-mon [fill="#F26B52"] {
+  fill: #f5d46a; /* Charmeleon lit side */
+}
+.shiny .gb-mon [fill="#F9A98A"] {
+  fill: #fdeab0; /* Charmeleon highlight */
+}
+.shiny .gb-mon[data-stage="2"] [fill="#E98E3D"] {
+  fill: #3a3a3a; /* Charizard body: orange -> black */
+}
+.shiny .gb-mon[data-stage="2"] [fill="#F2A94E"] {
+  fill: #4f4f4f; /* Charizard lit side */
+}
+.shiny .gb-mon[data-stage="2"] [fill="#D1631F"] {
+  fill: #232323; /* Charizard shade */
+}
+.shiny .gb-mon[data-stage="2"] [fill="#8E3A10"] {
+  fill: #111111; /* Charizard dark lines */
+}
+.shiny .gb-mon[data-stage="2"] [fill="#E5BB52"] {
+  fill: #9b6bd6; /* Charizard wing and belly: cream -> purple */
+}
+
+/* Partner stages (src/app/lib/partner.js): the hero and the 404 page draw
+   every stage; <html data-partner> (set before first paint by the inline
+   script in layout.js) picks the one that shows. Once the partner differs
+   from the baked "CHARMANDER♂ Lv5" (data-partner-custom), that baked text is
+   hidden and components/gameboy/StatusName.js draws the live name and level. */
+.gb-mon[data-stage] {
+  display: none;
+}
+html:not([data-partner]) .gb-mon[data-stage="0"],
+html[data-partner="0"] .gb-mon[data-stage="0"],
+html[data-partner="1"] .gb-mon[data-stage="1"],
+html[data-partner="2"] .gb-mon[data-stage="2"],
+.gb-mon[data-stage][data-evolving] {
+  display: inline;
+}
+html[data-partner-custom]
+  :is(
+    [data-gb="status-name"],
+    [data-gb="status-gender"],
+    [data-gb="status-level"]
+  ) {
+  display: none;
+}
+
+/* Pokédex command palette (components/palette/CommandPalette.js). Opens with a
+   short rise and fade (ease-out), closes faster; the scrim fades with it.
+   `data-closing` on the root plays the exits; the panel unmounts when its
+   exit animation ends. */
+@keyframes palette-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+@keyframes palette-out {
+  to {
+    opacity: 0;
+    transform: translate(-50%, 4px) scale(0.99);
+  }
+}
+@keyframes palette-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes palette-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+.palette-panel {
+  animation: palette-in var(--motion-base) var(--ease-out) both;
+}
+.palette-scrim {
+  animation: palette-fade-in var(--motion-move) var(--ease-out) both;
+}
+[data-closing] .palette-panel {
+  animation: palette-out var(--motion-fast) var(--ease-out) forwards;
+}
+[data-closing] .palette-scrim {
+  animation: palette-fade-out var(--motion-fast) linear forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .palette-panel {
+    animation: palette-fade-in var(--motion-fast) linear both;
+  }
 }

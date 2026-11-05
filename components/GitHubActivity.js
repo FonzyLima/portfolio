@@ -2,7 +2,7 @@ import React from "react";
 import { TbArrowUpRight } from "react-icons/tb";
 import HeatmapScroll from "./github/HeatmapScroll";
 
-// GitHub activity as the last row of the Technical Skills panel (passed as its
+// GitHub activity as the last row of the Technical skills panel (passed as its
 // `footer`, so it matches the category rows above it). Server component:
 // `stats` comes from getGitHubStats() (src/app/lib/github.js), configured with
 // the links in `github` in src/app/data/portfolioData.js. Renders nothing when
@@ -56,10 +56,10 @@ function Legend() {
 
 function Heatmap({ weeks, total }) {
   return (
-    <HeatmapScroll label="Contribution graph, past 12 months">
+    <HeatmapScroll label="Contribution graph, past year">
       <div
         role="img"
-        aria-label={`${fmt.format(total)} contributions in the past 12 months`}
+        aria-label={`${fmt.format(total)} contributions in the past year`}
         className="grid min-w-[620px] gap-[3px]"
         style={{
           gridTemplateColumns: `repeat(${weeks.length}, minmax(8px, 1fr))`,
@@ -99,10 +99,10 @@ export default function GitHubActivity({ stats }) {
   return (
     <div className="grid grid-cols-1 gap-3 p-5 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-8 lg:p-6">
       <div className="flex flex-col">
-        <h3 className="type-h3 text-fg">GitHub Activity</h3>
+        <h3 className="type-h3 text-fg">GitHub activity</h3>
         {stats.pastYear != null && (
           <p className="mt-1 type-small text-fg-muted">
-            {fmt.format(stats.pastYear)} contributions in the last year
+            {fmt.format(stats.pastYear)} contributions in the past year
           </p>
         )}
         <a
@@ -113,7 +113,7 @@ export default function GitHubActivity({ stats }) {
         >
           @{stats.login}
           <TbArrowUpRight aria-hidden="true" className="h-4 w-4" />
-          <span className="sr-only">on GitHub (opens in a new tab)</span>
+          <span className="sr-only"> on GitHub (opens in a new tab)</span>
         </a>
       </div>
 
@@ -137,7 +137,7 @@ export default function GitHubActivity({ stats }) {
                     >
                       {own ? repo.name : repo.fullName}
                       <TbArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
-                      <span className="sr-only">(opens in a new tab)</span>
+                      <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                   </li>
                 );

@@ -25,9 +25,8 @@ const setSheen = (sheens, x, y, on) => {
   }
 };
 
-// The tilting element. `as` picks the tag (e.g. "aside"); other props pass
-// through (aria-label, className).
-export function Tilt({ as: Tag = "div", maxDeg = 10, children, ...props }) {
+// The tilting element; other props (className) pass through.
+export function Tilt({ maxDeg = 10, children, ...props }) {
   const sheens = useRef([]);
   const handlers = usePointerTilt({
     start: (el) => {
@@ -45,9 +44,9 @@ export function Tilt({ as: Tag = "div", maxDeg = 10, children, ...props }) {
     },
   });
   return (
-    <Tag {...props} {...handlers}>
+    <div {...props} {...handlers}>
       {children}
-    </Tag>
+    </div>
   );
 }
 
@@ -55,13 +54,13 @@ export function Tilt({ as: Tag = "div", maxDeg = 10, children, ...props }) {
 
 const FlipContext = createContext([false, () => {}]);
 
-// The card's outer element (`as`, default div; other props pass through).
-// Holds the flipped state for the FlipInner/FlipFace/FlipButton inside it.
-export function FlipRoot({ as: Tag = "div", children, ...props }) {
+// The card's outer element (other props pass through). Holds the flipped
+// state for the FlipInner/FlipFace/FlipButton inside it.
+export function FlipRoot({ children, ...props }) {
   const state = useState(false);
   return (
     <FlipContext.Provider value={state}>
-      <Tag {...props}>{children}</Tag>
+      <div {...props}>{children}</div>
     </FlipContext.Provider>
   );
 }
@@ -88,7 +87,7 @@ export function FlipFace({ as: Tag = "div", side = "front", hideWhenInactive = f
 
 // Flip toggle. Shows `flippedLabel` (defaults to `label`) while flipped, after
 // an optional server-rendered `icon`. No aria-pressed: the label already says
-// what the button will do, and "Show front, pressed" reads as nonsense.
+// what the button will do, and "Flip back, pressed" reads as nonsense.
 export function FlipButton({ className = "", label, flippedLabel = label, icon = null }) {
   const [flipped, setFlipped] = useContext(FlipContext);
   return (
