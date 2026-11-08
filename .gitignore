@@ -37,3 +37,8 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# local-only working notes (kept out of the public repo)
+/FEATURE_IDEAS.md
+/DESIGN_SYSTEM.md
+/.claude/
